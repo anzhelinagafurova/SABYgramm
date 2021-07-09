@@ -6,8 +6,8 @@ import Edit from '../pages/edit/edit';
 const App = () => {
     return (
         <Switch>
-            <Route path to="/" component={Auth} exact />
-            <Route path="/edit" component={Edit} />
+            <Route exact path="/" component={Auth} />
+            <Route exact path="/edit" component={Edit} />
         </Switch>
     )
 }

@@ -21,14 +21,14 @@ export default class Auth extends Component {
         else if (!isRegistrated) {
             return (
                 <section className='login-container'>
-                    <p1 className='login-text'>вход</p1>
+                    <h1 className='login-text'>вход</h1>
                     <form action="/login" method="post" className='login-form'>
                         <div className='tel-wrapper'>
                             <p className="number-7">+7</p>
-                            <input type="tel" name="phone-number" placeholder='Тел. номер' maxlength="10" pattern="\d*" required></input>
+                            <input type="tel" name="phone-number" placeholder='Тел. номер' maxLength="10" pattern="\d*" required></input>
                         </div>
                         <input type="text" name="password" placeholder='Пароль' required></input>
-                        <Link to="/edit" type="submit" className='login-button'><i class="fas fa-play"></i></Link>
+                        <Link to="/edit" type="submit" className='login-button'><i className="fas fa-play"></i></Link>
 
                     </form>
                 </section>
@@ -37,14 +37,14 @@ export default class Auth extends Component {
         else if (!isAuthenticated && isRegistrated) { //в Link to на диалоги
             return (
                 <section className='login-container'>
-                    <p1 className='login-text'>вход</p1>
+                    <h1 className='login-text'>вход</h1>
                     <form action="/login" method="post" className='login-form'>
                         <div className='tel-wrapper'>
                             <p className="number-7">+7</p>
-                            <input type="tel" name="phone-number" placeholder='Тел. номер' maxlength="10" pattern="\d*" required></input>
+                            <input type="tel" name="phone-number" placeholder='Тел. номер' maxLength="10" pattern="\d*" required></input>
                         </div>
                         <input type="text" name="password" placeholder='Пароль' required></input>
-                        <Link to="/edit" type="submit" className='login-button'><i class="fas fa-play"></i></Link>
+                        <Link to="/edit" type="submit" className='login-button'><i className="fas fa-play"></i></Link>
                     </form>
                 </section>
             )
