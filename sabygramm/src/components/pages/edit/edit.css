@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-.upload-background {
+#upload-background {
   margin-top: 12vh;
   cursor: pointer;
   border-radius: 50%;

@@ -7,18 +7,20 @@ export default class Edit extends Component {
   state = {
     name: 'Ваше имя',
   }
-
+  renderPhoto = () => {
+    console.log('фото')
+  }
   render() {
     return (
 
       <section className='edit-container'>
         <form action="/login" method="post" className='name-form'>
-          <label htmlFor="file-upload" className="upload-background">
+          <label htmlFor="file-upload" id="upload-background">
             <div className="plus">+</div>
 
           </label>
 
-          <input type="file" id="file-upload" onChange={() => { console.log('sdsd') }} />
+          <input type="file" id="file-upload" onChange={this.renderPhoto} />
 
 
           <p className='photo-label'>Фото</p>
