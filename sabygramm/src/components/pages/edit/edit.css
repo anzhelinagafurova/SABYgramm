@@ -1,0 +1,71 @@
+* {
+  outline:none
+}
+
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.upload-background {
+  margin-top: 12vh;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 15vh;
+  height: 15vh;
+  border: none;
+  background-color: #738DED;
+  text-align: center;
+}
+
+.edit-container input[type="file"] {
+  display: none;
+}
+
+.photo-label {
+  font-family: Calibri;
+  color: gray;
+  margin-bottom:10vh;
+}
+
+.name-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.name-form input {
+  font-family: Calibri;
+  font-size: 16px;
+  border: none;
+  border-bottom: 3px solid lightgrey;
+  margin-bottom:10vh;
+  text-align: center;
+}
+
+.edit-button {
+  margin: 12vh 0;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 15vh;
+  height: 15vh;
+  border: none;
+  background-color: #738DED;
+  text-align: center;
+}
+
+.fa-play {
+  color: white;
+  font-size: 7vh;
+  margin-left: 1vh;
+  margin-top: 3.7vh;
+}
+
+.plus {
+  color: white;
+  font-size: 10vh;
+  margin-top: 2vh;
+}
