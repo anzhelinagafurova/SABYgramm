@@ -18,7 +18,7 @@
 
 .login-form input {
   font-family: Calibri;
-  font-size: 16px;
+  font-size: 1.4em;
   border: none;
   border-bottom: 3px solid lightgrey;
 }
@@ -34,6 +34,8 @@
   color: gray;
   width: 20%;
   margin: 0;
+  position: relative;
+  bottom: 2px
 }
 .login-form input[type="tel"] {
   width: 80%;
@@ -60,11 +62,13 @@
   border: none;
   background-color: #738DED;
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .fa-play {
   color: white;
   font-size: 7vh;
-  margin-left: 1vh;
-  margin-top: 3.7vh;
+  /* margin-left: 1vh; */
+  /* margin-top: 3.7vh; */
 }
