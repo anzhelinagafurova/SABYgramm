@@ -2,7 +2,7 @@
 import {
     ServiceProvider,
     ServiceConsumer
-} from './serviceContext';
+} from './context';
 
 export {
     ServiceProvider,

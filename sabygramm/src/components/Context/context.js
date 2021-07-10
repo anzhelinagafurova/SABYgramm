@@ -1,6 +1,6 @@
 import React from 'react';
 
-const { 
+const {
     Provider: ServiceProvider,
     Consumer: ServiceConsumer
 } = React.createContext();
