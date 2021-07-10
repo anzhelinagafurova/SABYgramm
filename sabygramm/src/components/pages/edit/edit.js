@@ -35,7 +35,7 @@ export default class Edit extends Component {
 
           <input type="text" name="username" placeholder={this.state.name} required ></input>
 
-          <input type="text" name="message" value={this.state.message} onChange={this.setMessage}></input>
+          <input type="text" name="message" placeholder={this.state.message} onChange={this.setMessage}></input>
 
           <Link to="/edit" type="submit" className='edit-button'><i className="fas fa-play"></i></Link>
 
