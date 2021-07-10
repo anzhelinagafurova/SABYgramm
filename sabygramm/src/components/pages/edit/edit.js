@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import './edit.scss';
+import './edit.css';
 
 
 
