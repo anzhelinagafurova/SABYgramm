@@ -1,0 +1,36 @@
+%message-wrapped {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.dialog{
+    font-family: 'Roboto', sans-serif;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    padding: 10px;     
+}
+.dialog:hover{
+    background-color: rgb(209, 224, 255);
+}
+.dialog-img{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.dialog-contain{
+    min-width: 0;
+}
+.dialog-name{
+    @extend %message-wrapped;
+    font-weight: 600;
+    margin: 0 0 10px 0;  
+}
+.dialog-message{
+    @extend %message-wrapped;
+    color: grey;
+    margin: 0;
+    font-size: 15px;
+}

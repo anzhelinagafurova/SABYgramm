@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { withService } from '../../hoc';
 
-import './auth.css';
+
+import './auth.scss';
 
 class Auth extends Component {
 
