@@ -12,7 +12,7 @@ export default class SabygramService {
                 name: "Ксения Ерофеева",
                 lastMessage: "Встала сегодня в 6 утра прикинь...",
                 img: "https://yt3.ggpht.com/a/AATXAJynSQVjxLr742pi_eZXJxyzjfWLaRcCxgYaeJX_Cg=s900-c-k-c0xffffffff-no-rj-mo"
-            }      
+            }
         ],
         [
             {
@@ -44,20 +44,21 @@ export default class SabygramService {
         ]
     ];
 
-    async sendLoginForm(formData){
+    async sendLoginForm(formData) {
         let response = await fetch('/', {
             method: 'POST',
             body: {
                 login: formData.login,
                 password: formData.password
             }
-          });
-        if(response.ok){
+        });
+        if (response.ok) {
             alert("Logged in!")
         }
     }
 
-    getDialogData(id){
+    getDialogData(id) {
         return this.dialogData[id];
     }
+
 }

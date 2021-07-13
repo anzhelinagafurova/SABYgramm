@@ -26,10 +26,10 @@ class Edit extends Component {
     const newName = e.target.value;
     this.props.setUserName(newName)
   }
-  
+
 
   render() {
-    const {name, photo, message} = this.props;
+    const { name, photo, message } = this.props;
     return (
 
       <section className='edit-container'>
@@ -37,7 +37,7 @@ class Edit extends Component {
           <label htmlFor="file-upload" id="upload-background" className="upload-background">
 
             {photo ? <img src={photo} alt="Profile icon" className="profile-photo"></img> : <div className="plus">+</div>}
-            
+
           </label>
 
           <input type="file" id="file-upload" accept="image/*" onChange={this.setPhoto} />
@@ -46,7 +46,7 @@ class Edit extends Component {
 
           <input type="text" name="username" value={name} placeholder='Ваше имя' onChange={this.setName} required ></input>
 
-          <input type="text" name="message" value={message}  onChange={this.setMessage}></input>
+          <input type="text" name="message" value={message} placeholder='Привет всем друзьям!' onChange={this.setMessage}></input>
 
           <Link to="/edit" type="submit" className='edit-button'><i className="fas fa-play"></i></Link>
 
@@ -57,19 +57,19 @@ class Edit extends Component {
   }
 }
 
-const mapStateToProps = ({myProfilePhoto, myWelcomeMessage, myUserName}) => {
+const mapStateToProps = ({ myProfilePhoto, myWelcomeMessage, myUserName }) => {
   return {
-    name:myUserName,
-    message:myWelcomeMessage,
-    photo:myProfilePhoto
+    name: myUserName,
+    message: myWelcomeMessage,
+    photo: myProfilePhoto
   }
 }
 
 const mapDispatchProps = (dispatch) => {
   return {
-    setProfilePhoto: (photo) => dispatch({type:"SET_MY_PROFILE_PHOTO", payload:photo}),
-    setUserName: (name) => dispatch({type:"SET_MY_USER_NAME", payload:name}),
-    setWelcomeMessage: (message) => dispatch({type:"SET_MY_WELCOME_MESSAGE", payload:message}),
+    setProfilePhoto: (photo) => dispatch({ type: "SET_MY_PROFILE_PHOTO", payload: photo }),
+    setUserName: (name) => dispatch({ type: "SET_MY_USER_NAME", payload: name }),
+    setWelcomeMessage: (message) => dispatch({ type: "SET_MY_WELCOME_MESSAGE", payload: message }),
   }
 }
 

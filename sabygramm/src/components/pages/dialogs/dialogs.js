@@ -1,27 +1,44 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from "swiper/react";
 import DialogItem from '../../dialogItem/dialogItem';
 import SabygramService from '../../../services/SabygramService';
 import './dialogs.scss';
 
 const Dialogs = ({ groupId }) => {
-    const service = new SabygramService() 
-    const dialogs = service.getDialogData(groupId); 
-    if(dialogs) 
+    const service = new SabygramService()
+    const dialogs = service.getDialogData(groupId);
+    if (dialogs)
         return (
             <div className="dialog-container">
-                {                
-                    dialogs.map((dialog) => {
-                        return <DialogItem key={dialog.id} dialog={dialog}/>
-                    })
-                }
+                <Swiper className="mySwiper">
+                    <SwiperSlide>
+                        <RenderDialog groupId={0} service={service} />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <RenderDialog groupId={1} service={service} />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <RenderDialog groupId={2} service={service} />
+                    </SwiperSlide>
+                    <SwiperSlide>Возможно первый слайд будет для меню, чтобы свайпать</SwiperSlide>
+                </Swiper>
 
-                <h4>Группа { groupId }</h4>
-                <Link to={`/dialogs/${+groupId - 1}`}> назад</Link>
-                <Link to={`/dialogs/${+groupId + 1}`}> далее</Link>
-            </div>       
+            </div>
         )
     return null;
+}
+
+const RenderDialog = ({ groupId, service }) => {
+    return (
+        <div>
+            {
+                service.getDialogData(groupId).map((dialog) => {
+                    return <DialogItem key={dialog.id} dialog={dialog} />
+                })
+            }
+            <h4 h4 > Группа {groupId}</h4 >
+        </div>
+    )
 }
 
 export default Dialogs;
