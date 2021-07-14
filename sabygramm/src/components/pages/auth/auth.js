@@ -11,7 +11,7 @@ class Auth extends Component {
         return (
             <section className='login-container'>
                 <h1 className='login-text'>вход</h1>
-                <form onSubmit={this.sendForm} className='login-form'>
+                <form onSubmit={this.sendForm} className='login-form' method="POST" action="home/urls.py">  {/* сюда в action указать путь до файла-обработчика */ }
                     <div className='tel-wrapper'>
                         <p className="number-7">+7</p>
                         <input type="tel" name="phone-number" placeholder='Тел. номер' value={phone} onChange = {this.props.setPhone} maxLength="10" pattern="\d*" required></input>

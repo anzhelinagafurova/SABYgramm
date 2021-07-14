@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
 import './edit.css';
 
 
@@ -33,7 +32,7 @@ class Edit extends Component {
     return (
 
       <section className='edit-container'>
-        <form action="/login" method="post" className='name-form'>
+        <form action="home/urls.py" method="post" className='name-form'> {/* сюда в action указать путь до файла-обработчика */ }
           <label htmlFor="file-upload" id="upload-background" className="upload-background">
 
             {photo ? <img src={photo} alt="Profile icon" className="profile-photo"></img> : <div className="plus">+</div>}
@@ -48,7 +47,7 @@ class Edit extends Component {
 
           <input type="text" name="message" value={message} placeholder='Привет всем друзьям!' onChange={this.setMessage}></input>
 
-          <Link to="/dialogs/1" type="submit" className='edit-button'><i className="fas fa-play"></i></Link>
+          <button type="submit" className='edit-button'><i className="fas fa-play"></i></button>
 
         </form>
       </section>
