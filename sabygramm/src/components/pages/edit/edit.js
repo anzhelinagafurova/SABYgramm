@@ -48,7 +48,7 @@ class Edit extends Component {
 
           <input type="text" name="message" value={message} placeholder='Привет всем друзьям!' onChange={this.setMessage}></input>
 
-          <Link to="/edit" type="submit" className='edit-button'><i className="fas fa-play"></i></Link>
+          <Link to="/dialogs/1" type="submit" className='edit-button'><i className="fas fa-play"></i></Link>
 
         </form>
       </section>
