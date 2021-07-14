@@ -1,8 +1,8 @@
 const initialState = {
     isAuthenticated: false, //входил раньше, осталось в кэше браузера
     isRegistrated: false, //регистрировался раньше 
-    myUserName: null,
-    myWelcomeMessage: null,
+    myUserName: '',
+    myWelcomeMessage: '',
     myProfilePhoto: null,
     myPassword: null,
     myPhone: null
