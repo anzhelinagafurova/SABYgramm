@@ -1,11 +1,18 @@
+body{
+    margin: 0;
+    padding: 0;
+}
 .dialog-container{
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 .swiper-container {
     width: 100%;
     height: 100%;
-  }
-  
+}
+.swiper-slide{
+    height: calc(100vh - 58px)
+}
 
   

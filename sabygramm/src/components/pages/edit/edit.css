@@ -57,6 +57,9 @@
   color: black;
 }
 .edit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 5vh;
   cursor: pointer;
   border-radius: 50%;
@@ -64,14 +67,12 @@
   height: 15vh;
   border: none;
   background-color: #738DED;
-  text-align: center;
 }
 
 .fa-play {
   color: white;
   font-size: 7vh;
   margin-left: 1vh;
-  margin-top: 3.7vh;
 }
 
 .plus {

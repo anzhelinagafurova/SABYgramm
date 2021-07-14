@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
 import './edit.css';
-
-
 
 class Edit extends Component {
 
@@ -18,22 +15,21 @@ class Edit extends Component {
       alert("Возникла ошибка при загрузке фотографии")
     }
   }
-  setMessage = (e) => {
-    const newMessage = e.target.value;
-    this.props.setWelcomeMessage(newMessage)
-  }
-  setName = (e) => {
-    const newName = e.target.value;
-    this.props.setUserName(newName)
-  }
 
+  setData = (e) => {
+    e.preventDefault();
+
+    this.props.setUserName(e.target[1].value);
+    this.props.setWelcomeMessage(e.target[2].value)
+  }
 
   render() {
-    const { name, photo, message } = this.props;
+    const {photo} = this.props;
+
     return (
 
       <section className='edit-container'>
-        <form action="/login" method="post" className='name-form'>
+        <form className='name-form' onSubmit={this.setData}>
           <label htmlFor="file-upload" id="upload-background" className="upload-background">
 
             {photo ? <img src={photo} alt="Profile icon" className="profile-photo"></img> : <div className="plus">+</div>}
@@ -44,11 +40,11 @@ class Edit extends Component {
 
           <p className='photo-label'>Фото</p>
 
-          <input type="text" name="username" value={name} placeholder='Ваше имя' onChange={this.setName} required ></input>
+          <input type="text" name="username" placeholder='Ваше имя' required ></input>
 
-          <input type="text" name="message" value={message} placeholder='Привет всем друзьям!' onChange={this.setMessage}></input>
+          <input type="text" name="message" placeholder='Привет всем друзьям!' ></input>
 
-          <Link to="/edit" type="submit" className='edit-button'><i className="fas fa-play"></i></Link>
+          <button type="submit" className='edit-button'><i className="fas fa-play"></i></button>
 
         </form>
       </section>
