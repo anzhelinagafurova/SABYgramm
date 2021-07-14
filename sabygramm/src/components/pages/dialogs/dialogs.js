@@ -10,7 +10,7 @@ const Dialogs = ({ groupId }) => {
     if (dialogs)
         return (
             <div className="dialog-container">
-                <Swiper className="mySwiper">
+                <Swiper className="mySwiper" onSlideChange={() => console.log('slide change')}>
                     <SwiperSlide>
                         <RenderDialog groupId={0} service={service} />
                     </SwiperSlide>
@@ -36,7 +36,7 @@ const RenderDialog = ({ groupId, service }) => {
                     return <DialogItem key={dialog.id} dialog={dialog} />
                 })
             }
-            <h4 h4 > Группа {groupId}</h4 >
+            <h4 > Группа {groupId}</h4 >
         </div>
     )
 }
