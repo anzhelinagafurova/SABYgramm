@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './dialogItem.scss';
 
 let timer;
@@ -23,7 +22,7 @@ function touchstart(e) {
     }
 
 };
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMSubtreeModified", function (event) {
     for (let i = 0; i < dialogs.length; i++) {
         let dialog = dialogs[i];
         dialog.addEventListener("touchstart", touchstart, false);
@@ -33,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     }
 })
+
 //onMouseDown={touchstart} onMouseUp={touchend} onTouchStart={touchstart} onTouchEnd={touchend}
 const DialogItem = ({ dialog: { name, lastMessage, img } }) => {
     return (
