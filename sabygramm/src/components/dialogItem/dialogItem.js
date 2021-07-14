@@ -2,10 +2,10 @@ import React from 'react';
 
 import './dialogItem.scss';
 
-var timer;
-var touchduration = 500;
-var dialogs = document.getElementsByClassName('dialog');
-var settings = document.createElement('ul');
+let timer;
+let touchduration = 500;
+let dialogs = document.getElementsByClassName('dialog');
+let settings = document.createElement('ul');
 settings.innerHTML = '<li>Сделать тихим</li><li>Сделать гроким</li><li>Удалить</li>';
 settings.className = 'settings';
 function touchend() {
@@ -24,7 +24,7 @@ function touchstart(e) {
 
 };
 document.addEventListener("DOMContentLoaded", function (event) {
-    for (var i = 0; i < dialogs.length; i++) {
+    for (let i = 0; i < dialogs.length; i++) {
         let dialog = dialogs[i];
         dialog.addEventListener("touchstart", touchstart, false);
         dialog.addEventListener("touchend", touchend, false);
