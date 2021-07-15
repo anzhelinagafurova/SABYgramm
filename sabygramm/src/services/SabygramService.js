@@ -1,7 +1,7 @@
 export default class SabygramService {
     dialogData = [
         [
-            {
+            {//добавить время последнего сообщения
                 id: 0,
                 name: "Анжелина",
                 lastMessage: "Как ты?",

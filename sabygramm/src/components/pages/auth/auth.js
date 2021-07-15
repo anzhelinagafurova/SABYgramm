@@ -11,7 +11,7 @@ class Auth extends Component {
         return (
             <section className='login-container'>
                 <h1 className='login-text'>вход</h1>
-                <form onSubmit={this.sendForm} className='login-form'>
+                <form method="POST" action="" onSubmit={this.sendForm} className='login-form'>
                     <div className='tel-wrapper'>
                         <p className="number-7">+7</p>
                         <input type="tel" name="phone-number" placeholder='Тел. номер' value={phone} onChange={this.props.setPhone} maxLength="10" pattern="\d*" required></input>
@@ -23,9 +23,10 @@ class Auth extends Component {
         )
     }
     sendForm = (e) => {
-        e.preventDefault()
+        e.preventDefault();       
+        e.target.submit();
         const { history } = this.props;
-        history.push('/edit')
+        history.push('/edit');
     }
 
     render() {
