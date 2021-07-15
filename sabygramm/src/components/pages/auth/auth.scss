@@ -32,13 +32,13 @@
   font-family: Calibri;
   font-size: 26px;
   color: gray;
-  width: 20%;
   margin: 0;
+  margin-right: 10px;
   position: relative;
   bottom: 2px
 }
 .login-form input[type="tel"] {
-  width: 80%;
+  width: 90%;
 }
 
 .login-form input[type="text"] {
@@ -55,6 +55,7 @@
 }
 .login-button {
   margin-top: 11vh;
+  padding-top: 4vh;
   cursor: pointer;
   border-radius: 50%;
   width: 15vh;
