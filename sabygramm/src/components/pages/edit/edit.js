@@ -24,7 +24,7 @@ class Edit extends Component {
   }
 
   render() {
-    const {photo} = this.props;
+    const { photo } = this.props;
 
     return (
 
@@ -42,7 +42,7 @@ class Edit extends Component {
 
           <input type="text" name="username" placeholder='Ваше имя' required ></input>
 
-          <input type="text" name="message" placeholder='Привет всем друзьям!' ></input>
+          <input type="text" name="message" placeholder='Привет всем друзьям!' required ></input>
 
           <button type="submit" className='edit-button'><i className="fas fa-play"></i></button>
 

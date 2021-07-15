@@ -17,10 +17,8 @@ function touchend() {
 function touchstart(e) {
     const current = e.currentTarget
     if (!timer) {
-
         timer = setTimeout(() => { current.appendChild(settings) }, touchduration);
     }
-
 };
 document.addEventListener("DOMSubtreeModified", function (event) {
     for (let i = 0; i < dialogs.length; i++) {
@@ -31,6 +29,9 @@ document.addEventListener("DOMSubtreeModified", function (event) {
         dialog.addEventListener("mouseup", touchend, false);
 
     }
+})
+document.getElementById('root').addEventListener('click', function () {
+    settings.remove();
 })
 
 //onMouseDown={touchstart} onMouseUp={touchend} onTouchStart={touchstart} onTouchEnd={touchend}
