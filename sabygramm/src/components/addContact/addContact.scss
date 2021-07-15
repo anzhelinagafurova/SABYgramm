@@ -1,0 +1,15 @@
+.add-contact-form {
+  display: flex;
+  justify-content: center;
+  .add-contact {
+    font-family: Roboto;
+    width: 150px;
+    text-align: center;
+    padding: 5px 20px;
+    margin: 3vh 0;
+  
+    background-color: #DBE2FA;
+    border: none;
+    border-radius: 25px;
+  }
+}

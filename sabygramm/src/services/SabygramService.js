@@ -12,9 +12,10 @@ export default class SabygramService {
                 name: "Крис",
                 lastMessage: "Встала сегодня в 6 утра прикинь...",
                 img: "https://yt3.ggpht.com/a/AATXAJynSQVjxLr742pi_eZXJxyzjfWLaRcCxgYaeJX_Cg=s900-c-k-c0xffffffff-no-rj-mo"
-            }
+            },
         ],
         [
+
             {
                 id: 2,
                 name: "Сергей",
