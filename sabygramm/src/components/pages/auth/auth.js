@@ -22,8 +22,7 @@ class Auth extends Component {
             </section>
         )
     }
-    sendForm = (e) => {
-        e.preventDefault()
+    sendForm = () => {
         const {history} = this.props;
         history.push('/edit')      
     }
