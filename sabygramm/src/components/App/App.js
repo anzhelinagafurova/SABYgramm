@@ -4,6 +4,7 @@ import Auth from '../pages/auth/auth';
 import Edit from '../pages/edit/edit';
 import Dialogs from '../pages/dialogs/dialogs';
 
+
 const App = () => {
     return (
         <Switch>

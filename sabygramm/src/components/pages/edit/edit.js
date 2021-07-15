@@ -19,7 +19,28 @@ class Edit extends Component {
   setData = (e) => {
     e.preventDefault();
     this.props.setUserName(e.target[1].value);
-    this.props.setWelcomeMessage(e.target[2].value)
+    this.props.setWelcomeMessage(e.target[2].value);
+
+    if(!this.props.photo) {
+      const newPhotoSvg = (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" >
+          <circle cx="130" cy="130" r="130"  fill="#738DED" width="200" />
+          <text x="70" y="190" fontSize="180" fontFamily="Roboto, sans-serif" fill="white">{this.props.name[0]}</text>     
+        </svg>
+      )
+      let blob = new Blob([newPhotoSvg], {type: 'image/svg+xml'});
+
+      const reader = new FileReader();
+      const file = blob;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.props.setProfilePhoto(reader.result);
+      }
+
+
+      // const file = URL.createObjectURL(blob);
+      // this.props.setProfilePhoto(file);
+    }
   }
 
   render() {
@@ -34,6 +55,8 @@ class Edit extends Component {
             {photo ? <img src={photo} alt="Profile icon" className="profile-photo"></img> : <div className="plus">+</div>}
 
           </label>
+
+           
 
           <input type="file" id="file-upload" accept="image/*" onChange={this.setPhoto} />
 
