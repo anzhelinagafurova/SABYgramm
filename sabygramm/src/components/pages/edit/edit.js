@@ -32,7 +32,7 @@ class Edit extends Component {
     return (
 
       <section className='edit-container'>
-        <form action="home/urls.py" method="post" className='name-form'> {/* сюда в action указать путь до файла-обработчика */ }
+        <form action="" method="post" className='name-form'> {/* сюда в action указать путь до файла-обработчика */ }
           <label htmlFor="file-upload" id="upload-background" className="upload-background">
 
             {photo ? <img src={photo} alt="Profile icon" className="profile-photo"></img> : <div className="plus">+</div>}
