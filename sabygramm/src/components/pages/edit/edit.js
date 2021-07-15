@@ -18,7 +18,6 @@ class Edit extends Component {
 
   setData = (e) => {
     e.preventDefault();
-
     this.props.setUserName(e.target[1].value);
     this.props.setWelcomeMessage(e.target[2].value)
   }
