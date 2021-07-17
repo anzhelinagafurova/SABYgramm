@@ -10,13 +10,7 @@ const App = () => {
         <Switch>
             <Route exact path="/" component={Auth} />
             <Route path="/edit" component={Edit} />
-            <Route path="/dialogs/:id"
-                render={({ match }) => {
-                    const { id } = match.params;
-                    return <Dialogs groupId={id} />
-                }}
-            />
-            
+            <Route path="/dialogs" component={Dialogs}/>           
         </Switch>
     )
 }

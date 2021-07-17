@@ -1,64 +1,78 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import DialogItem from '../../dialogItem/dialogItem';
 import SabygramService from '../../../services/SabygramService';
 import Header from '../../header';
 import './dialogs.scss';
 import AddContact from '../../addContact/addContact';
+import SettingPage from '../settingPage';
 
-const Dialogs = ({ groupId }) => {
-    const [slideGroup, setSlideGroup] = useState(+groupId);
-    const [itemsFound, setFound] = useState(null);
+export default class Dialogs extends Component {
+    service = new SabygramService();
+    dialogs = this.service.getDialogData();
 
-    const service = new SabygramService();
-    const dialogs = service.getDialogData(slideGroup);
+    state = {
+        slideGroup: 0,
+        itemsFound: null
+    }
 
-    const slideChanged = (e) => {
+
+    slideChanged = (e) => {
         if (e) {
-            setSlideGroup(e.activeIndex)
+            this.setState({
+                slideGroup: e.activeIndex - 1
+            })
         }
     }
 
-    const RenderSearchItems = (dialogs, groupId) => {
-        if (groupId === slideGroup)
-            setFound(dialogs)
+    renderSearchItems = (dialogs) => {
+        this.setState({
+            itemsFound: dialogs
+        })
     }
 
-    const addContact = () => {
-        if (dialogs.length === 0) {
+    addContact = () => {
+        if (this.dialogs.length === 0) {
             return (<AddContact />)
         }
     }
 
-    return (
-        <div className="dialog-container">
-            <Header groupId={slideGroup} onSearch={RenderSearchItems} dialogs={dialogs} />
-            <Swiper className="mySwiper" onSlideChange={slideChanged}>
-                <SwiperSlide>
-                    {addContact()}
-                    <RenderDialog groupId={0} service={service} itemsFound={itemsFound} />
-                </SwiperSlide>
+    render(){
+        return (
+            <div className="dialog-container">
+                <Header groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.dialogs} />
+                <Swiper className="mySwiper" onSlideChange={this.slideChanged}>
+                    <SwiperSlide>
+                        <SettingPage />
+                    </SwiperSlide>
 
-                <SwiperSlide>
-                    <RenderDialog groupId={1} service={service} itemsFound={itemsFound} />
-                </SwiperSlide>
-
-                <SwiperSlide>
-                    <RenderDialog groupId={2} service={service} itemsFound={itemsFound} />
-                </SwiperSlide>
-            </Swiper>
-            <br />
-
-        </div>
-    )
+                    <SwiperSlide>
+                        {this.addContact()}
+                        <RenderDialog dialogs={this.dialogs[0]} itemsFound={this.state.itemsFound} />
+                    </SwiperSlide>
+    
+                    <SwiperSlide>
+                        <RenderDialog dialogs={this.dialogs[1]} itemsFound={this.state.itemsFound} />
+                    </SwiperSlide>
+    
+                    <SwiperSlide>
+                        <RenderDialog dialogs={this.dialogs[2]} itemsFound={this.state.itemsFound} />
+                    </SwiperSlide>
+                </Swiper>
+                <br />
+            </div>
+        )
+    }
+    
 }
 
-const RenderDialog = ({ groupId, service, itemsFound = null }) => {
+const RenderDialog = ({ dialogs, itemsFound = null }) => {
+    
     let toSearchIn = null;
 
-    itemsFound ? toSearchIn = itemsFound : toSearchIn = service.getDialogData(groupId);
+    itemsFound ? toSearchIn = itemsFound : toSearchIn = dialogs;
 
-    return (
+    return ( 
         <div>
             {
                 toSearchIn.map((dialog) => {
@@ -68,5 +82,3 @@ const RenderDialog = ({ groupId, service, itemsFound = null }) => {
         </div>
     )
 }
-
-export default Dialogs;

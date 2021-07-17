@@ -26,15 +26,15 @@ const Header = ({ groupId,  onSearch, dialogs}) => {
 
     const searchDialogs = (e) => {
         let dialogsFound = [];
-        dialogs.forEach((dialog) => {
+        dialogs[groupId].forEach((dialog) => {
             if(dialog.name.toLowerCase().includes(e.target.value.toLowerCase()))
                 dialogsFound.push(dialog)
         })
-        onSearch(dialogsFound, groupId)
+        onSearch(dialogsFound)
     }
 
     const clearDialogs = (e) => {
-        onSearch(null, groupId);
+        onSearch(null);
         setVisibility(false);
         e.target.value = null
     }
