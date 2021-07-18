@@ -11,6 +11,7 @@
     display: flex;
     padding: 10px;  
     border-bottom: 1px solid lightgray;   
+    justify-content: space-between;
 }
 .dialog:hover{
     background-color: rgb(209, 224, 255);
@@ -24,6 +25,7 @@
 }
 .dialog-contain{
     min-width: 0;
+    flex-grow: 1;
 }
 .dialog-name{
     @extend %message-wrapped;
@@ -35,6 +37,14 @@
     color: grey;
     margin: 0;
     font-size: 15px;
+}
+.dialog-timing{
+    align-content: flex-end;
+    color: gray;
+    min-width: 40px;
+    font-size: 13px;
+    text-align: right;
+    white-space: nowrap;
 }
 .settings {
     list-style: none;

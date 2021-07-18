@@ -6,13 +6,15 @@ body{
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow-x: hidden;
 }
 .swiper-container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
 }
 .swiper-slide{
-    height: calc(100vh - 58px)
+    height: 100vh;
+    overflow-x: auto;
 }
 
   
