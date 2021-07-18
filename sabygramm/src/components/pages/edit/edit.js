@@ -5,58 +5,79 @@ import './edit.css';
 class Edit extends Component {
 
   setPhoto = (e) => {
+    const form = document.getElementById("editForm")
     const reader = new FileReader();
     const file = e.target.files[0];
     reader.readAsDataURL(file);
     reader.onload = () => {
       this.props.setProfilePhoto(reader.result);
-      document.getElementById("editForm").pictureUrl.value = reader.result
-    }
-    reader.onerror = () => {
-      alert("Возникла ошибка при загрузке фотографии")
+      form.pictureUrl.value = reader.result
     }
   }
 
+  createPictureBlob = (letter) => {
+    const newPhotoSvg = 
+    `<svg xmlns="http://www.w3.org/2000/svg" width="74" height="74" version="1.1">
+    <circle cx="37" cy="37" r="37" fill="#738DED"></circle>
+  <text x="20" y="60" font-size="60" font-family="Roboto, sans-serif" fill="white">${letter}
+        </text>  
+  </svg>`
+    const blob = new Blob([newPhotoSvg], {type: 'image/svg+xml'}); 
+    return URL.createObjectURL(blob)
+  }
+
   setData = (e) => {
-    this.props.setUserName(document.getElementById("editForm").username.value);
-    this.props.setWelcomeMessage(document.getElementById("editForm").message.value);
-
+    e.preventDefault();
+    const form = e.currentTarget;
+    
     if(!this.props.photo) {
-      const newPhotoSvg = 
-        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" >
-        <circle cx="130" cy="130" r="180"  fill="#738DED" width="200" />
-          <text x="90" y="220" font-size="180" font-family="Roboto, sans-serif" fill="white"> ${document.getElementById("editForm").username.value[0].toUpperCase()}
-          </text>     
-        </svg>`
-
-      let blob = new Blob([newPhotoSvg], {type: 'image/svg+xml'});
-      const file = URL.createObjectURL(blob);
-      this.props.setProfilePhoto(file);
-      document.getElementById("editForm").pictureUrl.value = file;
+      var profilePicSvg = this.createPictureBlob(form.username.value[0].toUpperCase());
+      form.pictureUrl.value = profilePicSvg;
     }
 
-    document.getElementById("editForm").submit();
+    let userInfo = {
+      name: form.username.value,
+      welcome_msg: form.message.value || "Привет всем друзьям!",
+      image_link: form.pictureUrl.value || profilePicSvg
+    }
+
+    this.props.setUserName(userInfo.name);
+    this.props.setWelcomeMessage(userInfo.welcome_msg);
+    this.props.setProfilePhoto(userInfo.image_link);
+
+    this.sendData(userInfo);
+  }
+
+  sendData = (userInfo) => {
+    fetch('', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(userInfo)
+    })
+    .then((result) => result.json())
+    .then((result) => alert(result.message))
   }
   render() {
     const { photo } = this.props;
 
     return (
-
       <section className='edit-container'>
-        <form className='name-form' id="editForm" action="" method="POST" onSubmit={this.setData}>
+        <form className='name-form' id="editForm" onSubmit={this.setData}>
           <label htmlFor="picture" id="upload-background" className="upload-background">
 
             {photo ? <img src={photo} alt="Profile icon" className="profile-photo"></img> : <div className="plus">+</div>}
             <input type="file" id="picture" accept="image/*" onChange={this.setPhoto}/>
           </label>
 
-          <input type="text" name="pictureUrl" hidden></input>
+          <input type="text" name="pictureUrl" hidden></input> 
           
           <p className='photo-label'>Фото</p>
 
           <input type="text" name="username" placeholder='Ваше имя' required ></input>
 
-          <input type="text" name="message" placeholder='Привет всем друзьям!' required ></input>
+          <input type="text" name="message" placeholder='Привет всем друзьям!' ></input>
 
           <button type="submit" className='edit-button' ><i className="fas fa-play"></i></button>
 

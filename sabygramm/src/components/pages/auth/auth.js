@@ -15,7 +15,7 @@ class Auth extends Component {
                         <p className="number-7">+7</p>
                         <input type="tel" name="phoneNumber" placeholder='Тел. номер' value={phone} onChange={this.props.setPhone} maxLength="10" pattern="\d*" required></input>
                     </div>
-                    <input type="password" name="password" placeholder='Пароль' onChange={this.props.setPassword} value={password} required></input>
+                    <input type="password" name="password" placeholder='Пароль' onChange={this.props.setPassword} value={password} maxLength="12" required></input>
                     <button type="submit" className='login-button'><i className="fas fa-play" ></i></button>
                 </form>
             </section>
@@ -38,8 +38,8 @@ class Auth extends Component {
           .then((result) => result.json())
           .then((result) => alert(result.message))
 
-        //const { history } = this.props;
-        //history.push('/edit');
+        const { history } = this.props;
+        history.push('/edit');
     }
 
     render() {
