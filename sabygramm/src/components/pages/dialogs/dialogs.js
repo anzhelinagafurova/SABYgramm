@@ -39,9 +39,10 @@ export default class Dialogs extends Component {
 
     render(){
         return (
-            <div className="dialog-container">
-                <Header groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.dialogs} />
-                <Swiper className="mySwiper" onSlideChange={this.slideChanged}>
+            
+                <Swiper className="mySwiper" initialSlide="1" onSlideChange={this.slideChanged}>
+                <Header  slot="container-start" groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.dialogs} />
+                <div className="dialog-container">
                     <SwiperSlide>
                         <SettingPage />
                     </SwiperSlide>
@@ -58,9 +59,9 @@ export default class Dialogs extends Component {
                     <SwiperSlide>
                         <RenderDialog dialogs={this.dialogs[2]} itemsFound={this.state.itemsFound} />
                     </SwiperSlide>
+                    </div>
                 </Swiper>
-                <br />
-            </div>
+            
         )
     }
     

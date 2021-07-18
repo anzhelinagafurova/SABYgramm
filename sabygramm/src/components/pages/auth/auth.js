@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import './auth.scss';
 
 class Auth extends Component {
-
     renderAuthPage = () => {
         const { password, phone } = this.props;
         return (
@@ -16,7 +15,7 @@ class Auth extends Component {
                         <p className="number-7">+7</p>
                         <input type="tel" name="phone-number" placeholder='Тел. номер' value={phone} onChange={this.props.setPhone} maxLength="10" pattern="\d*" required></input>
                     </div>
-                    <input type="text" name="password" placeholder='Пароль' onChange={this.props.setPassword} value={password} required></input>
+                    <input type="password" name="password" placeholder='Пароль' onChange={this.props.setPassword} value={password} required></input>
                     <button type="submit" className='login-button'><i className="fas fa-play" ></i></button>
                 </form>
             </section>

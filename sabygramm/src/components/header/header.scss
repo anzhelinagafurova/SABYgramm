@@ -2,11 +2,13 @@
     display: flex;
     background-color: #728DED;
     padding: 20px;
+    height: 60px;
+    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     color: white;
 
     .group-name{
-        font-size: 0.85em;
+        font-size: 1em;
         flex-grow: 1;
         margin-right: 20px;
     }

@@ -41,11 +41,11 @@ const Header = ({ groupId,  onSearch, dialogs}) => {
     
     return(
         <header className="dialogs-header">
-            <i className="fa fa-bars" aria-hidden="true"></i>
-            <i className="fa fa-users" aria-hidden="true"></i>
+            {groupName && <i className="fa fa-bars" aria-hidden="true"></i>}
+            {groupName && <i className="fa fa-users" aria-hidden="true"></i>}
             <div className="group-name">{ groupName }</div>
             <input type="text" className="dialogs-search" onInput={searchDialogs} onBlur={clearDialogs} hidden={!inputVisible} autoFocus={true}></input>
-            <i className="fa fa-search" aria-hidden="true" onClick={handleSearch}></i>
+            {groupName &&  <i className="fa fa-search" aria-hidden="true" onClick={handleSearch}></i> }
         </header>
     )
 }

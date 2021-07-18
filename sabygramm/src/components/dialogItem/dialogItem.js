@@ -35,7 +35,7 @@ document.getElementById('root').addEventListener('click', function () {
 })
 
 //onMouseDown={touchstart} onMouseUp={touchend} onTouchStart={touchstart} onTouchEnd={touchend}
-const DialogItem = ({ dialog: { name, lastMessage, img } }) => {
+const DialogItem = ({ dialog: { name, lastMessage, img, timing } }) => {
     return (
 
         <div className="dialog" >
@@ -44,6 +44,8 @@ const DialogItem = ({ dialog: { name, lastMessage, img } }) => {
                 <p className="dialog-name">{name}</p>
                 <p className="dialog-message">{lastMessage}</p>
             </div>
+
+            <div className="dialog-timing">{timing}</div>
         </div>
     )
 }
