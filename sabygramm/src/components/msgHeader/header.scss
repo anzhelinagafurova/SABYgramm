@@ -1,0 +1,32 @@
+.message-header{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #728DED;
+    padding: 0.25rem 20px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    .message-dialog-img{
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        margin-left: 10px;
+    }
+
+    .flex-names {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 0 15px;
+        .group-name{
+            font-size: 0.7em;
+
+            margin-right: 20px;
+        }
+        .user-name {
+            font-size: 1em;
+            
+        }
+    }
+
+}

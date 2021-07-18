@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './header.scss';
 
-const Header = ({ groupId,  onSearch, dialogs}) => {
+const Header = ({ groupId, onSearch, dialogs }) => {
     const [inputVisible, setVisibility] = useState(false);
 
     let groupName = null;
 
-    switch (groupId){
+    switch (groupId) {
         case 0:
             groupName = "Общие";
             break;
@@ -17,7 +17,7 @@ const Header = ({ groupId,  onSearch, dialogs}) => {
             groupName = "Тихие";
             break;
         default:
-            groupName = null;         
+            groupName = null;
     }
 
     const handleSearch = () => {
@@ -27,7 +27,7 @@ const Header = ({ groupId,  onSearch, dialogs}) => {
     const searchDialogs = (e) => {
         let dialogsFound = [];
         dialogs[groupId].forEach((dialog) => {
-            if(dialog.name.toLowerCase().includes(e.target.value.toLowerCase()))
+            if (dialog.name.toLowerCase().includes(e.target.value.toLowerCase()))
                 dialogsFound.push(dialog)
         })
         onSearch(dialogsFound)
@@ -38,8 +38,8 @@ const Header = ({ groupId,  onSearch, dialogs}) => {
         setVisibility(false);
         e.target.value = null
     }
-    
-    return(
+
+    return (
         <header className="dialogs-header">
             {groupName && <i className="fa fa-bars" aria-hidden="true"></i>}
             {groupName && <i className="fa fa-users" aria-hidden="true"></i>}

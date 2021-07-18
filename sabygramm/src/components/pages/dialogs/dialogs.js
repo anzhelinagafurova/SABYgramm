@@ -37,7 +37,8 @@ export default class Dialogs extends Component {
         }
     }
 
-    render(){
+
+    render() {
         return (
             
                 <Swiper className="mySwiper" initialSlide="1" onSlideChange={this.slideChanged}>
@@ -51,11 +52,12 @@ export default class Dialogs extends Component {
                         {this.addContact()}
                         <RenderDialog dialogs={this.dialogs[0]} itemsFound={this.state.itemsFound} />
                     </SwiperSlide>
-    
+
                     <SwiperSlide>
                         <RenderDialog dialogs={this.dialogs[1]} itemsFound={this.state.itemsFound} />
                     </SwiperSlide>
-    
+
+
                     <SwiperSlide>
                         <RenderDialog dialogs={this.dialogs[2]} itemsFound={this.state.itemsFound} />
                     </SwiperSlide>
@@ -64,16 +66,16 @@ export default class Dialogs extends Component {
             
         )
     }
-    
+
 }
 
 const RenderDialog = ({ dialogs, itemsFound = null }) => {
-    
+
     let toSearchIn = null;
 
     itemsFound ? toSearchIn = itemsFound : toSearchIn = dialogs;
 
-    return ( 
+    return (
         <div>
             {
                 toSearchIn.map((dialog) => {
