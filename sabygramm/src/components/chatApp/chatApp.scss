@@ -1,0 +1,172 @@
+
+
+.chat-container {
+    display: block;
+    height: 100%;
+    width: 100vw;
+}
+
+.hamburger-icon {
+    display: none;
+}
+
+/* Chat window styling */
+
+.chat-window {
+    font-family: Roboto;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 1 1 auto;
+    max-height: 100vh;
+    height: calc(100vh - 3.5rem);
+}
+
+ul.message-list {
+    list-style-type: none;
+    padding-inline-start: 0;
+    overflow-y: auto;
+    width: 100%;
+    margin: 0;
+}
+
+.message {
+    font-family: Roboto;
+    border-radius: 20px;
+    margin: 0 1rem 0 1rem;
+    padding: 0.4rem 0.8rem;
+    clear: both;
+    border: 0;
+    text-align: right;
+    font-size: 0.9rem;
+    min-height: 1.1rem;
+    max-width: 90vw;
+   
+    word-wrap: break-word;
+}
+
+.outgoing .message {
+    background-color: #E3E8FB;
+    float: right;
+    cursor: pointer;
+}
+
+.incoming .message {
+    float: left;
+    background-color: #FFEBCC;
+    text-align: left;
+}
+
+.outgoing .message:hover {
+    background-color: #c8cddd;
+}
+
+.outgoing .editing {
+    background-color: #dbcaaf;;
+}
+
+.msg-date {
+    font-family: 'Fira Sans', sans-serif;
+    clear: both;
+    margin: 0.2rem 1.2rem 1rem 1.2rem;
+    color: #bababa;
+    font-size: 0.7rem;
+}
+
+.outgoing .msg-date {
+    float: right;
+}
+
+.incoming .msg-date {
+    float: left;
+}
+
+.no-message {
+    text-align: center;
+    color: #bababa;
+    font-size: 0.8rem;
+    width: 100%;
+}
+
+/* Message input form */
+
+.message-form {
+    width: 100%;
+    display: flex;
+    height: 3rem;
+    position: relative;
+}
+
+.message-input{
+    font-family: Roboto;
+    color: white;
+    font-size: 1rem;
+    flex: 1 1 auto;
+   border:1px solid #728DED;
+   background-color: #728DED;
+    border-right: 1px solid #728DED !important;
+}
+.message-input::-webkit-input-placeholder {
+    color: rgb(218, 218, 218);
+   } 
+
+.send-message {
+    flex: 0 0 2rem;
+    color: hsl(0, 0%, 100%);
+    padding-right: 0.8rem !important;
+    padding-left: 0.5rem !important;
+    cursor: pointer;
+    border:1px solid #728DED;
+    background-color: #728DED;
+    font-size: 1.2rem;
+}
+
+.send-message:hover {
+    color: rgb(224, 224, 224);
+}
+
+.editing-input input,
+.editing-input .send-message {
+    background-color: #7892ee;
+}
+
+.message-input,
+.send-message{
+    padding: 0.5rem 0.5rem 0.5rem 2.5rem;
+}
+
+.open-emojis {
+    color: #ffffff;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    cursor: pointer;
+    border: 0;
+    background: none;
+    padding: 0;
+}
+.open-emojis:hover {
+    color:rgb(252, 223, 94);
+}
+
+.emoji-picker {
+    position: absolute;
+    bottom: 3rem;
+    left: 0rem;
+}
+aside.emoji-picker-react {
+    box-shadow: none;
+}
+.emoji-picker-react .emoji-scroll-wrapper::-webkit-scrollbar { /* webkit */
+    width: 0;
+    height: 0;
+}
+.emoji-picker-react .emoji-group:before {
+    display: none;
+}
+.hidden {
+    display: none;
+}
+

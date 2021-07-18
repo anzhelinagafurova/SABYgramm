@@ -70,8 +70,8 @@ export default class SabygramService {
         }
     }
 
-    getDialogData(id) {
-        return this.dialogData[id];
+    getDialogData() {
+        return this.dialogData;
     }
 
 }

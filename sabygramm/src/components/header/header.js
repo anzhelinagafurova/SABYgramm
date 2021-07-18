@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './header.scss';
 
-const Header = ({ groupId,  onSearch, dialogs}) => {
+const Header = ({ groupId, onSearch, dialogs }) => {
     const [inputVisible, setVisibility] = useState(false);
 
     let groupName = null;
 
-    switch (groupId){
+    switch (groupId) {
         case 0:
             groupName = "Общие";
             break;
@@ -17,7 +17,7 @@ const Header = ({ groupId,  onSearch, dialogs}) => {
             groupName = "Тихие";
             break;
         default:
-            groupName = null;         
+            groupName = null;
     }
 
     const handleSearch = () => {
@@ -26,24 +26,24 @@ const Header = ({ groupId,  onSearch, dialogs}) => {
 
     const searchDialogs = (e) => {
         let dialogsFound = [];
-        dialogs.forEach((dialog) => {
-            if(dialog.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        dialogs[groupId].forEach((dialog) => {
+            if (dialog.name.toLowerCase().includes(e.target.value.toLowerCase()))
                 dialogsFound.push(dialog)
         })
-        onSearch(dialogsFound, groupId)
+        onSearch(dialogsFound)
     }
 
     const clearDialogs = (e) => {
-        onSearch(null, groupId);
+        onSearch(null);
         setVisibility(false);
         e.target.value = null
     }
-    
-    return(
+
+    return (
         <header className="dialogs-header">
             <i className="fa fa-bars" aria-hidden="true"></i>
             <i className="fa fa-users" aria-hidden="true"></i>
-            <div className="group-name">{ groupName }</div>
+            <div className="group-name">{groupName}</div>
             <input type="text" className="dialogs-search" onInput={searchDialogs} onBlur={clearDialogs} hidden={!inputVisible} autoFocus={true}></input>
             <i className="fa fa-search" aria-hidden="true" onClick={handleSearch}></i>
         </header>

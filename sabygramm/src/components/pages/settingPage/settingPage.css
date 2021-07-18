@@ -1,0 +1,8 @@
+.setting-page{
+  height: calc(100vh + 56px);
+  position: relative;
+  bottom: 56px;
+  background-color: #728DED;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
