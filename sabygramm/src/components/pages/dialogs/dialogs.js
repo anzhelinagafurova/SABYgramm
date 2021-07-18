@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import DialogItem from '../../dialogItem/dialogItem';
@@ -38,6 +37,7 @@ export default class Dialogs extends Component {
         }
     }
 
+
     render() {
         return (
             <div className="dialog-container">
@@ -56,6 +56,7 @@ export default class Dialogs extends Component {
                         <RenderDialog dialogs={this.dialogs[1]} itemsFound={this.state.itemsFound} />
                     </SwiperSlide>
 
+
                     <SwiperSlide>
                         <RenderDialog dialogs={this.dialogs[2]} itemsFound={this.state.itemsFound} />
                     </SwiperSlide>
@@ -67,13 +68,12 @@ export default class Dialogs extends Component {
 
 }
 
-
 const RenderDialog = ({ dialogs, itemsFound = null }) => {
 
     let toSearchIn = null;
 
     itemsFound ? toSearchIn = itemsFound : toSearchIn = dialogs;
-    console.log('start render')
+
     return (
         <div>
             {
