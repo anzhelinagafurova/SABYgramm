@@ -25,25 +25,30 @@
 
 .tel-wrapper {
   display: flex;
-  width: 50%;
+  width: 70%;
   margin: 5vh 0;
+  box-sizing: border-box;
 }
 .number-7 {
   font-family: Calibri;
-  font-size: 26px;
+  font-size: 27px;
   color: gray;
   margin: 0;
   margin-right: 10px;
   position: relative;
-  bottom: 2px
+  top: 2px;
+  
 }
 .login-form input[type="tel"] {
   width: 90%;
+  padding: 5px;
 }
 
-.login-form input[type="text"] {
-  width: 50%;
+.login-form input[type="password"] {
+  box-sizing: border-box;
+  width: 70%;
   margin-bottom: 5vh;
+  padding: 5px;
 }
 
 .login-text {
@@ -55,7 +60,6 @@
 }
 .login-button {
   margin-top: 11vh;
-  padding-top: 4vh;
   cursor: pointer;
   border-radius: 50%;
   width: 15vh;
