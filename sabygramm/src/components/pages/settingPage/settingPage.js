@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './settingPage.scss';
 
@@ -7,7 +8,7 @@ import contactsImg from '../../../img/1.png';
 import cinemaImg from '../../../img/2.png';
 import profileImg from '../../../img/3.png';
 
-const SettingPage = () => {
+const SettingPage = ({myUserName, myWelcomeMessage, myProfilePhoto}) => {
     return(
         <div className="setting-page">
             <div className="link-controllers ">
@@ -29,20 +30,28 @@ const SettingPage = () => {
                 </Link>
             </div>
 
-            <img className="profileImg" src={profileImg} alt="Фото профиля" />
+            <img className="profileImg" src={myProfilePhoto} alt="Фото профиля" />
 
 
-            <div className="profileInfo">
-                <span>Иосиф Сталин</span>
+            <form className="profileInfo">
+                <input type="text" className="username-field" name="username" defaultValue={myUserName} />
+                <span></span>
                 <i className="fa fa-magic" aria-hidden="true"></i>
                 <br/> 
                 <br/> 
-                <span>Здравствуй, товарищ!</span>
+                <input type="text" className="message-field" name="message" defaultValue={myWelcomeMessage} />
                 <i className="fa fa-magic" aria-hidden="true"></i>
-            </div>
+            </form>
 
             <span>SABYgramm ©</span>
         </div>
     )
 }
-export default SettingPage;
+const mapStateToProps = ({myUserName, myWelcomeMessage, myProfilePhoto}) => {
+    return{
+        myUserName,
+        myWelcomeMessage,
+        myProfilePhoto
+    }
+}
+export default connect(mapStateToProps)(SettingPage);

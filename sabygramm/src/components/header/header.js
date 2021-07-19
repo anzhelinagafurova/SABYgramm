@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './header.scss';
 
-const Header = ({ groupId, onSearch, dialogs }) => {
+const Header = ({ groupId, onSearch, dialogs, onSettings }) => {
     const [inputVisible, setVisibility] = useState(false);
 
     let groupName = null;
@@ -16,6 +16,9 @@ const Header = ({ groupId, onSearch, dialogs }) => {
         case 2:
             groupName = "Тихие";
             break;
+        case "all":
+            groupName = "Контакты";
+            break;
         default:
             groupName = null;
     }
@@ -26,10 +29,21 @@ const Header = ({ groupId, onSearch, dialogs }) => {
 
     const searchDialogs = (e) => {
         let dialogsFound = [];
-        dialogs[groupId].forEach((dialog) => {
+
+        if(groupId === "all"){
+            dialogs.forEach((dialogGroup) => {
+                dialogGroup.forEach((dialog) => {
+                    if (dialog.name.toLowerCase().includes(e.target.value.toLowerCase()))
+                    dialogsFound.push(dialog)
+                    })
+                })
+            }
+        else {
+            dialogs[groupId].forEach((dialog) => {
             if (dialog.name.toLowerCase().includes(e.target.value.toLowerCase()))
                 dialogsFound.push(dialog)
-        })
+            })
+        }
         onSearch(dialogsFound)
     }
 
@@ -41,7 +55,7 @@ const Header = ({ groupId, onSearch, dialogs }) => {
 
     return (
         <header className="dialogs-header">
-            {groupName && <i className="fa fa-bars" aria-hidden="true"></i>}
+            {groupName && <i className="fa fa-bars" aria-hidden="true" onClick={onSettings}></i>}
             {groupName && <i className="fa fa-users" aria-hidden="true"></i>}
             <div className="group-name">{ groupName }</div>
             <input type="text" className="dialogs-search" onInput={searchDialogs} onBlur={clearDialogs} hidden={!inputVisible} autoFocus={true}></input>

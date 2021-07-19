@@ -18,6 +18,7 @@ class Edit extends Component {
   }
 
   setData = (e) => {
+    e.preventDefault();
     this.props.setUserName(document.getElementById("editForm").username.value);
     this.props.setWelcomeMessage(document.getElementById("editForm").message.value);
 
@@ -34,8 +35,9 @@ class Edit extends Component {
       this.props.setProfilePhoto(file);
       document.getElementById("editForm").pictureUrl.value = file;
     }
-
-    document.getElementById("editForm").submit();
+        const { history } = this.props;
+        history.push('/dialogs');
+    //document.getElementById("editForm").submit();
   }
   render() {
     const { photo } = this.props;

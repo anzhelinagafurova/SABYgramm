@@ -54,11 +54,13 @@ export default class Dialogs extends Component {
                     </SwiperSlide>
 
                     <SwiperSlide>
+                        {this.addContact()}
                         <RenderDialog dialogs={this.dialogs[1]} itemsFound={this.state.itemsFound} />
                     </SwiperSlide>
 
 
                     <SwiperSlide>
+                        {this.addContact()}
                         <RenderDialog dialogs={this.dialogs[2]} itemsFound={this.state.itemsFound} />
                     </SwiperSlide>
                     </div>
@@ -75,7 +77,8 @@ const RenderDialog = ({ dialogs, itemsFound = null }) => {
 
     itemsFound ? toSearchIn = itemsFound : toSearchIn = dialogs;
 
-    return (
+    if (dialogs) 
+        return (
         <div>
             {
                 toSearchIn.map((dialog) => {
@@ -84,4 +87,5 @@ const RenderDialog = ({ dialogs, itemsFound = null }) => {
             }
         </div>
     )
+    else return <div></div>
 }

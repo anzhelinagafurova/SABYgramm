@@ -1,7 +1,7 @@
 export default class SabygramService {
     dialogData = [
         [
-            {//добавить время последнего сообщения
+            {
                 id: 0,
                 name: "Анжелина",
                 lastMessage: "Как ты?",
@@ -63,6 +63,7 @@ export default class SabygramService {
                 img: "https://avatars.mds.yandex.net/get-zen_doc/1886729/pub_5d62dba6998ed600ad85c10e_5d62dbc135c8d800adef2383/scale_1200",
                 timing: "2 н"
             }
+            
         ]
     ];
 

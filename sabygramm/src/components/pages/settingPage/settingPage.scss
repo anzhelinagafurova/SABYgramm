@@ -48,4 +48,16 @@
         color: white;
         margin-left: 20px;
     }
+    .username-field,
+    .message-field{
+        background-color: inherit;
+        border: 0;
+        color: white;
+        font-size: 15px;
+        text-align: center;
+    }
+}
+.profileImg{
+    width: 100px;
+    height: 100px;
 }
