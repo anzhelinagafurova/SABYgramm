@@ -10,20 +10,34 @@ class Auth extends Component {
         return (
             <section className='login-container'>
                 <h1 className='login-text'>вход</h1>
-                <form onSubmit={this.sendForm} className='login-form'>
+                <form className='login-form' onSubmit={this.sendForm}>
                     <div className='tel-wrapper'>
                         <p className="number-7">+7</p>
-                        <input type="tel" name="phone-number" placeholder='Тел. номер' value={phone} onChange={this.props.setPhone} maxLength="10" pattern="\d*" required></input>
+                        <input type="tel" name="phoneNumber" placeholder='Тел. номер' value={phone} onChange={this.props.setPhone} maxLength="10" pattern="\d*" required></input>
                     </div>
-                    <input type="password" name="password" placeholder='Пароль' onChange={this.props.setPassword} value={password} required></input>
+                    <input type="password" name="password" placeholder='Пароль' onChange={this.props.setPassword} value={password} maxLength="12" required></input>
                     <button type="submit" className='login-button'><i className="fas fa-play" ></i></button>
                 </form>
             </section>
         )
     }
     sendForm = (e) => {
-        e.preventDefault();       
-        // e.target.submit();
+        e.preventDefault();
+        let user = {
+            phone: e.currentTarget.phoneNumber.value,
+            password: e.currentTarget.password.value
+          };
+          
+          fetch('', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(user)
+          })
+          .then((result) => result.json())
+          .then((result) => alert(result.message))
+
         const { history } = this.props;
         history.push('/edit');
     }
