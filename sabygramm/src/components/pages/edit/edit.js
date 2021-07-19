@@ -23,16 +23,22 @@ class Edit extends Component {
         </text>  
   </svg>`
     const blob = new Blob([newPhotoSvg], {type: 'image/svg+xml'}); 
-    return URL.createObjectURL(blob)
+    return new Promise((resolve) => {
+      let reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+    })
   }
 
-  setData = (e) => {
+  setData = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     
     if(!this.props.photo) {
-      var profilePicSvg = this.createPictureBlob(form.username.value[0].toUpperCase());
-      form.pictureUrl.value = profilePicSvg;
+      var profilePicSvg = await this.createPictureBlob(form.username.value[0].toUpperCase());
+      form.pictureUrl.value = await profilePicSvg;
     }
 
     let userInfo = {
@@ -49,7 +55,7 @@ class Edit extends Component {
   }
 
   sendData = (userInfo) => {
-    fetch('', {
+    fetch('/edit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
