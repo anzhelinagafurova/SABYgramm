@@ -1,35 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import './edit.css';
+import { createPictureBlob, readPhoto } from '../../helpers';
+import SabygramService from "../../../services/SabygramService";
+import './edit.scss';
 
 class Edit extends Component {
+  service = new SabygramService();
 
-  setPhoto = (e) => {
-    const form = document.getElementById("editForm")
-    const reader = new FileReader();
-    const file = e.target.files[0];
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.props.setProfilePhoto(reader.result);
-      form.pictureUrl.value = reader.result
-    }
-  }
-
-  createPictureBlob = (letter) => {
-    const newPhotoSvg = 
-    `<svg xmlns="http://www.w3.org/2000/svg" width="74" height="74" version="1.1">
-    <circle cx="37" cy="37" r="37" fill="#738DED"></circle>
-  <text x="20" y="60" font-size="60" font-family="Roboto, sans-serif" fill="white">${letter}
-        </text>  
-  </svg>`
-    const blob = new Blob([newPhotoSvg], {type: 'image/svg+xml'}); 
-    return new Promise((resolve) => {
-      let reader = new FileReader();
-      reader.readAsDataURL(blob);
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-    })
+  setPhoto = async (e) => {
+    const form = e.currentTarget.closest("form");
+    const photo = await readPhoto(e);
+    this.props.setProfilePhoto(await photo);
+    form.pictureUrl.value = await photo
   }
 
   setData = async (e) => {
@@ -37,7 +19,7 @@ class Edit extends Component {
     const form = e.currentTarget;
     
     if(!this.props.photo) {
-      var profilePicSvg = await this.createPictureBlob(form.username.value[0].toUpperCase());
+      var profilePicSvg = await createPictureBlob(form.username.value[0].toUpperCase());
       form.pictureUrl.value = await profilePicSvg;
     }
 
@@ -47,24 +29,16 @@ class Edit extends Component {
       image_link: form.pictureUrl.value || profilePicSvg
     }
 
+    this.service.sendDataPost(userInfo, '/edit')
+
     this.props.setUserName(userInfo.name);
     this.props.setWelcomeMessage(userInfo.welcome_msg);
     this.props.setProfilePhoto(userInfo.image_link);
 
-    this.sendData(userInfo);
+    const { history } = this.props;
+    history.push('/dialogs');
   }
 
-  sendData = (userInfo) => {
-    fetch('/edit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: JSON.stringify(userInfo)
-    })
-    .then((result) => result.json())
-    .then((result) => alert(result.message))
-  }
   render() {
     const { photo } = this.props;
 
@@ -77,13 +51,13 @@ class Edit extends Component {
             <input type="file" id="picture" accept="image/*" onChange={this.setPhoto}/>
           </label>
 
-          <input type="text" name="pictureUrl" hidden></input> 
+          <input type="text" name="pictureUrl" hidden /> 
           
           <p className='photo-label'>Фото</p>
 
-          <input type="text" name="username" placeholder='Ваше имя' required ></input>
+          <input type="text" name="username" placeholder='Ваше имя' maxLength="25" required />
 
-          <input type="text" name="message" placeholder='Привет всем друзьям!' ></input>
+          <input type="text" name="message" placeholder='Привет всем друзьям!' maxLength="200" />
 
           <button type="submit" className='edit-button' ><i className="fas fa-play"></i></button>
 

@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import SabygramService from "../../../services/SabygramService";
 
 import './auth.scss';
 
 class Auth extends Component {
+    service = new SabygramService();
+
     renderAuthPage = () => {
         const { password, phone } = this.props;
         return (
@@ -23,21 +25,12 @@ class Auth extends Component {
     }
     sendForm = (e) => {
         e.preventDefault();
-        let user = {
-            phone: e.currentTarget.phoneNumber.value,
-            password: e.currentTarget.password.value
-          };
-          
-          fetch('', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(user)
-          })
-          .then((result) => result.json())
-          .then((result) => alert(result.message))
-
+        const form = e.currentTarget;
+        let userInfo = {
+            phone: form.phoneNumber.value,
+            password: form.password.value
+        };
+        this.service.sendDataPost(userInfo, '');
         const { history } = this.props;
         history.push('/edit');
     }

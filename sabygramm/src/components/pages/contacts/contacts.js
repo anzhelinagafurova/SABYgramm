@@ -15,7 +15,6 @@ export default class Contacts extends Component{
         itemsFound: null
     }
     slideChanged = (e) => {
-        console.log(e)
         if (e && e.activeIndex === 1) {
             this.setState({
                 slideGroup: "all"
