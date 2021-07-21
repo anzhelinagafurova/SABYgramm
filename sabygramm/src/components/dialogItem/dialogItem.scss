@@ -46,32 +46,3 @@
     text-align: right;
     white-space: nowrap;
 }
-.settings {
-    list-style: none;
-    margin: 0;
-    margin-top: 55px;
-    padding: 0;
-    width: 40%;
-    position: absolute;
-    right: 5%;
-    font-size:11px;
-    background-color: white;
-    font-family: Roboto;
-    border: 1px solid lightgrey;
-    border-radius: 10px;
-    li {
-     margin: 5px 15px;
-      color:grey;
-        
-    }
-}
-@media screen and (min-width: 480px){
-    .settings {
-        font-size: 13px;
-    }
-}
-@media screen and (min-width: 980px){
-    .settings {
-        font-size: 14px;
-    }
-}

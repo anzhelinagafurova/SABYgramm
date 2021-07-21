@@ -51,7 +51,7 @@ class Auth extends Component {
 const mapStateToProps = ({ isAuthenticated, isRegistrated }) => {
     return {
         isAuthenticated,
-        isRegistrated
+        isRegistrated,
     }
 }
 

@@ -2,7 +2,9 @@ import React from "react";
 
 const Message = (props) => {
     const handleClick = () => props.enterEditMode(props.index);
-
+    const formatTime = (time) => {
+        return time.toString().split(' ')[1].split(':')[0] + ':' + time.toString().split(' ')[1].split(':')[1]
+    }
     return (
         <>
             {props.message.direction === "outgoing" ? (
@@ -16,21 +18,23 @@ const Message = (props) => {
                         onClick={handleClick}
                     >
                         {props.message.message}
+                        <p className="msg-date">
+                            {props.message.edit
+                                ? "ред. " + formatTime(props.message.edit)
+                                : formatTime(props.message.time)}
+                        </p>
                     </button>
-                    <p className="msg-date">
-                        {props.message.edit
-                            ? "изменено " + props.message.edit
-                            : props.message.time}
-                    </p>
+
                 </div>
             ) : (
                 <div className="incoming">
-                    <div className="message">{props.message.message}</div>
-                    <p className="msg-date">
-                        {props.message.edit
-                            ? "изменено " + props.message.edit
-                            : props.message.time}
-                    </p>
+                    <div className="message">{props.message.message}
+                        <p className="msg-date">
+                            {props.message.edit
+                                ? "ред. " + formatTime(props.message.edit)
+                                : formatTime(props.message.time)}
+                        </p></div>
+
                 </div>
             )}
         </>

@@ -1,17 +1,20 @@
 import React, { useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import ChatWindow from "../chatWindow";
 import './chatApp.scss';
 import MsgHeader from "../msgHeader";
-import SabygramService from "../../services/SabygramService";
+//import SabygramService from "../../services/SabygramService";
 
 /**
  * The chat application
  */
 const ChatApp = () => {
+    const location = useLocation();
+    const { groupId, name, img } = location.state
     /**
      * The currentConv state determines the conversation currently rendered
      */
-    const [currentConv, setCurrentConv] = useState('0');
+    const [currentConv] = useState("0");
     //индекс диалога в группе
 
     /** The editMode state defines if a message is being edited or not */
@@ -21,19 +24,19 @@ const ChatApp = () => {
     const [editIndex, setEditIndex] = useState(null);
 
     const msgInput = useRef();
-    const service = new SabygramService();
-    const dialogs = service.getDialogData(0);
+    //const service = new SabygramService();
+    //const dialogs = service.getDialogData(0);
     //индекс группы
 
     /**
      * The data object holds all friends and their related messages
      */
     const [data, setData] = useState({
-        0: { name: dialogs[0][currentConv].name, messages: [], saved: "", editMode: false, groupId: 0, img: dialogs[0][currentConv].img },
-        1: { name: dialogs[1].name, messages: [], saved: "", editMode: false, groupId: 0, img: dialogs[1].img },
-        2: { name: dialogs[1].name, messages: [], saved: "", editMode: false, groupId: 1, img: dialogs[1].img },
-        3: { name: dialogs[0].name, messages: [], saved: "", editMode: false, groupId: 0, img: dialogs[0].img },
-        4: { name: dialogs[0].name, messages: [], saved: "", editMode: false, groupId: 0, img: dialogs[0].img },
+        0: { name: name, messages: [], saved: "", editMode: false, groupId: groupId, img: img },
+        // 1: { name: dialogs[1].name, messages: [], saved: "", editMode: false, groupId: 0, img: dialogs[1].img },
+        // 2: { name: dialogs[1].name, messages: [], saved: "", editMode: false, groupId: 1, img: dialogs[1].img },
+        // 3: { name: dialogs[0].name, messages: [], saved: "", editMode: false, groupId: 0, img: dialogs[0].img },
+        // 4: { name: dialogs[0].name, messages: [], saved: "", editMode: false, groupId: 0, img: dialogs[0].img },
     });
     //поменять индексы и должно работать, но не могу с сервиса забрать в пропс сразу
 

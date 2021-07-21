@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import SabygramService from '../../services/SabygramService';
 import './addContact.scss';
 
 export default class AddContact extends Component {
-
+service = new SabygramService();
   state = {
     placeholder: 'Добавить контакт',
-    phone: ''
+    resultHidden: true,
+    found: []
   }
 
   changePlaceholderFocus = () => {
@@ -21,17 +23,30 @@ export default class AddContact extends Component {
   }
 
   changePhone = (e) => {
-    this.setState(
-      {
-        phone: e.target.value
-      }
-    )
+    this.service.sendDataGet(e.target.value, '')
+    .then((result) => this.setState({
+      found: result,
+      resultHidden: false
+    }))
   }
 
   render() {
     return (
       <form className='add-contact-form'>
-        <input className='add-contact' placeholder={this.state.placeholder} onFocus={this.changePlaceholderFocus} onBlur={this.changePlaceholderBlur} value={this.state.phone} onChange={this.changePhone} />
+        <input type="tel" className='add-contact' placeholder={this.state.placeholder} onFocus={this.changePlaceholderFocus} onBlur={this.changePlaceholderBlur} onChange={this.changePhone} />        
+          <div className='add-contact-result-container' hidden={this.state.resultHidden}>
+            {
+              this.state.found.map((result) => {
+                return (
+                  <div key={result.id} className="add-contact-result">
+                    <img src={result.picture} alt="avatar"></img>
+                    <span>{result.name}</span>
+                    <i className="fa fa-plus-circle" aria-hidden="true"></i>
+                  </div>
+                )
+              })
+          }   
+          </div>
       </form>
     )
   }

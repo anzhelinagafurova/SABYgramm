@@ -11,7 +11,7 @@ import cinemaImg from '../../../img/2.png';
 import pencilImg from '../../../img/3.png';
 const service = new SabygramService();
 
-const SettingPage = ({myUserName, myWelcomeMessage, myProfilePhoto, setProfilePhoto, setUserName, setWelcomeMessage}) => {
+const SettingPage = ({myUserName, myWelcomeMessage, myProfilePhoto, setProfilePhoto, setUserName, setWelcomeMessage, clearState}) => {
     const setPhoto = async (e) => {
         const form = e.currentTarget.closest("form");
         const photo = await readPhoto(e);
@@ -54,9 +54,7 @@ const SettingPage = ({myUserName, myWelcomeMessage, myProfilePhoto, setProfilePh
                     <img src={pencilImg} alt="edit" className="settings-pencil"></img>
                 </label>
                 <button type="submit" className="profileInfo-button">Сохранить</button>
-                <button type="button" className="profileInfo-button exit-button">
-                    <Link to="/">Выйти</Link>
-                </button>
+                <Link to="/" className="profileInfo-button exit-button" onClick={clearState}>Выйти</Link>
                 <span>SABYgramm ©</span>
             </form>
         )
@@ -104,6 +102,7 @@ const mapDispatchProps = (dispatch) => {
       setProfilePhoto: (photo) => dispatch({ type: "SET_MY_PROFILE_PHOTO", payload: photo }),
       setUserName: (name) => dispatch({ type: "SET_MY_USER_NAME", payload: name }),
       setWelcomeMessage: (message) => dispatch({ type: "SET_MY_WELCOME_MESSAGE", payload: message }),
+      clearState: () => dispatch({ type: "CLEAR_STATE"})
     }
   }
 export default connect(mapStateToProps, mapDispatchProps)(SettingPage);

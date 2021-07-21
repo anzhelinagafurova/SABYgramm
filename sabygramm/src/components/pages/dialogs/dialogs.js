@@ -40,9 +40,9 @@ export default class Dialogs extends Component {
 
     render() {
         return (
-            
-                <Swiper className="mySwiper" initialSlide="1" onSlideChange={this.slideChanged}>
-                <Header  slot="container-start" groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.dialogs} />
+
+            <Swiper className="mySwiper" initialSlide="1" onSlideChange={this.slideChanged}>
+                <Header slot="container-start" groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.dialogs} />
                 <div className="dialog-container">
                     <SwiperSlide>
                         <SettingPage />
@@ -50,42 +50,42 @@ export default class Dialogs extends Component {
 
                     <SwiperSlide>
                         {this.addContact()}
-                        <RenderDialog dialogs={this.dialogs[0]} itemsFound={this.state.itemsFound} />
+                        <RenderDialog dialogs={this.dialogs[0]} itemsFound={this.state.itemsFound} groupId={0} />
                     </SwiperSlide>
 
                     <SwiperSlide>
                         {this.addContact()}
-                        <RenderDialog dialogs={this.dialogs[1]} itemsFound={this.state.itemsFound} />
+                        <RenderDialog dialogs={this.dialogs[1]} itemsFound={this.state.itemsFound} groupId={1} />
                     </SwiperSlide>
 
 
                     <SwiperSlide>
                         {this.addContact()}
-                        <RenderDialog dialogs={this.dialogs[2]} itemsFound={this.state.itemsFound} />
+                        <RenderDialog dialogs={this.dialogs[2]} itemsFound={this.state.itemsFound} groupId={2} />
                     </SwiperSlide>
-                    </div>
-                </Swiper>
-            
+                </div>
+            </Swiper>
+
         )
     }
 
 }
 
-const RenderDialog = ({ dialogs, itemsFound = null }) => {
+const RenderDialog = ({ dialogs, itemsFound = null, groupId = null }) => {
 
     let toSearchIn = null;
 
     itemsFound ? toSearchIn = itemsFound : toSearchIn = dialogs;
 
-    if (dialogs) 
+    if (dialogs)
         return (
-        <div>
-            {
-                toSearchIn.map((dialog) => {
-                    return <DialogItem key={dialog.id} dialog={dialog} />
-                })
-            }
-        </div>
-    )
+            <div>
+                {
+                    toSearchIn.map((dialog) => {
+                        return <DialogItem key={dialog.id} dialog={dialog} groupId={groupId} />
+                    })
+                }
+            </div>
+        )
     else return <div></div>
 }
