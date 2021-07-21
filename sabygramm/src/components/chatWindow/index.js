@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import MsgForm from "../msgForm";
 import Message from "../message";
@@ -56,7 +56,6 @@ const ChatWindow = (props) => {
                 setSavedMsg={props.setSavedMsg}
                 savedMsg={props.savedMsg}
                 currentMessages={currentMessages}
-                addNewMessage={props.addNewMessage}
                 updateMessage={props.updateMessage}
                 editMode={props.editMode}
                 setEditMode={props.setEditMode}

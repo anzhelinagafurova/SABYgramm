@@ -15,8 +15,8 @@ const App = () => {
             <Route path="/contacts" component={Contacts} />
             <Route path="/chatapp/:id"
                 render={({ match }) => {
-                    const { id } = match.params;
-                    return <ChatApp dialogId={id} />
+                    const { id, groupId } = match.params;
+                    return <ChatApp dialogId={groupId} id={id} />
                 }}
             />
 

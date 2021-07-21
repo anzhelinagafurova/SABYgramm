@@ -1,65 +1,67 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import './dialogItem.scss';
+import ChatMenu from '../chatMenu/chatMenu';
 
-const DialogItem = ({ dialog: { name, lastMessage, img, id, timing } }) => {
+class DialogItem extends Component {
+    timer = null
 
-    let timer;
-    let touchduration = 500;
-    let dialogs = document.getElementsByClassName('dialog');
-    let settings = document.createElement('ul');
+    state = {
+        showed: false
+    }
 
-    settings.innerHTML = '<li>Сделать тихим</li><li>Сделать гроким</li><li>Удалить</li>';
+    constructor(props) {
+        super(props);
+        this.onHistoryPush = this.onHistoryPush.bind(this);
+    }
 
-    settings.className = 'settings';
-
-    const touchend = () => {
-        if (timer) {
-            clearTimeout(timer);
-            timer = null;
+    touchend = () => {
+        if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = null
         }
     }
 
-    const touchstart = (e) => {
-        const current = e.currentTarget
-        if (!timer) {
-            timer = setTimeout(() => { current.appendChild(settings) }, touchduration);
+    touchstart = () => {
+        if (!this.timer) {
+            this.timer = setTimeout(() => {
+                this.setState({ showed: true })
+            }, 500);
         }
     };
-
-    const addEventListeners = () => {
-        for (let i = 0; i < dialogs.length; i++) {
-            let dialog = dialogs[i];
-            dialog.addEventListener("touchstart", touchstart, false);
-            dialog.addEventListener("touchend", touchend, false);
-            dialog.addEventListener("mousedown", touchstart, false);
-            dialog.addEventListener("mouseup", touchend, false);
+    onHistoryPush() {
+        const { dialog: { name, img, id }, groupId } = this.props
+        this.props.history.push({
+            pathname: `/chatapp/${id}`,
+            state: {
+                id: id,
+                name: name,
+                img: img,
+                groupId: groupId
+            }
         }
+        );
     }
 
-    document.addEventListener("DOMContentLoaded", addEventListeners)
-    document.getElementById('root').addEventListener('click', function () {
-        settings.remove();
-    })
+    handleClick = () => {
+        this.onHistoryPush();
 
-    const history = useHistory();
-    const handleClick = () => {
-        history.push(`/chatapp/${id}`, {
-            id: id,
-        })
     };
+    render() {
+        const { dialog: { name, lastMessage, img, timing }, groupId } = this.props
+        return (
+            <div className="dialog" onClick={this.handleClick} onTouchStart={this.touchstart} onTouchEnd={this.touchend} onMouseDown={this.touchstart} onMouseUp={this.touchend}>
+                <img src={img} alt="dialogPicture" className="dialog-img" />
+                <div className="dialog-contain">
+                    <p className="dialog-name">{name}</p>
+                    <p className="dialog-message">{lastMessage}</p>
+                </div>
+                <div className="dialog-timing">{timing}</div>
+                <ChatMenu showed={this.state.showed} groupId={groupId} />
 
-    return (
-        <div className="dialog" onClick={handleClick}>
-            <img src={img} alt="dialogPicture" className="dialog-img" />
-            <div className="dialog-contain">
-                <p className="dialog-name">{name}</p>
-                <p className="dialog-message">{lastMessage}</p>
             </div>
-
-            <div className="dialog-timing">{timing}</div>
-        </div>
-    )
+        )
+    }
 }
 
-export default DialogItem;
+export default withRouter(DialogItem);
