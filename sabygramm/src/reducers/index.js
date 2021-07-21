@@ -6,7 +6,6 @@ const initialState = {
     myProfilePhoto: null,
     myPassword: null,
     myPhone: null
-
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -39,6 +38,9 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 myUserName: action.payload
             }
+        }
+        case "CLEAR_STATE": {
+            return initialState;
         }
         default:
             return state;

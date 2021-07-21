@@ -76,7 +76,25 @@ export default class SabygramService {
             body: JSON.stringify(data)
         })
     }
-
+    sendDataGet(data, url) {
+        return new Promise((resolve) => {
+            setTimeout(() => resolve([
+                {
+                    id: 0,
+                    name: "Halo",
+                    number: "Salut",
+                    picture:"https://i0.wp.com/prostolike.net/wp-content/uploads/2018/08/image3_700x669.jpg?w=700&ssl=1"
+                }
+            ]), 500)
+        })
+        // return fetch(url, {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        //     body: JSON.stringify(data)
+        // })
+    }
     getDialogData() {
         return this.dialogData;
     }
