@@ -52,7 +52,8 @@ export default class Dialogs extends Component {
                 <Header slot="container-start" groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.state.dialogs} />
                 <div className="dialog-container">
                     <SwiperSlide>
-                        <SettingPage data={this.state.dialogs[3][0]}/>
+                        {/* <SettingPage data={this.state.dialogs[3][0]}/> */}
+                        <SettingPage/>
                     </SwiperSlide>
 
                     <SwiperSlide>

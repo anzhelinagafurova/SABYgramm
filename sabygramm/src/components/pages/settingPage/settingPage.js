@@ -11,15 +11,15 @@ import cinemaImg from '../../../img/2.png';
 import pencilImg from '../../../img/3.png';
 const service = new SabygramService();
 
-const SettingPage = ({ data, setProfilePhoto, setUserName, setWelcomeMessage, clearState}) => {
-    const userName = data[0];
-    const greetMessage = data[1];
-    const pictureUrl = data[3];
+const SettingPage = ({myUserName, myWelcomeMessage, myProfilePhoto, setProfilePhoto, setUserName, setWelcomeMessage, clearState}) => {
+    // const userName = data[0];
+    // const greetMessage = data[1];
+    // const pictureUrl = data[3];
 
-    alert("data" + data)
-    alert(" data[0]" + data[0])
-    alert("{data}" + {data})
-    alert("{data}[0]" + {data}[0])
+    // alert("data" + data)
+    // alert(" data[0]" + data[0])
+    // alert("{data}" + {data})
+    // alert("{data}[0]" + {data}[0])
 
     const setPhoto = async (e) => {
         const form = e.currentTarget.closest("form");
@@ -49,17 +49,17 @@ const SettingPage = ({ data, setProfilePhoto, setUserName, setWelcomeMessage, cl
         return(
             <form name="profileInfo" className="profileInfo" onSubmit={setData}>
                 <label htmlFor="picture" id="upload-background" className="upload-background-profile">
-                    <img src={pictureUrl} alt="Profile icon" className="photo-settings" />
+                    <img src={myProfilePhoto} alt="Profile icon" className="photo-settings" />
                     <input className="profile-photo-settings" type="file" id="picture" accept="image/*" onChange={setPhoto}/>
                 </label>
                 <input type="text" name="pictureUrl" hidden></input> 
 
                 <label>
-                    <input type="text" className="username-field" name="username" defaultValue={userName} maxLength="25" />
+                    <input type="text" className="username-field" name="username" defaultValue={myUserName} maxLength="25" />
                     <img src={pencilImg} alt="edit" className="settings-pencil"></img>
                 </label>
                 <label>
-                    <input type="text" className="message-field" name="message" defaultValue={greetMessage} maxLength="200" />
+                    <input type="text" className="message-field" name="message" defaultValue={myWelcomeMessage} maxLength="200" />
                     <img src={pencilImg} alt="edit" className="settings-pencil"></img>
                 </label>
                 <button type="submit" className="profileInfo-button">Сохранить</button>
@@ -98,9 +98,9 @@ const renderLinks = () => {
     )
 }
 
-const mapStateToProps = ({myUserName, myWelcomeMessage, myProfilePhoto}, ownProps) => {
+const mapStateToProps = ({myUserName, myWelcomeMessage, myProfilePhoto}) => {
     return{
-        data: ownProps.data,
+        // data: ownProps.data,
         myUserName,
         myWelcomeMessage,
         myProfilePhoto
