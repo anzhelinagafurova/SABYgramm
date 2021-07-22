@@ -1,11 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useHistory } from 'react-router-dom';
+import ChatMenu from '../chatMenu/chatMenu';
 import './header.scss';
 
 const MsgHeader = ({ groupId, name, img }) => {
+   const [dotsClicked, dotsClick] = useState(false);
+
+
     let groupName = null;
     const history = useHistory();
     const handleClick = () => history.push(`/dialogs`);
+    const onDotsClick = () => {
+        dotsClick(!dotsClicked)
+    }
     switch (groupId) {
         case 0:
             groupName = "Общие";
@@ -30,6 +37,9 @@ const MsgHeader = ({ groupId, name, img }) => {
                 <div className='user-name'>{name}</div>
                 <div className="group-name">{groupName}</div>
             </div>
+            <i class="fas fa-ellipsis-v" onClick={onDotsClick}></i>
+            
+            <ChatMenu showed={dotsClicked} groupId={groupId}/>
         </header>
     )
 }

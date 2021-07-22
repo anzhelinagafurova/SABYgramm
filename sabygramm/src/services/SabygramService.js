@@ -101,6 +101,6 @@ export default class SabygramService {
         // return new Promise((resolve) => {
         //     setTimeout(() => resolve([]), 500)
         // })
-        return fetch('/dialogs')
+        return fetch('http://185.93.109.221:8000/dialogs')
     }
 }
