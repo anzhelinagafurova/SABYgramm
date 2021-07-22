@@ -9,13 +9,20 @@ import SettingPage from '../settingPage';
 
 export default class Dialogs extends Component {
     service = new SabygramService();
-    dialogs = this.service.getDialogData();
 
     state = {
         slideGroup: 0,
-        itemsFound: null
+        itemsFound: null,
+        dialogs: []
     }
 
+    componentDidMount() {  
+        this.service.getDialogData()
+            //.then((result) => result.json())
+            //.then((dialogs) => this.setState({dialogs}))
+            .then((data) => console.log(data))
+            
+    }
 
     slideChanged = (e) => {
         if (e) {
@@ -32,7 +39,7 @@ export default class Dialogs extends Component {
     }
 
     addContact = () => {
-        if (this.dialogs.length === 0) {
+        if (this.state.dialogs.length === 0) {
             return (<AddContact />)
         }
     }
@@ -42,7 +49,7 @@ export default class Dialogs extends Component {
         return (
 
             <Swiper className="mySwiper" initialSlide="1" onSlideChange={this.slideChanged}>
-                <Header slot="container-start" groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.dialogs} />
+                <Header slot="container-start" groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.state.dialogs} />
                 <div className="dialog-container">
                     <SwiperSlide>
                         <SettingPage />
@@ -50,22 +57,21 @@ export default class Dialogs extends Component {
 
                     <SwiperSlide>
                         {this.addContact()}
-                        <RenderDialog dialogs={this.dialogs[0]} itemsFound={this.state.itemsFound} groupId={0} />
+                        <RenderDialog dialogs={this.state.dialogs[0]} itemsFound={this.state.itemsFound} groupId={0} />
                     </SwiperSlide>
 
                     <SwiperSlide>
                         {this.addContact()}
-                        <RenderDialog dialogs={this.dialogs[1]} itemsFound={this.state.itemsFound} groupId={1} />
+                        <RenderDialog dialogs={this.state.dialogs[1]} itemsFound={this.state.itemsFound} groupId={1} />
                     </SwiperSlide>
 
 
                     <SwiperSlide>
                         {this.addContact()}
-                        <RenderDialog dialogs={this.dialogs[2]} itemsFound={this.state.itemsFound} groupId={2} />
+                        <RenderDialog dialogs={this.state.dialogs[2]} itemsFound={this.state.itemsFound} groupId={2} />
                     </SwiperSlide>
                 </div>
             </Swiper>
-
         )
     }
 
