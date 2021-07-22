@@ -30,22 +30,28 @@ class Auth extends Component {
             phone: form.phoneNumber.value,
             password: form.password.value
         };
-        this.service.sendDataPost(userInfo, '');
-        const { history } = this.props;
-        history.push('/edit');
+        this.service.sendDataPost(userInfo, '')
+        .then((result) => result.json())
+        .then((answer) => {
+            if(answer.status === 0){
+                const { history } = this.props;
+                history.push('/dialogs');
+            }
+            if(answer.status === 1) {
+                alert("Password is incorrect!")
+            }
+            if(answer.status === 2) {
+                const { history } = this.props;
+                history.push('/edit');
+            }
+        })
+        
     }
 
     render() {
-        const { isAuthenticated, isRegistrated } = this.props;
-        if (isAuthenticated && isRegistrated) {
-            return (<div>старинца с диалогами</div>)
-        }
-        else if (!isRegistrated) {
-            return (this.renderAuthPage("/edit"))
-        }
-        else if (!isAuthenticated && isRegistrated) { //заменить на dialig
-            return (this.renderAuthPage("/edit"))
-        }
+        return(
+            this.renderAuthPage()
+        )
     }
 }
 const mapStateToProps = ({ isAuthenticated, isRegistrated }) => {
