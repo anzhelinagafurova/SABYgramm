@@ -1,4 +1,5 @@
 export default class SabygramService {
+    dialogData = [[{"id": 21, "name": "\u0414\u0438\u0432\u0430\u043d\u043d\u044b\u0439 \u0418\u043c\u043f\u0435\u0440\u0430\u0442\u043e\u0440", "lastMessage": "\u0410 \u0445\u043e\u0447\u0435\u0448\u044c \u043f\u0440\u043e \u043a\u043e\u043c\u043c\u0443\u043d\u0438\u0437\u043c \u0440\u0430\u0441\u0441\u043a\u0430\u0436\u0443?", "img": "/var/www/web/sites/java-ekb.ru/media/9000002202.jpg", "timing": "2021-07-20 21:12:00"}], [], []]
     // dialogData = [
     //     [
     //         {
@@ -94,8 +95,12 @@ export default class SabygramService {
         //     },
         //     body: JSON.stringify(data)
         // })
+        // это для поиска контактов
     }
     getDialogData() {
+        // return new Promise((resolve) => {
+        //     setTimeout(() => resolve([]), 500)
+        // })
         return fetch('/dialogs')
     }
 }
