@@ -18,10 +18,7 @@ export default class Dialogs extends Component {
 
     componentDidMount() {  
         this.service.getDialogData()
-            //.then((result) => result.json())
-            //.then((dialogs) => this.setState({dialogs}))
-            .then((data) => console.log(data))
-            
+            .then((dialogs) => this.setState({dialogs}))       
     }
 
     slideChanged = (e) => {
