@@ -8,12 +8,21 @@ import './contacts.scss';
 
 export default class Contacts extends Component{
     service = new SabygramService();
-    dialogs = this.service.getDialogData();
+
+    componentDidMount() {  
+        this.service.getDialogData()
+        .then((dialogs) => dialogs.json())
+        .then((result) => {
+            this.setState({dialogs:result});
+        }) 
+    }
 
     state = {
         slideGroup: "all",
-        itemsFound: null
+        itemsFound: null,
+        dialogs: []
     }
+
     slideChanged = (e) => {
         if (e && e.activeIndex === 1) {
             this.setState({
@@ -31,7 +40,7 @@ export default class Contacts extends Component{
     }
 
     addContact = () => {
-        if (this.dialogs.length === 0) {
+        if (this.state.dialogs.length === 0) {
             return (<AddContact />)
         }
     }
@@ -42,14 +51,14 @@ export default class Contacts extends Component{
     render(){
         return(
             <Swiper className="mySwiper" initialSlide="1" onSlideChange={this.slideChanged}>
-                <Header slot="container-start" groupId={this.state.slideGroup} onSettings={this.swipePrev} onSearch={this.renderSearchItems} dialogs={this.dialogs}/>
+                <Header slot="container-start" groupId={this.state.slideGroup} onSettings={this.swipePrev} onSearch={this.renderSearchItems} dialogs={this.state.dialogs}/>
                 <SwiperSlide>
                     <SettingPage />
                 </SwiperSlide>
     
                 <SwiperSlide>
                     {this.addContact()}
-                    <RenderContact dialogs={this.dialogs} itemsFound={this.state.itemsFound}/>
+                    <RenderContact dialogs={this.state.dialogs} itemsFound={this.state.itemsFound}/>
                 </SwiperSlide>
             </Swiper>
         )
