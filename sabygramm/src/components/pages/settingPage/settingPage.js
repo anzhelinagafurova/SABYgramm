@@ -16,6 +16,11 @@ const SettingPage = ({ data, setProfilePhoto, setUserName, setWelcomeMessage, cl
     const greetMessage = data[1];
     const pictureUrl = data[3];
 
+    alert("data" + data)
+    alert(" data[0]" + data[0])
+    alert("{data}" + {data})
+    alert("{data}[0]" + {data}[0])
+
     const setPhoto = async (e) => {
         const form = e.currentTarget.closest("form");
         const photo = await readPhoto(e);
@@ -93,8 +98,9 @@ const renderLinks = () => {
     )
 }
 
-const mapStateToProps = ({myUserName, myWelcomeMessage, myProfilePhoto}) => {
+const mapStateToProps = ({myUserName, myWelcomeMessage, myProfilePhoto}, ownProps) => {
     return{
+        data: ownProps.data,
         myUserName,
         myWelcomeMessage,
         myProfilePhoto
