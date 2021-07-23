@@ -15,7 +15,7 @@ const ChatApp = () => {
     /**
      * The currentConv state determines the conversation currently rendered
      */
-    const [currentConv] = useState(id);
+    const [currentConv] = useState("0");
     //индекс диалога в группе
 
     /** The editMode state defines if a message is being edited or not */
@@ -42,15 +42,15 @@ const ChatApp = () => {
             time: new Date().toLocaleString(),
             direction: 'outgoing',
         }], saved: "", editMode: false, groupId: groupId, img: img },
-        1: { name: name, messages: [{
-            message: "newMessage1",
-            time: new Date().toLocaleString(),
-            direction: 'incoming',
-        },{
-            message: "newMessage1",
-            time: new Date().toLocaleString(),
-            direction: 'outgoing',
-        }], saved: "", editMode: false, groupId: groupId, img: img },
+        // 1: { name: name, messages: [{
+        //     message: "newMessage1",
+        //     time: new Date().toLocaleString(),
+        //     direction: 'incoming',
+        // },{
+        //     message: "newMessage1",
+        //     time: new Date().toLocaleString(),
+        //     direction: 'outgoing',
+        // }], saved: "", editMode: false, groupId: groupId, img: img },
     });
     //поменять индексы и должно работать, но не могу с сервиса забрать в пропс сразу
 
