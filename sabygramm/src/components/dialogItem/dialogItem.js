@@ -4,10 +4,18 @@ import './dialogItem.scss';
 import ChatMenu from '../chatMenu/chatMenu';
 
 class DialogItem extends Component {
+    state = {
+        display: "none"
+    }
+
     timer = null
 
-    state = {
-        showed: false
+    componentDidMount(){
+        document.getElementById('root').addEventListener('click', () => {
+            this.setState({
+                display: "none"
+            })
+          })
     }
 
     constructor(props) {
@@ -25,7 +33,10 @@ class DialogItem extends Component {
     touchstart = () => {
         if (!this.timer) {
             this.timer = setTimeout(() => {
-                this.setState({ showed: true })
+                this.setState({
+                    display: "block"
+                })
+                
             }, 500);
         }
     };
@@ -48,7 +59,10 @@ class DialogItem extends Component {
 
     };
     render() {
-        const { dialog: { name, lastMessage, img, timing }, groupId } = this.props
+        const { dialog: { name, lastMessage, img, id }, groupId } = this.props
+        let {dialog:{timing}} = this.props
+        timing = timing.toString().split(' ')[1].split(':')[0] + ':' + timing.toString().split(' ')[1].split(':')[1]
+        
         return (
             <div className="dialog" onClick={this.handleClick} onTouchStart={this.touchstart} onTouchEnd={this.touchend} onMouseDown={this.touchstart} onMouseUp={this.touchend}>
                 <img src={img} alt="dialogPicture" className="dialog-img" />
@@ -57,11 +71,14 @@ class DialogItem extends Component {
                     <p className="dialog-message">{lastMessage}</p>
                 </div>
                 <div className="dialog-timing">{timing}</div>
-                <ChatMenu showed={this.state.showed} groupId={groupId} />
+                <ChatMenu groupId={groupId} display={this.state.display} id={id} margin={"55px"}/>
 
             </div>
         )
     }
+    
 }
+
+
 
 export default withRouter(DialogItem);

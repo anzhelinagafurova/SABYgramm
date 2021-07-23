@@ -47,6 +47,7 @@ const SettingPage = ({myUserName, myWelcomeMessage, myProfilePhoto, setProfilePh
 
     const renderForm = () => {
         return(
+            <>
             <form name="profileInfo" className="profileInfo" onSubmit={setData}>
                 <label htmlFor="picture" id="upload-background" className="upload-background-profile">
                     <img src={myProfilePhoto} alt="Profile icon" className="photo-settings" />
@@ -64,8 +65,10 @@ const SettingPage = ({myUserName, myWelcomeMessage, myProfilePhoto, setProfilePh
                 </label>
                 <button type="submit" className="profileInfo-button">Сохранить</button>
                 <Link to="/" className="profileInfo-button exit-button" onClick={clearState}>Выйти</Link>
-                <span>SABYgramm ©</span>
+                
             </form>
+            <span className="saby-gramm">SABYgramm ©</span>
+            </>
         )
     }
     return(

@@ -17,7 +17,7 @@ const App = () => {
             <Route path="/contacts" component={Contacts} />
             <Route path="/test" render={
               () => {
-                return <TestWebSocket socket={new WebSocket("ws://" + window.location.host + "/ws/room/1/")}/>
+                return <TestWebSocket/>
               }
             } />
             <Route path="/chatapp/:id"

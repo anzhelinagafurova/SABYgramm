@@ -10,11 +10,11 @@ import MsgHeader from "../msgHeader";
  */
 const ChatApp = () => {
     const location = useLocation();
-    const { groupId, name, img } = location.state
+    const { groupId, name, img, id } = location.state
     /**
      * The currentConv state determines the conversation currently rendered
      */
-    const [currentConv] = useState("0");
+    const [currentConv] = useState(id);
     //индекс диалога в группе
 
     /** The editMode state defines if a message is being edited or not */
@@ -32,11 +32,24 @@ const ChatApp = () => {
      * The data object holds all friends and their related messages
      */
     const [data, setData] = useState({
-        0: { name: name, messages: [], saved: "", editMode: false, groupId: groupId, img: img },
-        // 1: { name: dialogs[1].name, messages: [], saved: "", editMode: false, groupId: 0, img: dialogs[1].img },
-        // 2: { name: dialogs[1].name, messages: [], saved: "", editMode: false, groupId: 1, img: dialogs[1].img },
-        // 3: { name: dialogs[0].name, messages: [], saved: "", editMode: false, groupId: 0, img: dialogs[0].img },
-        // 4: { name: dialogs[0].name, messages: [], saved: "", editMode: false, groupId: 0, img: dialogs[0].img },
+        0: { name: name, messages: [{
+            message: "newMessage",
+            time: new Date().toLocaleString(),
+            direction: 'incoming',
+        },{
+            message: "newMessage",
+            time: new Date().toLocaleString(),
+            direction: 'outgoing',
+        }], saved: "", editMode: false, groupId: groupId, img: img },
+        1: { name: name, messages: [{
+            message: "newMessage1",
+            time: new Date().toLocaleString(),
+            direction: 'incoming',
+        },{
+            message: "newMessage1",
+            time: new Date().toLocaleString(),
+            direction: 'outgoing',
+        }], saved: "", editMode: false, groupId: groupId, img: img },
     });
     //поменять индексы и должно работать, но не могу с сервиса забрать в пропс сразу
 
@@ -58,6 +71,7 @@ const ChatApp = () => {
             time: time,
             direction: direction,
         });
+        console.log(selectedConv.messages)
         const updatedData = { ...data };
         updatedData[currentConv] = selectedConv;
         setData(updatedData);

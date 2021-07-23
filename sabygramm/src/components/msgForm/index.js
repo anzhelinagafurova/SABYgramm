@@ -21,20 +21,20 @@ const MsgForm = (props) => {
                 ? props.addNewMessage(trimmedMsg, "outgoing")
                 : props.updateMessage(trimmedMsg);
         }
-        if (!props.editMode) {
-            let phrase = "";
-            const generatedPhrase = async () => {
-                setTimeout(async () => {
-                    const result = await generatePhrase();
-                    phrase = result;
-                    props.addNewMessage(phrase, "incoming");
-                }, 2000);
-            };
-            const generatePhrase = () => {
-                return 'Какой-то текст'
-            };
-            generatedPhrase();
-        }
+        // if (!props.editMode) {
+        //     let phrase = "";
+        //     const generatedPhrase = async () => {
+        //         setTimeout(async () => {
+        //             const result = await generatePhrase();
+        //             phrase = result;
+        //             props.addNewMessage(phrase, "incoming");
+        //         }, 2000);
+        //     };
+        //     const generatePhrase = () => {
+        //         return 'Какой-то текст'
+        //     };
+        //     generatedPhrase();
+        // }
 
     };
 

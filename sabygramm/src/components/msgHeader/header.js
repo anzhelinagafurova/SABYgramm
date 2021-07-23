@@ -3,15 +3,18 @@ import { useHistory } from 'react-router-dom';
 import ChatMenu from '../chatMenu/chatMenu';
 import './header.scss';
 
-const MsgHeader = ({ groupId, name, img }) => {
-   const [dotsClicked, dotsClick] = useState(false);
+const MsgHeader = ({ groupId, name, img, id }) => {
+   const [dotsClicked, dotsClick] = useState("none");
 
 
     let groupName = null;
     const history = useHistory();
     const handleClick = () => history.push(`/dialogs`);
     const onDotsClick = () => {
-        dotsClick(!dotsClicked)
+        if(dotsClicked ==='block'){
+            dotsClick('none')
+        }
+        else dotsClick('block')
     }
     switch (groupId) {
         case 0:
@@ -37,9 +40,9 @@ const MsgHeader = ({ groupId, name, img }) => {
                 <div className='user-name'>{name}</div>
                 <div className="group-name">{groupName}</div>
             </div>
-            <i class="fas fa-ellipsis-v" onClick={onDotsClick}></i>
+            <i className="fas fa-ellipsis-v" onClick={onDotsClick}></i>
             
-            <ChatMenu showed={dotsClicked} groupId={groupId}/>
+            <ChatMenu display={dotsClicked} groupId={groupId} id={id} margin={"85px"}/>
         </header>
     )
 }

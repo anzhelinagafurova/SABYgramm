@@ -1,14 +1,14 @@
 import React from 'react';
 import './chatMenu.scss';
 
-const ChatMenu = ({ showed, groupId }) => {
+const ChatMenu = ({ display, groupId, id, margin }) => {
 
-  if (showed) {
+  if (display === "block") {
     switch (groupId) {
       case 0:
         {
           return (
-            <ul className='settings'>
+            <ul className='settings' style={{display: `${display}`, marginTop:`${margin}`}}>
               <li>Сделать тихим</li><li>Сделать гроким</li><li>Удалить</li>
             </ul>
           )
@@ -16,7 +16,7 @@ const ChatMenu = ({ showed, groupId }) => {
       case 1:
         {
           return (
-            <ul className='settings'>
+            <ul className='settings' style={{display: `${display}`, marginTop:`${margin}`}}>
               <li>Сделать общим</li><li>Сделать тихим</li><li>Удалить</li>
             </ul>
           )
@@ -24,7 +24,7 @@ const ChatMenu = ({ showed, groupId }) => {
       case 2:
         {
           return (
-            <ul className='settings'>
+            <ul className='settings' style={{display: `${display}`, marginTop:`${margin}`}}>
               <li>Сделать общим</li><li>Сделать гроким</li><li>Удалить</li>
             </ul>
           )
@@ -39,9 +39,6 @@ const ChatMenu = ({ showed, groupId }) => {
 }
 
 
-document.getElementById('root').addEventListener('click', function () {
-  const removeElements = (elms) => elms.forEach(el => el.remove());
-  removeElements(document.querySelectorAll(".settings"));
-})
+
 
 export default ChatMenu;

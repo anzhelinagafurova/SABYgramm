@@ -2,6 +2,8 @@ import React from 'react';
 import './test.scss';
 
 const TestWebSocket = ({socket}) => {
+  return (<div>Test</div>)
+    socket = new WebSocket("ws://" + window.location.host + "/ws/room/1/")
     socket.onopen = function() {
         alert("Соединение установлено.");
       };
@@ -23,7 +25,12 @@ const TestWebSocket = ({socket}) => {
         alert("Ошибка " + error.message);
       };
 
-      socket.send(JSON.stringify({'message': '123', 'username': 'vasa'}))
+    //   socket.send(JSON.stringify({'message': '123', 'username': 'vasa'}))
+
+
+
+
+
     // socket.onopen = function(e) {
     //     console.log("[open] Соединение установлено");
     // };

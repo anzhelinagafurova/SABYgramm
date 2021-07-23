@@ -1,14 +1,15 @@
 
 .setting-page{
-    height: calc(100vh - 60px);
+    height:calc(100vh - 60px);
     background-color: #728DED;
     font-family: 'Roboto', sans-serif;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     font-size: 14px;
+    margin-top:0;
 }
 .link-controllers{
     display: flex;
@@ -93,4 +94,7 @@
     background-color: #728DED;  
     text-decoration: none;
     color:white;
+}
+.saby-gramm{
+    margin-bottom: 5vh;
 }

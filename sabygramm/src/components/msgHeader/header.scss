@@ -1,7 +1,7 @@
 .message-header{
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     background-color: #728DED;
     padding: 0.25rem 20px;
     font-family: 'Roboto', sans-serif;
@@ -19,6 +19,7 @@
         flex-direction: column;
         justify-content: flex-start;
         padding: 0 15px;
+        flex-grow: 1;
         .group-name{
             font-size: 0.7em;
 

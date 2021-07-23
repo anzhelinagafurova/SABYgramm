@@ -7,17 +7,22 @@ import './auth.scss';
 class Auth extends Component {
     service = new SabygramService();
 
+    state = {
+        phone: '', 
+        password: ''
+    }
+
     renderAuthPage = () => {
-        const { password, phone } = this.props;
+        
         return (
             <section className='login-container'>
                 <h1 className='login-text'>вход</h1>
                 <form className='login-form' onSubmit={this.sendForm}>
                     <div className='tel-wrapper'>
                         <p className="number-7">+7</p>
-                        <input type="tel" name="phoneNumber" placeholder='Тел. номер' value={phone} onChange={this.props.setPhone} maxLength="10" pattern="\d*" required></input>
+                        <input type="tel" name="phoneNumber" placeholder='Тел. номер' maxLength="10" pattern="\d*" required></input>
                     </div>
-                    <input type="password" name="password" placeholder='Пароль' onChange={this.props.setPassword} value={password} maxLength="12" required></input>
+                    <input type="password" name="password" placeholder='Пароль' maxLength="12" required></input>
                     <button type="submit" className='login-button'><i className="fas fa-play" ></i></button>
                 </form>
             </section>
@@ -26,6 +31,7 @@ class Auth extends Component {
     sendForm = (e) => {
         e.preventDefault();
         const form = e.currentTarget;
+        const {setProlifePhoto, setUserName, setWelcomeMessage} = this.props;
         let userInfo = {
             phone: form.phoneNumber.value,
             password: form.password.value
@@ -34,6 +40,9 @@ class Auth extends Component {
         .then((result) => result.json())
         .then((answer) => {
             if(answer.status === 0){
+                setUserName(answer.name)
+                setWelcomeMessage(answer.welcome_msg)
+                setProlifePhoto(answer.image_link)
                 const { history } = this.props;
                 history.push('/dialogs');
             }
@@ -54,10 +63,9 @@ class Auth extends Component {
         )
     }
 }
-const mapStateToProps = ({ isAuthenticated, isRegistrated }) => {
-    return {
-        isAuthenticated,
-        isRegistrated,
+const mapStateToProps = ({ myUserName, myWelcomeMessage, myProfilePhoto }) => {
+    return { 
+        myUserName, myWelcomeMessage, myProfilePhoto 
     }
 }
 
@@ -70,7 +78,16 @@ const mapDispatchProps = (dispatch) => {
         setPassword: (e) => {
             const newPassword = e.target.value;
             dispatch({ type: "SET_MY_PHONE", payload: newPassword })
-        }
+        },
+        setProlifePhoto: (photo) => {
+            dispatch({ type: "SET_MY_PROFILE_PHOTO", payload: photo })
+        },
+        setUserName: (name) => {
+            dispatch({ type: "SET_MY_USER_NAME", payload: name })
+        },
+        setWelcomeMessage: (message) => {
+            dispatch({ type: "SET_MY_WELCOME_MESSAGE", payload: message })
+        },
     }
 }
 
