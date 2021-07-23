@@ -59,9 +59,9 @@ class DialogItem extends Component {
 
     };
     render() {
-        const { dialog: { name, lastMessage, img, id }, groupId } = this.props
-        let {dialog:{timing}} = this.props
-        timing = timing.toString().split(' ')[1].split(':')[0] + ':' + timing.toString().split(' ')[1].split(':')[1]
+        const { dialog: { name, lastMessage, img, id, timing }, groupId } = this.props
+        let time = timing
+        time = timing.toString().split(' ')[1].split(':')[0] + ':' + timing.toString().split(' ')[1].split(':')[1]
         
         return (
             <div className="dialog" onClick={this.handleClick} onTouchStart={this.touchstart} onTouchEnd={this.touchend} onMouseDown={this.touchstart} onMouseUp={this.touchend}>
@@ -70,7 +70,7 @@ class DialogItem extends Component {
                     <p className="dialog-name">{name}</p>
                     <p className="dialog-message">{lastMessage}</p>
                 </div>
-                <div className="dialog-timing">{timing}</div>
+                <div className="dialog-timing">{time}</div>
                 <ChatMenu groupId={groupId} display={this.state.display} id={id} margin={"55px"}/>
 
             </div>

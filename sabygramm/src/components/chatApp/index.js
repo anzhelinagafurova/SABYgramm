@@ -11,6 +11,7 @@ import MsgHeader from "../msgHeader";
 const ChatApp = () => {
     const location = useLocation();
     const { groupId, name, img, id } = location.state
+
     /**
      * The currentConv state determines the conversation currently rendered
      */
