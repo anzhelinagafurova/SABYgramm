@@ -70,6 +70,15 @@ export default class SabygramService {
         return this.dialogData;
     }
     sendDataPost(data, url) {
+        // return new Promise((resolve) => {
+        //     setTimeout(() => resolve(
+        //         {
+        //             status: 1,
+        //             name: "antony",
+        //             image_link:"https://i0.wp.com/prostolike.net/wp-content/uploads/2018/08/image3_700x669.jpg?w=700&ssl=1"
+        //         }
+        //     ), 500)
+        // })
         return fetch(url, {
             method: 'POST',
             headers: {
@@ -79,16 +88,7 @@ export default class SabygramService {
         })
     }
     sendDataGet(data, url) {
-        return new Promise((resolve) => {
-            setTimeout(() => resolve([
-                {
-                    id: 0,
-                    name: "Halo",
-                    number: "Salut",
-                    picture:"https://i0.wp.com/prostolike.net/wp-content/uploads/2018/08/image3_700x669.jpg?w=700&ssl=1"
-                }
-            ]), 500)
-        })
+        
         // return fetch(url, {
         //     method: 'GET',
         //     headers: {
@@ -96,7 +96,6 @@ export default class SabygramService {
         //     },
         //     body: JSON.stringify(data)
         // })
-        // это для поиска контактов
     }
     getDialogData() {
         // return new Promise((resolve) => {

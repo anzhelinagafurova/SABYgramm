@@ -15,9 +15,6 @@
     border: none;  
     
   }
-  .add-contact:focus{
-    //тут чо то надо на нижний бордер
-  }
   .add-contact-result-container{
     margin-top: 20px;
   }
@@ -40,6 +37,10 @@
     }
     i{
       color: #728DED;
+    }
+    p{
+      width: 100%;
+      text-align: center;
     }
   }
 }

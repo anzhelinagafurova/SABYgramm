@@ -40,13 +40,9 @@ export default class Contacts extends Component{
     }
 
     addContact = () => {
-        if (this.state.dialogs.length === 0) {
-            return (<AddContact />)
-        }
+        return (<AddContact />)   
     }
-    swipePrev = () => {
-        //console.log(document.querySelector('.mySwiper')) //.slidePrev()
-    }
+
     
     render(){
         return(
