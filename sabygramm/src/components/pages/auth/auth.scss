@@ -14,6 +14,7 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
+  min-height: 400px;
 }
 
 .login-form input {
@@ -64,6 +65,7 @@
   border-radius: 50%;
   width: 15vh;
   height: 15vh;
+
   border: none;
   background-color: #738DED;
   align-items: center;
@@ -71,7 +73,7 @@
   justify-content: center;
 }
 
-.fa-play {
+.fa-play::before {
   color: white;
   font-size: 7vh;
 }
