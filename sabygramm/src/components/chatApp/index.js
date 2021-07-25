@@ -10,7 +10,19 @@ import MsgHeader from "../msgHeader";
  */
 const ChatApp = () => {
     const location = useLocation();
-    const { groupId, name, img, id } = location.state
+
+    if (location.state) {
+        var { groupId, name, img, id } = location.state
+    }
+    else {
+        var groupId = 0;
+        var name = 'Vasya';
+        var img = 'https://i1.sndcdn.com/artworks-000094489636-qzznk3-t500x500.jpg';
+        var id = 100;
+    }
+
+
+
 
     /**
      * The currentConv state determines the conversation currently rendered
@@ -33,15 +45,17 @@ const ChatApp = () => {
      * The data object holds all friends and their related messages
      */
     const [data, setData] = useState({
-        0: { name: name, messages: [{
-            message: "newMessage",
-            time: new Date().toLocaleString(),
-            direction: 'incoming',
-        },{
-            message: "newMessage",
-            time: new Date().toLocaleString(),
-            direction: 'outgoing',
-        }], saved: "", editMode: false, groupId: groupId, img: img },
+        0: {
+            name: name, messages: [{
+                message: "newMessage",
+                time: new Date().toLocaleString(),
+                direction: 'incoming',
+            }, {
+                message: "newMessage",
+                time: new Date().toLocaleString(),
+                direction: 'outgoing',
+            }], saved: "", editMode: false, groupId: groupId, img: img
+        },
         // 1: { name: name, messages: [{
         //     message: "newMessage1",
         //     time: new Date().toLocaleString(),

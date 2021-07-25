@@ -1,0 +1,48 @@
+.cinema-page {
+    .movie {
+    width: 100vw;
+    height: calc(100vw / 2);
+  }
+  .blue-div-link {
+    background-color: #728DED;
+    display: flex;
+    flex-grow: 0.5;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    font-weight: 400;
+    text-align: center;
+    min-height: 100px;
+    height: calc(100vh - (100vw / 2) - 5px);
+    .link{
+        background-color: inherit;
+        margin-top: 10px;
+        border: 0;
+        color: white;
+        font-size: 15px;
+        text-align: center;
+        padding: 5px;
+        box-sizing: border-box;
+        border: 1px solid #728DED;
+   
+    }
+    .link:focus{
+        border: 1px solid white;
+    }
+    .exit-button{
+      font-family: 'Roboto', sans-serif;
+      background-color: #728DED;  
+      text-decoration: none;
+      color:white;
+  }
+  }
+  .chat-window {
+    height: 100%;
+  }
+  .message-header{
+    width: 90%;
+    .user-name, .group-name {
+      text-align: start;
+    }
+  }
+}
