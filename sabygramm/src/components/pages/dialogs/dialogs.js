@@ -22,14 +22,14 @@ export default class Dialogs extends Component {
     }
 
     componentDidMount() {
-        // this.service.getDialogData()
-        // .then((dialogs) => dialogs.json())
-        // .then((result) => {
-        //     this.setState({dialogs:result});
-        // }) 
+        this.service.getDialogData()
+            .then((dialogs) => dialogs.json())
+            .then((result) => {
+                this.setState({ dialogs: result });
+            })
 
-        let result = this.service.getMockedData();
-        this.setState({ dialogs: result });
+        // let result = this.service.getMockedData();
+        // this.setState({ dialogs: result });
 
 
     }
