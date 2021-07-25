@@ -5,6 +5,7 @@ import Edit from '../pages/edit/edit';
 import Dialogs from '../pages/dialogs/dialogs';
 import ChatApp from '../chatApp/index'
 import Contacts from '../pages/contacts/contacts';
+import Cinema from '../pages/cinema/cinema';
 import TestWebSocket from '../test/test';
 
 
@@ -15,10 +16,11 @@ const App = () => {
             <Route path="/edit" component={Edit} />
             <Route path="/dialogs" component={Dialogs} />
             <Route path="/contacts" component={Contacts} />
+            <Route path="/cinema" component={Cinema} />
             <Route path="/test" render={
-              () => {
-                return <TestWebSocket/>
-              }
+                () => {
+                    return <TestWebSocket />
+                }
             } />
             <Route path="/chatapp/:id"
                 render={({ match }) => {

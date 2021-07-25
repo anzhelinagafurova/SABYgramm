@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import DialogItem from '../../dialogItem/dialogItem';
 import SabygramService from '../../../services/SabygramService';
 import Header from '../../header';
@@ -18,7 +17,7 @@ export default class Dialogs extends Component {
         dialogs: []
     }
 
-    componentDidMount() {  
+    componentDidMount() {
         this.service.getDialogData()
         .then((dialogs) => dialogs.json())
         .then((result) => {
@@ -26,8 +25,8 @@ export default class Dialogs extends Component {
         }) 
 
         // let result = this.service.getMockedData();
-        // this.setState({dialogs:result});
-   
+        // this.setState({ dialogs: result });
+
     }
 
     slideSettings = () => {
@@ -59,7 +58,7 @@ export default class Dialogs extends Component {
     render() {
         return (
             <Swiper className="mySwiper" initialSlide="1" onSlideChange={this.slideChanged}>
-                <Header slot="container-start" groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.state.dialogs} onSettings={this.slideSettings}/>
+                <Header slot="container-start" groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.state.dialogs} onSettings={this.slideSettings} />
                 <div className="dialog-container">
             <SwiperSlide>
                 <SettingPage/>

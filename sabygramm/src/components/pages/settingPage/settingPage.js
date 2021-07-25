@@ -11,7 +11,7 @@ import cinemaImg from '../../../img/2.png';
 import pencilImg from '../../../img/3.png';
 const service = new SabygramService();
 
-const SettingPage = ({myUserName, myWelcomeMessage, myProfilePhoto, setProfilePhoto, setUserName, setWelcomeMessage, clearState}) => {
+const SettingPage = ({ myUserName, myWelcomeMessage, myProfilePhoto, setProfilePhoto, setUserName, setWelcomeMessage, clearState }) => {
     // const userName = data[0];
     // const greetMessage = data[1];
     // const pictureUrl = data[3];
@@ -46,53 +46,54 @@ const SettingPage = ({myUserName, myWelcomeMessage, myProfilePhoto, setProfilePh
     }
 
     const renderForm = () => {
-        return(
+        return (
             <>
-            <form name="profileInfo" className="profileInfo" onSubmit={setData}>
-                <label htmlFor="picture" id="upload-background" className="upload-background-profile">
-                    <img src={myProfilePhoto} alt="Profile icon" className="photo-settings" />
-                    <input className="profile-photo-settings" type="file" id="picture" accept="image/*" onChange={setPhoto}/>
-                </label>
-                <input type="text" name="pictureUrl" hidden></input> 
+                <form name="profileInfo" className="profileInfo" onSubmit={setData}>
+                    <label htmlFor="picture" id="upload-background" className="upload-background-profile">
+                        <img src={myProfilePhoto} alt="Profile icon" className="photo-settings" />
+                        <input className="profile-photo-settings" type="file" id="picture" accept="image/*" onChange={setPhoto} />
+                    </label>
+                    <input type="text" name="pictureUrl" hidden></input>
 
-                <label>
-                    <input type="text" className="username-field" name="username" defaultValue={myUserName} maxLength="25" />
-                    <img src={pencilImg} alt="edit" className="settings-pencil"></img>
-                </label>
-                <label>
-                    <input type="text" className="message-field" name="message" defaultValue={myWelcomeMessage} maxLength="200" />
-                    <img src={pencilImg} alt="edit" className="settings-pencil"></img>
-                </label>
-                <button type="submit" className="profileInfo-button">Сохранить</button>
-                <Link to="/" className="profileInfo-button exit-button" onClick={clearState}>Выйти</Link>
-                
-            </form>
-            <span className="saby-gramm">SABYgramm ©</span>
+                    <label>
+                        <input type="text" className="username-field" name="username" defaultValue={myUserName} maxLength="25" />
+                        <img src={pencilImg} alt="edit" className="settings-pencil"></img>
+                    </label>
+                    <label>
+                        <input type="text" className="message-field" name="message" defaultValue={myWelcomeMessage} maxLength="200" />
+                        <img src={pencilImg} alt="edit" className="settings-pencil"></img>
+                    </label>
+                    <button type="submit" className="profileInfo-button">Сохранить</button>
+                    <Link to="/" className="profileInfo-button exit-button" onClick={clearState}>Выйти</Link>
+
+                </form>
+                <span className="saby-gramm">SABYgramm ©</span>
             </>
         )
     }
-    return(
+    return (
         <div className="setting-page">
-            {renderLinks()}  
+            {renderLinks()}
             {renderForm()}
         </div>
     )
 }
+
 const renderLinks = () => {
-    return (       
+    return (
         <div className="link-controllers ">
             <Link to="/contacts" className="left-controller">
                 <div className="link-contain">
                     <div className="icon">
-                        <img src={contactsImg} alt="Контакты" />                          
+                        <img src={contactsImg} alt="Контакты" />
                     </div>
                     <p>Контакты</p>
                 </div>
             </Link>
-            <Link to="#!">
+            <Link to="/cinema">
                 <div className="link-contain">
                     <div className="icon">
-                        <img src={cinemaImg} alt="Кинотеатр" />                           
+                        <img src={cinemaImg} alt="Кинотеатр" />
                     </div>
                     <p>Кинотеатр</p>
                 </div>
@@ -101,8 +102,8 @@ const renderLinks = () => {
     )
 }
 
-const mapStateToProps = ({myUserName, myWelcomeMessage, myProfilePhoto}) => {
-    return{
+const mapStateToProps = ({ myUserName, myWelcomeMessage, myProfilePhoto }) => {
+    return {
         // data: ownProps.data,
         myUserName,
         myWelcomeMessage,
@@ -112,10 +113,10 @@ const mapStateToProps = ({myUserName, myWelcomeMessage, myProfilePhoto}) => {
 
 const mapDispatchProps = (dispatch) => {
     return {
-      setProfilePhoto: (photo) => dispatch({ type: "SET_MY_PROFILE_PHOTO", payload: photo }),
-      setUserName: (name) => dispatch({ type: "SET_MY_USER_NAME", payload: name }),
-      setWelcomeMessage: (message) => dispatch({ type: "SET_MY_WELCOME_MESSAGE", payload: message }),
-      clearState: () => dispatch({ type: "CLEAR_STATE"})
+        setProfilePhoto: (photo) => dispatch({ type: "SET_MY_PROFILE_PHOTO", payload: photo }),
+        setUserName: (name) => dispatch({ type: "SET_MY_USER_NAME", payload: name }),
+        setWelcomeMessage: (message) => dispatch({ type: "SET_MY_WELCOME_MESSAGE", payload: message }),
+        clearState: () => dispatch({ type: "CLEAR_STATE" })
     }
-  }
+}
 export default connect(mapStateToProps, mapDispatchProps)(SettingPage);
