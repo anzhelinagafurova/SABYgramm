@@ -15,10 +15,10 @@ const ChatApp = () => {
         var { groupId, name, img, id } = location.state
     }
     else {
-        var groupId = 0;
-        var name = 'Vasya';
-        var img = 'https://i1.sndcdn.com/artworks-000094489636-qzznk3-t500x500.jpg';
-        var id = 100;
+        groupId = 0;
+        name = 'Vasya';
+        img = 'https://i1.sndcdn.com/artworks-000094489636-qzznk3-t500x500.jpg';
+        id = 100;
     }
 
 
