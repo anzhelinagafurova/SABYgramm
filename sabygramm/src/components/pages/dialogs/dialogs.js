@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, {
-    Pagination
-  } from 'swiper/core';
+
 import DialogItem from '../../dialogItem/dialogItem';
 import SabygramService from '../../../services/SabygramService';
 import Header from '../../header';
@@ -10,7 +8,6 @@ import './dialogs.scss';
 import AddContact from '../../addContact/addContact';
 import SettingPage from '../settingPage';
 
-SwiperCore.use([Pagination]);
 
 export default class Dialogs extends Component {
     service = new SabygramService();
@@ -30,8 +27,7 @@ export default class Dialogs extends Component {
 
         // let result = this.service.getMockedData();
         // this.setState({dialogs:result});
-
-        
+   
     }
 
     slideSettings = () => {
@@ -62,38 +58,31 @@ export default class Dialogs extends Component {
 
     render() {
         return (
-
             <Swiper className="mySwiper" initialSlide="1" onSlideChange={this.slideChanged}>
                 <Header slot="container-start" groupId={this.state.slideGroup} onSearch={this.renderSearchItems} dialogs={this.state.dialogs} onSettings={this.slideSettings}/>
                 <div className="dialog-container">
-                    <SwiperSlide>
-                    
-                        {/* <SettingPage data={this.state.dialogs[3][0]}/> */}
-                        <SettingPage/>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-   
-                        {this.addContact()}
-                        <RenderDialog dialogs={this.state.dialogs[0]} itemsFound={this.state.itemsFound} groupId={0} />
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        {this.addContact()}
-                        <RenderDialog dialogs={this.state.dialogs[1]} itemsFound={this.state.itemsFound} groupId={1} />
-                    </SwiperSlide>
-
-
-                    <SwiperSlide>
-                        {this.addContact()}
-                        <RenderDialog dialogs={this.state.dialogs[2]} itemsFound={this.state.itemsFound} groupId={2} />
-                    </SwiperSlide>
-                </div>
-                
+            <SwiperSlide>
+                <SettingPage/>
+            </SwiperSlide>
+    
+            <SwiperSlide>
+                {this.addContact()}
+                <RenderDialog dialogs={this.state.dialogs[0]} itemsFound={this.state.itemsFound} groupId={0} />
+            </SwiperSlide>
+    
+            <SwiperSlide>
+                {this.addContact()}
+                <RenderDialog dialogs={this.state.dialogs[1]} itemsFound={this.state.itemsFound} groupId={1} />
+            </SwiperSlide>
+    
+            <SwiperSlide>
+                {this.addContact()}
+                <RenderDialog dialogs={this.state.dialogs[2]} itemsFound={this.state.itemsFound} groupId={2} />
+            </SwiperSlide>
+        </div>
             </Swiper>
         )
     }
-
 }
 
 const RenderDialog = ({ dialogs, itemsFound = null, groupId = null }) => {
@@ -107,11 +96,6 @@ const RenderDialog = ({ dialogs, itemsFound = null, groupId = null }) => {
             <div>
                 {
                     toSearchIn.map((dialog) => {
-                        const socket = new WebSocket("ws://" + window.location.host + `/ws/room/${dialog.id}/`)
-                        socket.onopen = function() {
-                            alert("Соединение установлено. " + dialog.id);
-                        };
-                        
                         return <DialogItem key={dialog.id} dialog={dialog} groupId={groupId} />
                     })
                 }

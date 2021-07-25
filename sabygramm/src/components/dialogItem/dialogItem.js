@@ -4,6 +4,8 @@ import './dialogItem.scss';
 import ChatMenu from '../chatMenu/chatMenu';
 
 class DialogItem extends Component {
+    socket = new WebSocket("ws://" + window.location.host + `/ws/room/${this.props.dialog.id}/`)
+    
     state = {
         display: "none"
     }
@@ -16,6 +18,9 @@ class DialogItem extends Component {
                 display: "none"
             })
           })
+        this.socket.onopen = function() {
+            alert("Соединение установлено. " + this.props.dialog.id);
+        };
     }
 
     constructor(props) {
