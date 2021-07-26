@@ -15,7 +15,7 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
       }, '/dialogs')
     }
   }
-  document.getElementById('first').addEventListener('click', onHandleClicked(id, 2))
+
 
   if (display === "block") {
     switch (groupId) {
@@ -24,7 +24,7 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
 
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li id='first' >Сделать тихим</li>
+              <li onClick={onHandleClicked(id, 2)}>Сделать тихим</li>
               <li onClick={onHandleClicked(id, 1)}>Сделать гроким</li>
               <li>Удалить</li>
             </ul>
