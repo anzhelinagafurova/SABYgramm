@@ -2,6 +2,7 @@
     .movie {
     width: 100vw;
     height: calc(100vw / 2);
+    max-height: 69.6vh;
   }
   .blue-div-link {
     background-color: #728DED;
@@ -12,7 +13,7 @@
     flex-direction: column;
     font-weight: 400;
     text-align: center;
-    min-height: 100px;
+    min-height: 30vh;
     height: calc(100vh - (100vw / 2) - 5px);
     .link{
         background-color: inherit;
