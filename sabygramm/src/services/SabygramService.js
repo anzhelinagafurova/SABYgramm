@@ -77,6 +77,20 @@ export default class SabygramService {
     getMockedData() {
         return this.dialogData;
     }
+    handleDialogs() {
+        data = {
+            user_id: 21,
+            group_number: 2
+        }
+        return fetch("http://185.93.109.221:8000/handleDialogs", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        })
+    }
+
     sendDataPost(data, url) {
         // return new Promise((resolve) => {
         //     setTimeout(() => resolve(
@@ -111,4 +125,5 @@ export default class SabygramService {
         // })
         return fetch('http://185.93.109.221:8000/dialogs')
     }
+
 }
