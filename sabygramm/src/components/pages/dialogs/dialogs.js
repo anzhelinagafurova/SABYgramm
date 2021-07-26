@@ -18,14 +18,14 @@ export default class Dialogs extends Component {
     }
 
     componentDidMount() {
-        this.service.getDialogData()
-        .then((dialogs) => dialogs.json())
-        .then((result) => {
-            this.setState({dialogs:result});
-        }) 
+        // this.service.getDialogData()
+        // .then((dialogs) => dialogs.json())
+        // .then((result) => {
+        //     this.setState({dialogs:result});
+        // }) 
 
-        // let result = this.service.getMockedData();
-        // this.setState({ dialogs: result });
+        let result = this.service.getMockedData();
+        this.setState({ dialogs: result });
 
     }
 
@@ -95,7 +95,7 @@ const RenderDialog = ({ dialogs, itemsFound = null, groupId = null }) => {
             <div>
                 {
                     toSearchIn.map((dialog) => {
-                        return <DialogItem key={dialog.id} dialog={dialog} groupId={groupId} />
+                        return <DialogItem key={dialog.id_pair} dialog={dialog} groupId={groupId} />
                     })
                 }
             </div>
