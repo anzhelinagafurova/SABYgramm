@@ -68,7 +68,7 @@ class DialogItem extends Component {
 
     };
     render() {
-        const { dialog: { name, lastMessage, img, id_pair, timing }, groupId } = this.props
+        const { dialog: { name, lastMessage, img, id_pair, timing, id }, groupId } = this.props
         let time = timing
         time = timing.toString().split(' ')[1].split(':')[0] + ':' + timing.toString().split(' ')[1].split(':')[1]
 
@@ -80,7 +80,7 @@ class DialogItem extends Component {
                     <p className="dialog-message">{lastMessage}</p>
                 </div>
                 <div className="dialog-timing">{time}</div>
-                <ChatMenu groupId={groupId} display={this.state.display} id_pair={id_pair} margin={"55px"} />
+                <ChatMenu groupId={groupId} display={this.state.display} id_pair={id_pair} id={id} margin={"55px"} />
             </div>
         )
     }

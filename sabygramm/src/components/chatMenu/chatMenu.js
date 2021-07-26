@@ -3,21 +3,30 @@ import './chatMenu.scss';
 import SabygramService from '../../services/SabygramService';
 
 
-const ChatMenu = ({ display, groupId, id_pair, margin }) => {
+const ChatMenu = ({ display, groupId, id, margin }) => {
 
   const service = new SabygramService();
-  const data = {
-    user_id: 21,
-    group_number: 2
+  let data = {
+    user_id: id,
+    group_number: 0
   }
 
   if (display === "block") {
     switch (groupId) {
       case 0:
         {
+
           return (
-            <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }} onClick={service.handleDialogs(data, '/handledialogs')}>
-              <li>Сделать тихим</li><li>Сделать гроким</li><li>Удалить</li>
+            <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
+              <li onClick={service.handleDialogs({
+                user_id: id,
+                group_number: 2
+              }, '/dialogs')}>Сделать тихим</li>
+              <li onClick={service.handleDialogs({
+                user_id: id,
+                group_number: 1
+              }, '/dialogs')}>Сделать гроким</li>
+              <li>Удалить</li>
             </ul>
           )
         }
@@ -25,7 +34,15 @@ const ChatMenu = ({ display, groupId, id_pair, margin }) => {
         {
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li>Сделать общим</li><li>Сделать тихим</li><li>Удалить</li>
+              <li onClick={service.handleDialogs({
+                user_id: id,
+                group_number: 0
+              }, '/dialogs')}>Сделать общим</li>
+              <li onClick={service.handleDialogs({
+                user_id: id,
+                group_number: 2
+              }, '/dialogs')}>Сделать тихим</li>
+              <li>Удалить</li>
             </ul>
           )
         }
@@ -33,7 +50,15 @@ const ChatMenu = ({ display, groupId, id_pair, margin }) => {
         {
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li>Сделать общим</li><li>Сделать гроким</li><li>Удалить</li>
+              <li onClick={service.handleDialogs({
+                user_id: id,
+                group_number: 0
+              }, '/dialogs')}>Сделать общим</li>
+              <li onClick={service.handleDialogs({
+                user_id: id,
+                group_number: 1
+              }, '/dialogs')}>Сделать гроким</li>
+              <li>Удалить</li>
             </ul>
           )
         }
