@@ -7,7 +7,7 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
 
   const service = new SabygramService();
 
-  onHandleClicked = (id, group_number) => {
+  const onHandleClicked = (id, group_number) => {
     service.handleDialogs({
       user_id: id,
       group_number: group_number
@@ -21,8 +21,8 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
 
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li onClick={onHandleClicked(id, 2)}>Сделать тихим</li>
-              <li onClick={onHandleClicked(id, 1)}>Сделать гроким</li>
+              <li onClick={this.onHandleClicked(id, 2)}>Сделать тихим</li>
+              <li onClick={this.onHandleClicked(id, 1)}>Сделать гроким</li>
               <li>Удалить</li>
             </ul>
           )
