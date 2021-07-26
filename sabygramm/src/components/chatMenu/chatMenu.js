@@ -3,12 +3,12 @@ import './chatMenu.scss';
 import SabygramService from '../../services/SabygramService';
 
 
-const ChatMenu = ({ display, groupId, id, margin, canChange }) => {
+const ChatMenu = ({ display, groupId, id, margin }) => {
 
   const service = new SabygramService();
 
   const onHandleClicked = (id, group_number) => {
-    if (canChange) {
+    if (display === 'block') {
       service.handleDialogs({
         user_id: id,
         group_number: group_number

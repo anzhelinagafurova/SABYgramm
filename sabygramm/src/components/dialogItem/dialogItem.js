@@ -76,9 +76,9 @@ class DialogItem extends Component {
         time = timing.toString().split(' ')[1].split(':')[0] + ':' + timing.toString().split(' ')[1].split(':')[1]
 
         return (
-            <div className="dialog" onClick={this.handleClick} onTouchStart={this.touchstart} onTouchEnd={this.touchend} onMouseDown={this.touchstart} onMouseUp={this.touchend}>
-                <img src={img} alt="dialogPicture" className="dialog-img" />
-                <div className="dialog-contain">
+            <div className="dialog" onTouchStart={this.touchstart} onTouchEnd={this.touchend} onMouseDown={this.touchstart} onMouseUp={this.touchend}>
+                <img src={img} alt="dialogPicture" onClick={this.handleClick} className="dialog-img" />
+                <div className="dialog-contain" onClick={this.handleClick}>
                     <p className="dialog-name">{name}</p>
                     <p className="dialog-message">{lastMessage}</p>
                 </div>
