@@ -6,13 +6,17 @@ import SabygramService from '../../services/SabygramService';
 const ChatMenu = ({ display, groupId, id_pair, margin }) => {
 
   const service = new SabygramService();
+  const data = {
+    user_id: 21,
+    group_number: 2
+  }
 
   if (display === "block") {
     switch (groupId) {
       case 0:
         {
           return (
-            <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
+            <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }} onClick={service.handleDialogs(data, '/handledialogs')}>
               <li>Сделать тихим</li><li>Сделать гроким</li><li>Удалить</li>
             </ul>
           )
