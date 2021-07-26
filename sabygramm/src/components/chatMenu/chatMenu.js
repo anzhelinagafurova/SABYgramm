@@ -18,11 +18,11 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
 
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li onClick={service.handleDialogs({
+              <li onMouseUp={service.handleDialogs({
                 user_id: id,
                 group_number: 2
               }, '/dialogs')}>Сделать тихим</li>
-              <li onClick={service.handleDialogs({
+              <li onMouseDown={service.handleDialogs({
                 user_id: id,
                 group_number: 1
               }, '/dialogs')}>Сделать гроким</li>
@@ -34,11 +34,11 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
         {
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li onClick={service.handleDialogs({
+              <li onMouseUp={service.handleDialogs({
                 user_id: id,
                 group_number: 0
               }, '/dialogs')}>Сделать общим</li>
-              <li onClick={service.handleDialogs({
+              <li onMouseDown={service.handleDialogs({
                 user_id: id,
                 group_number: 2
               }, '/dialogs')}>Сделать тихим</li>
@@ -50,11 +50,11 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
         {
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li onClick={service.handleDialogs({
+              <li onMouseUp={service.handleDialogs({
                 user_id: id,
                 group_number: 0
               }, '/dialogs')}>Сделать общим</li>
-              <li onClick={service.handleDialogs({
+              <li onMouseDown={service.handleDialogs({
                 user_id: id,
                 group_number: 1
               }, '/dialogs')}>Сделать гроким</li>
