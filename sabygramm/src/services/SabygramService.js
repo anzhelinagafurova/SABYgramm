@@ -128,7 +128,7 @@ console.log(fetch("http://185.93.109.221:8000/handleDialogs", {
     },
     body: JSON.stringify(data)
 }))
-return fetch("http://185.93.109.221:8000/handleDialogs", {
+fetch("http://185.93.109.221:8000/handleDialogs", {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json;charset=utf-8'
