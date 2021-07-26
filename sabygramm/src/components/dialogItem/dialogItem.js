@@ -7,7 +7,8 @@ class DialogItem extends Component {
     socket = new WebSocket("ws://" + window.location.host + `/ws/room/${this.props.dialog.id_pair}/`)
 
     state = {
-        display: "none"
+        display: "none",
+        canChange: false
     }
 
     timer = null
@@ -35,6 +36,7 @@ class DialogItem extends Component {
         if (this.timer) {
             clearTimeout(this.timer);
             this.timer = null
+            this.setState({ canChange: true })
         }
     }
 
@@ -42,7 +44,8 @@ class DialogItem extends Component {
         if (!this.timer) {
             this.timer = setTimeout(() => {
                 this.setState({
-                    display: "block"
+                    display: "block",
+                    canChange: false
                 })
 
             }, 500);
@@ -80,7 +83,7 @@ class DialogItem extends Component {
                     <p className="dialog-message">{lastMessage}</p>
                 </div>
                 <div className="dialog-timing">{time}</div>
-                <ChatMenu groupId={groupId} display={this.state.display} id_pair={id_pair} id={id} margin={"55px"} />
+                <ChatMenu groupId={groupId} display={this.state.display} id_pair={id_pair} id={id} margin={"55px"} canChange={this.state.canChange} />
             </div>
         )
     }
