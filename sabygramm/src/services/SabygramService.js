@@ -78,7 +78,7 @@ export default class SabygramService {
         return this.dialogData;
     }
     handleDialogs() {
-        data = {
+        const data = {
             user_id: 21,
             group_number: 2
         }

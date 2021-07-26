@@ -5,7 +5,7 @@ import SabygramService from '../../services/SabygramService';
 
 const ChatMenu = ({ display, groupId, id_pair, margin }) => {
 
-  service = new SabygramService();
+  const service = new SabygramService();
 
   if (display === "block") {
     switch (groupId) {
