@@ -80,6 +80,7 @@ export default class SabygramService {
 
 
     handleDialogs(data, url) {
+        console.log('to' + data.group_number)
         return fetch(url, {
             method: 'POST',
             headers: {
