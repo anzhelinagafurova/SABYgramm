@@ -12,6 +12,7 @@ import TestWebSocket from '../test/test';
 const App = () => {
     return (
         <Switch>
+
             <Route exact path="/" component={Auth} />
             <Route path="/edit" component={Edit} />
             <Route path="/dialogs" component={Dialogs} />
@@ -22,12 +23,13 @@ const App = () => {
                     return <TestWebSocket />
                 }
             } />
-            <Route path="/chatapp/:id"
-                render={({ match }) => {
-                    const { id, groupId } = match.params;
-                    return <ChatApp dialogId={groupId} id={id} />
-                }}
-            />
+                <Route path="/chatapp/:id"
+                    render={({ match }) => {
+                        const { id, groupId } = match.params;
+                        return <ChatApp dialogId={groupId} id={id} />
+                    }}
+                />
+            
 
         </Switch>
     )

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import ChatWindow from "../chatWindow";
 import './chatApp.scss';
 import MsgHeader from "../msgHeader";
-//import SabygramService from "../../services/SabygramService";
+
 
 /**
  * The chat application
@@ -12,17 +12,24 @@ const ChatApp = () => {
     const location = useLocation();
 
     if (location.state) {
-        var { groupId, name, img, id } = location.state
+        var { groupId, name, img, id_pair } = location.state
     }
     else {
         groupId = 0;
         name = 'Vasya';
         img = 'https://i1.sndcdn.com/artworks-000094489636-qzznk3-t500x500.jpg';
-        id = 100;
+        id_pair = 100;
     }
 
+    const socket = new WebSocket("ws://" + window.location.host + `/ws/room/${id_pair}/`)
 
-
+    socket.onopen = () => {
+        console.log("Соединение установлено. " + id_pair);
+    };
+    socket.onmessage = (event) => {
+        console.log("Данные получены: " + event.data);
+        addNewMessage(JSON.parse(event.data).message, "incoming")
+    };
 
     /**
      * The currentConv state determines the conversation currently rendered
@@ -157,6 +164,7 @@ const ChatApp = () => {
                     updateMessage={updateMessage}
                     msgInput={msgInput}
                     enterEditMode={enterEditMode}
+                    id_pair={id_pair}
                 />
             </div>
         </>

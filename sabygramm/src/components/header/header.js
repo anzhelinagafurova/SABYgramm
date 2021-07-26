@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './header.scss';
 
 const Header = ({ groupId, onSearch, dialogs, onSettings }) => {
@@ -56,7 +57,7 @@ const Header = ({ groupId, onSearch, dialogs, onSettings }) => {
     return (
         <header className="dialogs-header">
             {groupName && <i className="fa fa-bars" aria-hidden="true" onClick={onSettings}></i>}
-            {groupName && <i className="fa fa-users" aria-hidden="true"></i>}
+            {groupName && <Link to="/dialogs"><i className="fa fa-users" aria-hidden="true" ></i></Link>}
             <div className="group-name">{ groupName }</div>
             <input type="text" className="dialogs-search" onInput={searchDialogs} onBlur={clearDialogs} hidden={!inputVisible} autoFocus={true}></input>
             {groupName &&  <i className="fa fa-search" aria-hidden="true" onClick={handleSearch}></i> }

@@ -39,9 +39,9 @@ const MsgForm = (props) => {
     };
 
     /** Update the saved message when the input changes */
-    const handleChange = (event) => {
-        props.setSavedMsg(event.currentTarget.value);
-    };
+    // const handleChange = (event) => {
+    //     props.setSavedMsg(event.currentTarget.value);
+    // };
 
     /** This state defines if the emoji picker is visible or not */
     const [displayEmojis, setDisplayEmojis] = useState(false);
@@ -56,23 +56,23 @@ const MsgForm = (props) => {
     };
 
     /** Edit the latest message when up arrow is pressed */
-    const handleKeyPress = (event) => {
-        if (
-            event.keyCode === 38 &&
-            props.lastMessageIndex >= 0 &&
-            props.editMode === false
-        ) {
-            // Find the index of the latest outgoing message
-            let testIndex = props.lastMessageIndex;
-            while (props.currentMessages[testIndex].direction === "incoming") {
-                testIndex--;
-            }
-            input.blur();
-            setTimeout(() => {
-                props.enterEditMode(testIndex);
-            }, 0);
-        }
-    };
+    // const handleKeyPress = (event) => {
+    //     if (
+    //         event.keyCode === 38 &&
+    //         props.lastMessageIndex >= 0 &&
+    //         props.editMode === false
+    //     ) {
+    //         // Find the index of the latest outgoing message
+    //         let testIndex = props.lastMessageIndex;
+    //         while (props.currentMessages[testIndex].direction === "incoming") {
+    //             testIndex--;
+    //         }
+    //         input.blur();
+    //         setTimeout(() => {
+    //             props.enterEditMode(testIndex);
+    //         }, 0);
+    //     }
+    // };
     /**
      * Adds an emoji in the string of the input, at the curor's current position
      * Browser focus then returns to the text input and places the cursor after the
@@ -116,9 +116,9 @@ const MsgForm = (props) => {
                 className="message-input"
                 placeholder="Message"
                 autoComplete="off"
-                onChange={handleChange}
+                // onChange={handleChange}
                 value={props.savedMsg || ""}
-                onKeyDown={handleKeyPress}
+                // onKeyDown={handleKeyPress}
             />
             <button type="submit" className="send-message">
                 <span className="sr-only">send</span>

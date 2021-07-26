@@ -43,11 +43,15 @@ export default class Contacts extends Component{
         return (<AddContact />)   
     }
 
+    slideSettings = () => {
+        var mySwiper = document.querySelector('.swiper-container').swiper
+        mySwiper.slideTo(0);
+    }
     
     render(){
         return(
             <Swiper className="mySwiper" initialSlide="1" onSlideChange={this.slideChanged}>
-                <Header slot="container-start" groupId={this.state.slideGroup} onSettings={this.swipePrev} onSearch={this.renderSearchItems} dialogs={this.state.dialogs}/>
+                <Header slot="container-start" groupId={this.state.slideGroup} onSettings={this.slideSettings} onSearch={this.renderSearchItems} dialogs={this.state.dialogs}/>
                 <SwiperSlide>
                     <SettingPage />
                 </SwiperSlide>

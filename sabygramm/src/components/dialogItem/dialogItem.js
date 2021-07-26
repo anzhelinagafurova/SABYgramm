@@ -4,8 +4,8 @@ import './dialogItem.scss';
 import ChatMenu from '../chatMenu/chatMenu';
 
 class DialogItem extends Component {
-    socket = new WebSocket("ws://" + window.location.host + `/ws/room/${this.props.dialog.id_pair}/`)
-
+    
+    
     state = {
         display: "none",
         canChange: false
@@ -19,14 +19,19 @@ class DialogItem extends Component {
                 display: "none"
             })
         })
-        this.socket.onopen = () => {
-            console.log("Соединение установлено. " + this.props.dialog.id_pair);
-        };
-        this.socket.onmessage = (event) => {
-            console.log("Данные получены: " + event.data);
-        };
+        // const socket = new WebSocket("ws://" + window.location.host + `/ws/room/${this.props.dialog.id_pair}/`)
+    
+        // socket.onopen = () => {
+        //     console.log("Соединение установлено. " + this.props.dialog.id_pair);
+        // };
+
+        // socket.onmessage = this.handleSocketMessage
     }
 
+    // handleSocketMessage = (event) => {
+    //     console.log("Данные получены: " + event.data);
+    //     this.addSocketMessage(JSON.parse(event.data).message, "incoming")
+    // }
     constructor(props) {
         super(props);
         this.onHistoryPush = this.onHistoryPush.bind(this);
