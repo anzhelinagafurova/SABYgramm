@@ -6,9 +6,12 @@ import SabygramService from '../../services/SabygramService';
 const ChatMenu = ({ display, groupId, id, margin }) => {
 
   const service = new SabygramService();
-  let data = {
-    user_id: id,
-    group_number: 0
+
+  onHandleClicked = (id, group_number) => {
+    service.handleDialogs({
+      user_id: id,
+      group_number: group_number
+    }, '/dialogs')
   }
 
   if (display === "block") {
@@ -18,14 +21,8 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
 
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li onMouseUp={service.handleDialogs({
-                user_id: id,
-                group_number: 2
-              }, '/dialogs')}>Сделать тихим</li>
-              <li onMouseDown={service.handleDialogs({
-                user_id: id,
-                group_number: 1
-              }, '/dialogs')}>Сделать гроким</li>
+              <li onClick={onHandleClicked(id, 2)}>Сделать тихим</li>
+              <li onClick={onHandleClicked(id, 1)}>Сделать гроким</li>
               <li>Удалить</li>
             </ul>
           )
@@ -34,11 +31,11 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
         {
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li onMouseUp={service.handleDialogs({
+              <li onClick={service.handleDialogs({
                 user_id: id,
                 group_number: 0
               }, '/dialogs')}>Сделать общим</li>
-              <li onMouseDown={service.handleDialogs({
+              <li onClick={service.handleDialogs({
                 user_id: id,
                 group_number: 2
               }, '/dialogs')}>Сделать тихим</li>
@@ -50,11 +47,11 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
         {
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li onMouseUp={service.handleDialogs({
+              <li onClick={service.handleDialogs({
                 user_id: id,
                 group_number: 0
               }, '/dialogs')}>Сделать общим</li>
-              <li onMouseDown={service.handleDialogs({
+              <li onClick={service.handleDialogs({
                 user_id: id,
                 group_number: 1
               }, '/dialogs')}>Сделать гроким</li>
