@@ -78,7 +78,7 @@ class DialogItem extends Component {
         return (
             <div className="dialog" onTouchStart={this.touchstart} onTouchEnd={this.touchend} onMouseDown={this.touchstart} onMouseUp={this.touchend}>
                 <img src={img} alt="dialogPicture" onClick={this.handleClick} className="dialog-img" />
-                <div className="dialog-contain" onClick={this.handleClick}>
+                <div className="dialog-contain" >
                     <p className="dialog-name">{name}</p>
                     <p className="dialog-message">{lastMessage}</p>
                 </div>

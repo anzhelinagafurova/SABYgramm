@@ -5,7 +5,7 @@ import './cinema.scss'
 
 export default class Cinema extends Component {
   state = {
-    link: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
 
   }
   changeLink = (e) => {
@@ -19,7 +19,7 @@ export default class Cinema extends Component {
         <iframe title='movie' className="movie" src={this.state.link} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         <div className='blue-div-link'>
 
-          <input className='link' value="https://www.youtube.com/embed/dQw4w9WgXcQ" placeholder='https://www.youtube.com/embed/dQw4w9WgXcQ' onChange={this.changeLink} />
+          <input className='link' value="https://www.youtube.com/watch?v=dQw4w9WgXcQ" placeholder='https://www.youtube.com/watch?v=dQw4w9WgXcQ' onChange={this.changeLink} />
           <InviteFriend />
           <ChatApp />
         </div>
