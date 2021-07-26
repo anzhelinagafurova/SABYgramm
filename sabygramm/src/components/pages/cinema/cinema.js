@@ -16,7 +16,9 @@ export default class Cinema extends Component {
   render() {
     return (
       <div className='cinema-page'>
-        <iframe className="movie" src={this.state.link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {/* <iframe className="movie" src={this.state.link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
+        <iframe className="movie" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen>
+        </iframe>
         <div className='blue-div-link'>
 
           <input className='link' value="https://www.youtube.com/embed/dQw4w9WgXcQ" placeholder='https://www.youtube.com/embed/dQw4w9WgXcQ' onChange={this.changeLink} />
