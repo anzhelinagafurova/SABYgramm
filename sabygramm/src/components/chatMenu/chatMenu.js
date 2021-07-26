@@ -13,7 +13,7 @@ const ChatMenu = ({ display, groupId, id_pair, margin }) => {
         {
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li onClick={service.handleDialogs()}>Сделать тихим</li><li>Сделать гроким</li><li>Удалить</li>
+              <li>Сделать тихим</li><li>Сделать гроким</li><li>Удалить</li>
             </ul>
           )
         }
