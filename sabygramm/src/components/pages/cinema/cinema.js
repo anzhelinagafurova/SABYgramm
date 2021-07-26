@@ -17,7 +17,7 @@ export default class Cinema extends Component {
     return (
       <div className='cinema-page'>
         {/* <iframe className="movie" src={this.state.link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
-        <iframe className="movie" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen>
+        <iframe className="movie" width="560" height="315" src="https://www.youtube.com/embed/3jT_q7dt-cM" frameborder="0" allowfullscreen>
         </iframe>
         <div className='blue-div-link'>
 
