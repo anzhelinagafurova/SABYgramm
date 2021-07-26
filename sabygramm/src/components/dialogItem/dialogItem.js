@@ -5,19 +5,19 @@ import ChatMenu from '../chatMenu/chatMenu';
 
 class DialogItem extends Component {
     socket = new WebSocket("ws://" + window.location.host + `/ws/room/${this.props.dialog.id_pair}/`)
-    
+
     state = {
         display: "none"
     }
 
     timer = null
 
-    componentDidMount(){
+    componentDidMount() {
         document.getElementById('root').addEventListener('click', () => {
             this.setState({
                 display: "none"
             })
-          })
+        })
         this.socket.onopen = () => {
             console.log("Соединение установлено. " + this.props.dialog.id_pair);
         };
@@ -44,19 +44,20 @@ class DialogItem extends Component {
                 this.setState({
                     display: "block"
                 })
-                
+
             }, 500);
         }
     };
     onHistoryPush() {
-        const { dialog: { name, img, id }, groupId } = this.props
+        const { dialog: { name, img, id, id_pair }, groupId } = this.props
         this.props.history.push({
-            pathname: `/chatapp/${id}`,
+            pathname: `/chatapp/${id_pair}`,
             state: {
                 id: id,
                 name: name,
                 img: img,
-                groupId: groupId
+                groupId: groupId,
+                id_pair: id_pair
             }
         }
         );
@@ -70,7 +71,7 @@ class DialogItem extends Component {
         const { dialog: { name, lastMessage, img, id_pair, timing }, groupId } = this.props
         let time = timing
         time = timing.toString().split(' ')[1].split(':')[0] + ':' + timing.toString().split(' ')[1].split(':')[1]
-        
+
         return (
             <div className="dialog" onClick={this.handleClick} onTouchStart={this.touchstart} onTouchEnd={this.touchend} onMouseDown={this.touchstart} onMouseUp={this.touchend}>
                 <img src={img} alt="dialogPicture" className="dialog-img" />
@@ -79,11 +80,11 @@ class DialogItem extends Component {
                     <p className="dialog-message">{lastMessage}</p>
                 </div>
                 <div className="dialog-timing">{time}</div>
-                <ChatMenu groupId={groupId} display={this.state.display} id={id_pair} margin={"55px"}/>
+                <ChatMenu groupId={groupId} display={this.state.display} id_pair={id_pair} margin={"55px"} />
             </div>
         )
     }
-    
+
 }
 
 
