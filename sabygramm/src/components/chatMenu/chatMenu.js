@@ -34,8 +34,8 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
         {
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li onClick={onHandleClicked(id, 0)}>Сделать общим</li>
-              <li onClick={onHandleClicked(id, 2)}>Сделать тихим</li>
+              <li onClick={function () { onHandleClicked(id, 0) }}>Сделать общим</li>
+              <li onClick={function () { onHandleClicked(id, 2) }}>Сделать тихим</li>
               <li>Удалить</li>
             </ul>
           )
@@ -44,8 +44,8 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
         {
           return (
             <ul className='settings' style={{ display: `${display}`, marginTop: `${margin}` }}>
-              <li onClick={onHandleClicked(id, 0)}>Сделать общим</li>
-              <li onClick={onHandleClicked(id, 1)}>Сделать гроким</li>
+              <li onClick={function () { onHandleClicked(id, 0) }}>Сделать общим</li>
+              <li onClick={function () { onHandleClicked(id, 1) }}>Сделать гроким</li>
               <li>Удалить</li>
             </ul>
           )
