@@ -19,17 +19,11 @@ export default class Dialogs extends Component {
 
     componentDidMount() {
         this.service.getDialogData()
-<<<<<<< Updated upstream
             .then((dialogs) => dialogs.json())
             .then((result) => {
                 this.setState({ dialogs: result });
             })
-=======
-        .then((dialogs) => dialogs.json())
-        .then((result) => {
-            this.setState({dialogs:result});
-        }) 
->>>>>>> Stashed changes
+
 
         // let result = this.service.getMockedData();
         // this.setState({ dialogs: result });
