@@ -12,7 +12,6 @@ import SabygramService from "../../services/SabygramService";
  */
 const service = new SabygramService();
 const ChatApp = (props) => {
-    const [dialogs, handleDialogs] = useState([]);
 
     const location = useLocation();
 
@@ -66,15 +65,14 @@ const ChatApp = (props) => {
      * @param {string} newMessage
      * @param {string} direction
      */
-    const addNewMessage = (newMessage, direction) => {
+    const addNewMessage = (newMessage, direction, time = new Date().toLocaleString()) => {
         const selectedConv = data[currentConv];
-        const time = new Date().toLocaleString();
         selectedConv.messages.push({
             message: newMessage,
             time: time,
             direction: direction,
         });
-        console.log(selectedConv.messages)
+        // console.log(selectedConv.messages)
         const updatedData = { ...data };
         updatedData[currentConv] = selectedConv;
         setData(updatedData);
@@ -84,7 +82,15 @@ const ChatApp = (props) => {
     useEffect(() => {
         service.sendDataPost({id_pair, status: 2}, `/dialogs`)
         .then((result) => result.json())
-        .then((result) => handleDialogs(result))
+        .then((dialogs) => {
+            dialogs.forEach((message) => {
+                let handledDirection;               
+                message.direction === 1 ? handledDirection = "incoming" : handledDirection = "outgoing";           
+                addNewMessage(message.message, handledDirection, message.time)
+            })
+        })
+
+        
 
         socket.onopen = () => {
             console.log("Соединение установлено. " + id_pair);
@@ -95,9 +101,7 @@ const ChatApp = (props) => {
 
             if(data.user_id.toString() !== props.myId.toString() ){
                 addNewMessage(data.message, "incoming")
-            }
-            
-            
+            }  
         };
       }, [id_pair]);
 

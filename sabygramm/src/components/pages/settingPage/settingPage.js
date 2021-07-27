@@ -12,15 +12,7 @@ import pencilImg from '../../../img/3.png';
 const service = new SabygramService();
 
 const SettingPage = ({ myUserName, myWelcomeMessage, myProfilePhoto, setProfilePhoto, setUserName, setWelcomeMessage, clearState }) => {
-    // const userName = data[0];
-    // const greetMessage = data[1];
-    // const pictureUrl = data[3];
-
-    // alert("data" + data)
-    // alert(" data[0]" + data[0])
-    // alert("{data}" + {data})
-    // alert("{data}[0]" + {data}[0])
-
+    
     const setPhoto = async (e) => {
         const form = e.currentTarget.closest("form");
         const photo = await readPhoto(e);
@@ -33,18 +25,22 @@ const SettingPage = ({ myUserName, myWelcomeMessage, myProfilePhoto, setProfileP
         const form = e.currentTarget;
 
         let userInfo = {
+            status: 1,
             name: form.username.value,
             welcome_msg: form.message.value,
             image_link: form.pictureUrl.value
         }
 
-        service.sendDataPost(userInfo, '/edit')
+        service.sendDataPost(userInfo, '/dialogs')
 
         setUserName(userInfo.name);
         setWelcomeMessage(userInfo.welcome_msg);
         //this.props.setProfilePhoto(userInfo.image_link);   
     }
-
+    const handleExit = () => {
+        service.getDataPost({status:99}, '/dialogs');
+        clearState();
+    }
     const renderForm = () => {
         return (
             <>
@@ -64,7 +60,7 @@ const SettingPage = ({ myUserName, myWelcomeMessage, myProfilePhoto, setProfileP
                         <img src={pencilImg} alt="edit" className="settings-pencil"></img>
                     </label>
                     <button type="submit" className="profileInfo-button">Сохранить</button>
-                    <Link to="/" className="profileInfo-button exit-button" onClick={clearState}>Выйти</Link>
+                    <Link to="/" className="profileInfo-button exit-button" onClick={handleExit}>Выйти</Link>
 
                 </form>
                 <span className="saby-gramm">SABYgramm ©</span>

@@ -17,6 +17,7 @@ const ChatMenu = ({ display, groupId, id, margin }) => {
     //   }, '/dialogs')
     // }
     service.handleDialogs({
+      status: 0,
       user_id: id,
       group_number: group_number
     }, '/dialogs')
