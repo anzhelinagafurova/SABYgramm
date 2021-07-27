@@ -42,8 +42,8 @@ ul.message-list {
     text-align: right;
     font-size: 0.9rem;
     min-height: 1.1rem;
-    max-width: 90vw;
-    margin: 0.2rem 1.2rem 1rem 1.2rem;
+    max-width: 85vw;
+    margin: 0.2rem 1.5rem 1rem 1.5rem;
     word-wrap: break-word;
 }
 
@@ -82,7 +82,7 @@ ul.message-list {
 }
 
 .incoming .msg-date {
-    float: left;
+    float: right;
     margin-right: 0.3rem;
 }
 

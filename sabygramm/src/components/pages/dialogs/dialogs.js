@@ -29,6 +29,7 @@ export default class Dialogs extends Component {
 
     }
 
+
     slideSettings = () => {
         var mySwiper = document.querySelector('.swiper-container').swiper
         mySwiper.slideTo(0);
