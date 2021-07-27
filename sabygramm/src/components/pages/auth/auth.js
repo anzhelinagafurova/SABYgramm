@@ -31,7 +31,7 @@ class Auth extends Component {
     sendForm = (e) => {
         e.preventDefault();
         const form = e.currentTarget;
-        const {setProlifePhoto, setUserName, setWelcomeMessage} = this.props;
+        const {setProlifePhoto, setUserName, setWelcomeMessage, setId} = this.props;
         let userInfo = {
             phone: form.phoneNumber.value,
             password: form.password.value
@@ -43,6 +43,7 @@ class Auth extends Component {
                 setUserName(answer.name)
                 setWelcomeMessage(answer.welcome_msg)
                 setProlifePhoto(answer.image_link)
+                setId(answer.id)
                 const { history } = this.props;
                 history.push('/dialogs');
             }
@@ -70,7 +71,7 @@ const mapStateToProps = ({ myUserName, myWelcomeMessage, myProfilePhoto }) => {
 }
 
 const mapDispatchProps = (dispatch) => {
-    return {
+    return {       
         setPhone: (e) => {
             const newPhone = e.target.value;
             dispatch({ type: "SET_MY_PASSWORD", payload: newPhone })
@@ -78,6 +79,9 @@ const mapDispatchProps = (dispatch) => {
         setPassword: (e) => {
             const newPassword = e.target.value;
             dispatch({ type: "SET_MY_PHONE", payload: newPassword })
+        },
+        setId: (id) => {
+            dispatch({ type: "SET_MY_ID", payload: id })
         },
         setProlifePhoto: (photo) => {
             dispatch({ type: "SET_MY_PROFILE_PHOTO", payload: photo })

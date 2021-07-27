@@ -108,21 +108,20 @@ export default class SabygramService {
             body: JSON.stringify(data)
         })
     }
-    sendDataGet(data, url) {
+    sendDataGet(url) {
 
-        // return fetch(url, {
-        //     method: 'GET',
-        //     headers: {
-        //         'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        //     body: JSON.stringify(data)
-        // })
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        })
     }
     getDialogData() {
         // return new Promise((resolve) => {
         //     setTimeout(() => resolve([]), 500)
         // })
-        return fetch('http://185.93.109.221:8000/dialogs')
+       // return fetch({}'http://185.93.109.221:8000/dialogs')
     }
 
 }

@@ -10,6 +10,7 @@ const ChatMenu = ({ display, groupId, id, margin, canChange }) => {
   const onHandleClicked = (id, group_number) => {
     if (canChange) {
       service.handleDialogs({
+        status: 0,
         user_id: id,
         group_number: group_number
       }, '/dialogs')

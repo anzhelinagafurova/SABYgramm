@@ -63,7 +63,7 @@ const ChatWindow = (props) => {
                 enterEditMode={props.enterEditMode}
                 lastMessageIndex={currentMessages.length - 1}
                 msgInput={props.msgInput}
-                id_pair={props.id_pair}
+                sendSocketMessage={props.sendSocketMessage}
             />
         </div>
     );

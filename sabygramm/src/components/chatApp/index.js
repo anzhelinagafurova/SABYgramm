@@ -1,35 +1,32 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
 import ChatWindow from "../chatWindow";
 import './chatApp.scss';
 import MsgHeader from "../msgHeader";
+import SabygramService from "../../services/SabygramService";
 
 
 /**
  * The chat application
  */
-const ChatApp = () => {
+const service = new SabygramService();
+const ChatApp = (props) => {
+    const [dialogs, handleDialogs] = useState([]);
+
     const location = useLocation();
 
     if (location.state) {
-        var { groupId, name, img, id_pair } = location.state
+        var { groupId, name, img, id_pair, id } = location.state
     }
-    else {
-        groupId = 0;
-        name = 'Vasya';
-        img = 'https://i1.sndcdn.com/artworks-000094489636-qzznk3-t500x500.jpg';
-        id_pair = 100;
-    }
-
-    const socket = new WebSocket("ws://" + window.location.host + `/ws/room/${id_pair}/`)
-
-    socket.onopen = () => {
-        console.log("Соединение установлено. " + id_pair);
-    };
-    socket.onmessage = (event) => {
-        console.log("Данные получены: " + event.data);
-        addNewMessage(JSON.parse(event.data).message, "incoming")
-    };
+    // else {
+    //     groupId = 0;
+    //     name = 'Vasya';
+    //     img = 'https://i1.sndcdn.com/artworks-000094489636-qzznk3-t500x500.jpg';
+    //     id_pair = 100;
+    // }
+    
+    
 
     /**
      * The currentConv state determines the conversation currently rendered
@@ -53,25 +50,9 @@ const ChatApp = () => {
      */
     const [data, setData] = useState({
         0: {
-            name: name, messages: [{
-                message: "newMessage",
-                time: new Date().toLocaleString(),
-                direction: 'incoming',
-            }, {
-                message: "newMessage",
-                time: new Date().toLocaleString(),
-                direction: 'outgoing',
-            }], saved: "", editMode: false, groupId: groupId, img: img
-        },
-        // 1: { name: name, messages: [{
-        //     message: "newMessage1",
-        //     time: new Date().toLocaleString(),
-        //     direction: 'incoming',
-        // },{
-        //     message: "newMessage1",
-        //     time: new Date().toLocaleString(),
-        //     direction: 'outgoing',
-        // }], saved: "", editMode: false, groupId: groupId, img: img },
+            name: name, messages: [], 
+            saved: "", editMode: false, groupId: groupId, img: img
+        }
     });
     //поменять индексы и должно работать, но не могу с сервиса забрать в пропс сразу
 
@@ -97,9 +78,32 @@ const ChatApp = () => {
         const updatedData = { ...data };
         updatedData[currentConv] = selectedConv;
         setData(updatedData);
-        setSavedMsg("");
+        // setSavedMsg("");
     };
+    var socket = new WebSocket("ws://" + window.location.host + `/ws/room/${id_pair}/`)
+    useEffect(() => {
+        service.sendDataPost({id_pair, status: 2}, `/dialogs`)
+        .then((result) => result.json())
+        .then((result) => handleDialogs(result))
 
+        socket.onopen = () => {
+            console.log("Соединение установлено. " + id_pair);
+        };
+        socket.onmessage = (event) => {
+            console.log("Данные получены: " + event.data);
+            const data = JSON.parse(event.data);
+
+            if(data.user_id.toString() !== props.myId.toString() ){
+                addNewMessage(data.message, "incoming")
+            }
+            
+            
+        };
+      }, [id_pair]);
+
+    const sendSocketMessage = (message) => {
+        socket.send(JSON.stringify({'message': message, 'user2_id': id, 'id_pair': id_pair }))
+    };
     /**
      * The following function saves any unsent message to that current conversation
      * object
@@ -164,11 +168,15 @@ const ChatApp = () => {
                     updateMessage={updateMessage}
                     msgInput={msgInput}
                     enterEditMode={enterEditMode}
-                    id_pair={id_pair}
+                    sendSocketMessage={sendSocketMessage}
                 />
             </div>
         </>
     );
 };
-
-export default ChatApp;
+const mapStateToProps = (state) => {
+    return{
+        myId: state.myId
+    }
+}
+export default connect(mapStateToProps)(ChatApp);

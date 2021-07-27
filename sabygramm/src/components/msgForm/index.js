@@ -8,18 +8,25 @@ import Picker from "emoji-picker-react";
  */
 const MsgForm = (props) => {
     const input = props.msgInput.current;
+    
+
 
     /** This functions handles the submission of the new message form */
     const handleSubmit = async (event) => {
         event.preventDefault();
         /* We ensure the message is not empty, and trim any extra space
          * before sending */
-        let trimmedMsg = props.savedMsg.trim();
+        // let trimmedMsg = props.savedMsg.trim();
+        const message = event.target.message.value;
+        const { sendSocketMessage } = props;
+        sendSocketMessage(message);
 
-        if (trimmedMsg.length > 0) {
-            !props.editMode
-                ? props.addNewMessage(trimmedMsg, "outgoing")
-                : props.updateMessage(trimmedMsg);
+        if (message.length > 0) {
+            props.addNewMessage(message, "outgoing")
+            event.target.message.value = "";
+            // !props.editMode
+                // ? props.addNewMessage(message, "outgoing")
+                // : props.updateMessage(trimmedMsg);
         }
         // if (!props.editMode) {
         //     let phrase = "";
@@ -109,7 +116,7 @@ const MsgForm = (props) => {
             >
                 <FontAwesomeIcon icon={faSmile} />
             </button>
-            <input
+            <input name="message"
                 id="message-input"
                 type="text"
                 ref={props.msgInput}
@@ -117,7 +124,7 @@ const MsgForm = (props) => {
                 placeholder="Message"
                 autoComplete="off"
                 // onChange={handleChange}
-                value={props.savedMsg || ""}
+                //value={props.savedMsg || ""}
                 // onKeyDown={handleKeyPress}
             />
             <button type="submit" className="send-message">

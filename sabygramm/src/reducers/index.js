@@ -1,4 +1,5 @@
 const initialState = {
+    myId: '',
     myUserName: '',
     myWelcomeMessage: '',
     myProfilePhoto: null,
@@ -7,6 +8,12 @@ const initialState = {
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case "SET_MY_ID": {
+            return {
+                ...state,
+                myId: action.payload
+            }
+        }
         case "SET_MY_PASSWORD": {
             return {
                 ...state,
