@@ -18,19 +18,12 @@ const App = () => {
             <Route path="/dialogs" component={Dialogs} />
             <Route path="/contacts" component={Contacts} />
             <Route path="/cinema" component={Cinema} />
-            <Route path="/test" render={
-                () => {
-                    return <TestWebSocket />
-                }
-            } />
-                <Route path="/chatapp/:id"
-                    render={({ match }) => {
-                        const { id, groupId } = match.params;
-                        return <ChatApp dialogId={groupId} id={id} />
-                    }}
-                />
-            
-
+            <Route path="/chatapp/:id"
+                render={({ match }) => {
+                    const { id, groupId } = match.params;
+                    return <ChatApp dialogId={groupId} id={id} />
+                }}
+            />
         </Switch>
     )
 }

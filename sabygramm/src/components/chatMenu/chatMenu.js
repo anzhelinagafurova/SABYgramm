@@ -4,21 +4,15 @@ import SabygramService from '../../services/SabygramService';
 import Dialogs from '../pages/dialogs/dialogs';
 
 
-const ChatMenu = ({ display, groupId, id, margin }) => {
+const ChatMenu = ({ display, groupId, id, margin, id_pair }) => {
 
   const service = new SabygramService();
 
   const onHandleClicked = (id, group_number) => {
-    // if (canChange) {
-    //   service.handleDialogs({
-    //     status: 0,
-    //     user_id: id,
-    //     group_number: group_number
-    //   }, '/dialogs')
-    // }
     service.handleDialogs({
       status: 0,
       user_id: id,
+      id_pair,
       group_number: group_number
     }, '/dialogs')
     return <Dialogs />

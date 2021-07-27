@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+// import { connect } from 'react-redux';
 import './dialogItem.scss';
 import ChatMenu from '../chatMenu/chatMenu';
 
 class DialogItem extends Component {
 
-
+    
     state = {
         display: "none",
+        socket: null
     }
 
     timer = null
 
-    componentDidMount() {
+    componentDidMount = () => {
         document.getElementById('root').addEventListener('click', () => {
             this.setState({
                 display: "none"
@@ -23,9 +25,17 @@ class DialogItem extends Component {
         // socket.onopen = () => {
         //     console.log("Соединение установлено. " + this.props.dialog.id_pair);
         // };
-
-        // socket.onmessage = this.handleSocketMessage
+        // socket.onclose = () => {
+        //     console.log("Соединение закрыто. " + this.props.dialog.id_pair);
+        //   };
+        // socket.onmessage = () => {
+        //     console.log("Сообщение получено. " + this.props.dialog.id_pair)
+        // }
     }
+
+    // componentWillUnmount() {
+    //     this.state.socket.close()
+    // }
 
     // handleSocketMessage = (event) => {
     //     console.log("Данные получены: " + event.data);
@@ -96,7 +106,9 @@ class DialogItem extends Component {
     }
 
 }
-
-
-
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         addSocket: (socket, socketId) => dispatch({type: "ADD_NEW_SOCKET", payload: {socket, socketId}})
+//     }
+// }
 export default withRouter(DialogItem);

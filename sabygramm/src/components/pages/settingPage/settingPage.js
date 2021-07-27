@@ -30,6 +30,10 @@ const SettingPage = ({ myUserName, myWelcomeMessage, myProfilePhoto, setProfileP
             welcome_msg: form.message.value,
             image_link: form.pictureUrl.value
         }
+        
+        console.log("name" + userInfo.name);
+        console.log("welcome_msg" + userInfo.welcome_msg);
+        console.log("image_link" + userInfo.image_link);
 
         service.sendDataPost(userInfo, '/dialogs')
 
@@ -38,7 +42,7 @@ const SettingPage = ({ myUserName, myWelcomeMessage, myProfilePhoto, setProfileP
         //this.props.setProfilePhoto(userInfo.image_link);   
     }
     const handleExit = () => {
-        service.getDataPost({status:99}, '/dialogs');
+        service.sendDataPost({status:99}, '/dialogs');
         clearState();
     }
     const renderForm = () => {

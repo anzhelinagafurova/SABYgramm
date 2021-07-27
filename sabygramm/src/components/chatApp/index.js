@@ -79,18 +79,26 @@ const ChatApp = (props) => {
         // setSavedMsg("");
     };
     var socket = new WebSocket("ws://" + window.location.host + `/ws/room/${id_pair}/`)
+    
     useEffect(() => {
-        service.sendDataPost({id_pair, status: 2}, `/dialogs`)
+        service.sendDataPost({id_pair, status: 2, my_id: props.myId}, `/dialogs`)
         .then((result) => result.json())
         .then((dialogs) => {
             dialogs.forEach((message) => {
-                let handledDirection;               
-                message.direction === 1 ? handledDirection = "incoming" : handledDirection = "outgoing";           
+                let handledDirection;   
+                if(message.status === 1)   {
+                    message.direction === 1 ? handledDirection = "incoming" : handledDirection = "outgoing";           
+                }    
+                if(message.status === 0)   {
+                    message.direction === 0 ? handledDirection = "incoming" : handledDirection = "outgoing";           
+                }       
                 addNewMessage(message.message, handledDirection, message.time)
             })
         })
 
-        
+
+        // const socketFound = this.state.sockets.find((socket) => socket.socketId === id_pair);
+        // const socket = socketFound.socket;
 
         socket.onopen = () => {
             console.log("Соединение установлено. " + id_pair);
@@ -105,9 +113,9 @@ const ChatApp = (props) => {
         };
       }, [id_pair]);
 
-    const sendSocketMessage = (message) => {
-        socket.send(JSON.stringify({'message': message, 'user2_id': id, 'id_pair': id_pair }))
-    };
+        const sendSocketMessage = (message) => {
+            socket.send(JSON.stringify({'message': message, 'user2_id': id, 'id_pair': id_pair }))
+        };
     /**
      * The following function saves any unsent message to that current conversation
      * object
@@ -180,7 +188,8 @@ const ChatApp = (props) => {
 };
 const mapStateToProps = (state) => {
     return{
-        myId: state.myId
+        myId: state.myId,
+        // sockets: state.sockets
     }
 }
 export default connect(mapStateToProps)(ChatApp);
