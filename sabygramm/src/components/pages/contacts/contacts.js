@@ -10,7 +10,7 @@ export default class Contacts extends Component{
     service = new SabygramService();
 
     componentDidMount() {  
-        this.service.sendDataGet('/dialogs')
+        this.service.sendDataPost({status: 80}, '/dialogs')
         .then((dialogs) => dialogs.json())
         .then((result) => {
             this.setState({dialogs:result});

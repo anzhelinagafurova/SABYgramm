@@ -6,12 +6,66 @@ const initialState = {
     myPassword: null,
     myPhone: null,
     sockets: [{
-        id: 100,
+        id: 10000,
         socket: new WebSocket('ws://' + window.location.host + '/ws/room/100/')
     }],
+    notifications: [],
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case "ADD_NOTIFICATION": {
+            console.log(state.notifications)
+            console.log(state.sockets)
+            let newCounter;
+            let newNotification;
+            let newNotifications;
+            const index = state.notifications.findIndex((element) => element.id === action.payload);
+            if(index === -1)
+            {
+                newCounter = 1;
+                newNotification = {
+                    id: action.payload,
+                    counter: newCounter
+                }
+                newNotifications = [
+                    ...state.notifications,
+                    newNotification
+                ]
+            }
+            else {
+                const foundCounter = state.notifications.find((element) => element.id === action.payload);
+                newCounter = foundCounter.counter + 1;
+                newNotification = {
+                    id: action.payload,
+                    counter: newCounter
+                }
+                newNotifications = [
+                    ...state.notifications.slice(0, index),
+                    newNotification,
+                    ...state.notifications.slice(index + 1)
+                ]
+            }
+            return {
+                ...state,
+                notifications: newNotifications 
+            }
+        }
+        case "READ_NOTIFICATION":{
+            const index = state.notifications.findIndex((element) => element.id === action.payload);
+            const newNotification = {
+                id: action.payload,
+                counter: 0
+            }
+            const newNotifications = [
+                ...state.notifications.slice(0, index),
+                newNotification,
+                ...state.notifications.slice(index + 1)
+            ]
+            return{
+                ...state,
+                notifications: newNotifications 
+            }
+        }
         case "ADD_SOCKET": {
             let newSockets = [
                 ...state.sockets,

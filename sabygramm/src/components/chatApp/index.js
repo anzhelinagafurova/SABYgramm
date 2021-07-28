@@ -12,7 +12,7 @@ import SabygramService from "../../services/SabygramService";
  */
 const service = new SabygramService();
 const ChatApp = (props) => {
-
+    
     const location = useLocation();
 
     if (location.state) {
@@ -22,9 +22,9 @@ const ChatApp = (props) => {
         groupId = 0;
         name = 'Vasya';
         img = 'https://i1.sndcdn.com/artworks-000094489636-qzznk3-t500x500.jpg';
-        id_pair = 100;
+        id_pair = 10000;
     }
-
+    props.readNotification(id_pair);
 
     /**
      * The currentConv state determines the conversation currently rendered
@@ -188,11 +188,15 @@ const ChatApp = (props) => {
         </>
     );
 };
-const mapStateToProps = (state) => {
-
+const mapStateToProps = ({myId, sockets}) => {
     return {
-        myId: state.myId,
-        sockets: state.sockets
+        myId,
+        sockets
     }
 }
-export default connect(mapStateToProps)(ChatApp);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        readNotification: (index) => dispatch({type: "READ_NOTIFICATION", payload: index})
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ChatApp);

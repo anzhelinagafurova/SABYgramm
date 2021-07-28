@@ -21,7 +21,10 @@ class DialogItem extends Component {
                 display: "none"
             })
         })
-        const socket = new WebSocket("ws://" + window.location.host + `/ws/room/${this.props.dialog.id_pair}/`)
+        const foundSocket = this.props.sockets.find((socket) => socket.id === this.props.dialog.id_pair);
+
+        if(!foundSocket){
+            const socket = new WebSocket("ws://" + window.location.host + `/ws/room/${this.props.dialog.id_pair}/`)
         socket.onopen = () => {
             console.log("Соединение установлено. " + this.props.dialog.id_pair);
         };
@@ -34,13 +37,15 @@ class DialogItem extends Component {
 
             if (data.user_id.toString() !== this.props.myId.toString()) {
                 this.setState({
-                    messagesUnread: this.state.messagesUnread + 1,
+                    // messagesUnread: this.state.messagesUnread + 1,
                     lastMessage: data.message
                 })
+
+                this.props.addNotification(this.props.dialog.id_pair)
             }
         }
-
-        this.props.addSocket({ id: this.props.dialog.id_pair, socket })
+            this.props.addSocket({ id: this.props.dialog.id_pair, socket })
+        }   
     }
 
     constructor(props) {
@@ -87,6 +92,17 @@ class DialogItem extends Component {
 
     };
     render() {
+        const note = this.props.notifications.find((notification) => notification.id === this.props.dialog.id_pair);
+        console.log(note)
+        let counter = 0;
+        if(note !== undefined){
+            // this.setState({
+            //     messagesUnread: note.counter
+            // })
+            counter = note.counter
+        }
+
+
         const { dialog: { name, lastMessage, img, id_pair, timing, id }, groupId, onUpdate } = this.props
         let time = timing
         time = timing.toString().split(' ')[1].split(':')[0] + ':' + timing.toString().split(' ')[1].split(':')[1]
@@ -116,7 +132,7 @@ class DialogItem extends Component {
                 <div className="dialog-timeNot">
                     <p className="dialog-timing">{time}</p>
                     {
-                        this.state.messagesUnread !== 0 ? <p className={clazz}>{this.state.messagesUnread}</p> : <></>
+                        counter !== 0 ? <p className={clazz}>{counter}</p> : <></>
                     }
 
                 </div>
@@ -126,14 +142,17 @@ class DialogItem extends Component {
     }
 
 }
-const mapStateToProps = ({ myId }) => {
+const mapStateToProps = ({ myId, notifications, sockets }) => {
     return {
-        myId
+        myId,
+        notifications, 
+        sockets
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        addSocket: (socketInfo) => dispatch({ type: "ADD_SOCKET", payload: socketInfo })
+        addSocket: (socketInfo) => dispatch({ type: "ADD_SOCKET", payload: socketInfo }),
+        addNotification: (notification) => dispatch({ type: "ADD_NOTIFICATION", payload: notification })
     }
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DialogItem));
