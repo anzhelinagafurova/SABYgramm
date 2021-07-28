@@ -1,7 +1,6 @@
 import React from 'react';
 import './chatMenu.scss';
 import SabygramService from '../../services/SabygramService';
-import Dialogs from '../pages/dialogs/dialogs';
 
 
 const ChatMenu = ({ display, groupId, id, margin, id_pair }) => {
@@ -15,7 +14,6 @@ const ChatMenu = ({ display, groupId, id, margin, id_pair }) => {
       id_pair,
       group_number: group_number
     }, '/dialogs')
-    return <Dialogs />
   }
 
 

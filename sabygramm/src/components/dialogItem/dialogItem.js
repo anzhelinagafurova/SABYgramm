@@ -6,7 +6,7 @@ import ChatMenu from '../chatMenu/chatMenu';
 
 class DialogItem extends Component {
 
-    
+
     state = {
         display: "none",
         socket: null
@@ -92,7 +92,7 @@ class DialogItem extends Component {
         return (
 
             <div className="dialog" onTouchStart={this.touchstart} onTouchEnd={this.touchend} onMouseDown={this.touchstart} onMouseUp={this.touchend} onClick={this.handleClick}>
-                <img src={img} alt="dialogPicture" className="dialog-img" />
+                <img src={img ? img : 'https://media.istockphoto.com/photos/smiling-man-portrait-made-of-vegetables-and-fruits-picture-id466161171'} alt="dialogPicture" className="dialog-img" />
                 <div className="dialog-contain" >
                     <p className="dialog-name">{name}</p>
                     <p className="dialog-message">{lastMessage}</p>
