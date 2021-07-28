@@ -5,19 +5,20 @@ const initialState = {
     myProfilePhoto: null,
     myPassword: null,
     myPhone: null,
-    // sockets: []
-    
+    sockets: []
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        // case "ADD_NEW_SOCKET": {
-        //     const {socket, socketId} = action.payload;
-        //     const newSockets = state.sockets.push({socketId, socket});
-        //     return {
-        //         ...state,
-        //         sockets: newSockets
-        //     }
-        // }
+        case "ADD_SOCKET": {
+            let newSockets = [
+                ...state.sockets,
+                action.payload
+            ]
+            return {
+                ...state,
+                sockets: newSockets
+            }
+        }
         case "SET_MY_ID": {
             return {
                 ...state,
