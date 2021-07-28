@@ -54,7 +54,11 @@ export default class Dialogs extends Component {
     }
 
     addContact = () => {
-        if (this.state.dialogs[0] && this.state.dialogs[0].length === 0) {
+        if (this.state.dialogs[0] 
+            && this.state.dialogs[0].length === 0
+            && this.state.dialogs[1].length === 0
+            && this.state.dialogs[2].length === 0
+            ) {
             return (<AddContact />)
         }
     }
