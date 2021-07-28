@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import ChatMenu from '../chatMenu/chatMenu';
 import './header.scss';
 
-const MsgHeader = ({ groupId, name, img, id }) => {
+const MsgHeader = ({ groupId, name, img, id, onUpdate }) => {
     const [dotsClicked, dotsClick] = useState("none");
 
 
@@ -42,7 +42,7 @@ const MsgHeader = ({ groupId, name, img, id }) => {
             </div>
             <i className="fas fa-ellipsis-v" onClick={onDotsClick}></i>
 
-            <ChatMenu display={dotsClicked} groupId={groupId} id={id} margin={"85px"} />
+            <ChatMenu display={dotsClicked} groupId={groupId} id={id} margin={"85px"} onUpdate={onUpdate} />
         </header>
     )
 }

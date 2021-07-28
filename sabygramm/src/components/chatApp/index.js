@@ -16,7 +16,7 @@ const ChatApp = (props) => {
     const location = useLocation();
 
     if (location.state) {
-        var { groupId, name, img, id_pair, id } = location.state
+        var { groupId, name, img, id_pair, id, onUpdate } = location.state
     }
     // else {
     //     groupId = 0;
@@ -24,8 +24,8 @@ const ChatApp = (props) => {
     //     img = 'https://i1.sndcdn.com/artworks-000094489636-qzznk3-t500x500.jpg';
     //     id_pair = 100;
     // }
-    
-    
+
+
 
     /**
      * The currentConv state determines the conversation currently rendered
@@ -49,7 +49,7 @@ const ChatApp = (props) => {
      */
     const [data, setData] = useState({
         0: {
-            name: name, messages: [], 
+            name: name, messages: [],
             saved: "", editMode: false, groupId: groupId, img: img
         }
     });
@@ -79,22 +79,22 @@ const ChatApp = (props) => {
         // setSavedMsg("");
     };
     var socket = new WebSocket("ws://" + window.location.host + `/ws/room/${id_pair}/`)
-    
+
     useEffect(() => {
-        service.sendDataPost({id_pair, status: 2, my_id: props.myId}, `/dialogs`)
-        .then((result) => result.json())
-        .then((dialogs) => {
-            dialogs.forEach((message) => {
-                let handledDirection;   
-                if(message.status === 1)   {
-                    message.direction === 1 ? handledDirection = "incoming" : handledDirection = "outgoing";           
-                }    
-                if(message.status === 0)   {
-                    message.direction === 0 ? handledDirection = "incoming" : handledDirection = "outgoing";           
-                }       
-                addNewMessage(message.message, handledDirection, message.time)
+        service.sendDataPost({ id_pair, status: 2, my_id: props.myId }, `/dialogs`)
+            .then((result) => result.json())
+            .then((dialogs) => {
+                dialogs.forEach((message) => {
+                    let handledDirection;
+                    if (message.status === 1) {
+                        message.direction === 1 ? handledDirection = "incoming" : handledDirection = "outgoing";
+                    }
+                    if (message.status === 0) {
+                        message.direction === 0 ? handledDirection = "incoming" : handledDirection = "outgoing";
+                    }
+                    addNewMessage(message.message, handledDirection, message.time)
+                })
             })
-        })
 
 
         // const socketFound = this.state.sockets.find((socket) => socket.socketId === id_pair);
@@ -107,15 +107,15 @@ const ChatApp = (props) => {
             console.log("Данные получены: " + event.data);
             const data = JSON.parse(event.data);
 
-            if(data.user_id.toString() !== props.myId.toString() ){
+            if (data.user_id.toString() !== props.myId.toString()) {
                 addNewMessage(data.message, "incoming")
-            }  
+            }
         };
-      }, [id_pair]);
+    }, [id_pair]);
 
-        const sendSocketMessage = (message) => {
-            socket.send(JSON.stringify({'message': message, 'user2_id': id, 'id_pair': id_pair }))
-        };
+    const sendSocketMessage = (message) => {
+        socket.send(JSON.stringify({ 'message': message, 'user2_id': id, 'id_pair': id_pair }))
+    };
     /**
      * The following function saves any unsent message to that current conversation
      * object
@@ -165,7 +165,8 @@ const ChatApp = (props) => {
             <MsgHeader
                 groupId={data[currentConv].groupId}
                 name={data[currentConv].name}
-                img={data[currentConv].img} />
+                img={data[currentConv].img}
+                onUpdate={onUpdate} />
             <div className="chat-container">
                 <ChatWindow
                     messages={data[currentConv]}
@@ -187,7 +188,7 @@ const ChatApp = (props) => {
     );
 };
 const mapStateToProps = (state) => {
-    return{
+    return {
         myId: state.myId,
         // sockets: state.sockets
     }

@@ -4,11 +4,14 @@ import SabygramService from '../../services/SabygramService';
 import { useHistory } from 'react-router-dom';
 
 
-const ChatMenu = ({ display, groupId, id, margin, id_pair }) => {
+const ChatMenu = ({ display, groupId, id, margin, id_pair, onUpdate }) => {
 
   const service = new SabygramService();
   const history = useHistory();
-  const handleClick = () => history.push(`/dialogs`);
+  const handleClick = () => {
+    history.push(`/dialogs`);
+    onUpdate();
+  }
   const onHandleClicked = (id, group_number) => {
     service.handleDialogs({
       status: 0,

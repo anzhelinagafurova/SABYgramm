@@ -14,8 +14,25 @@ export default class Dialogs extends Component {
     state = {
         slideGroup: 0,
         itemsFound: null,
-        dialogs: []
+        dialogs: [],
+        update: false
     }
+
+    onUpdate = () => {
+        this.setState({ update: true })
+    }
+
+    componentDidUpdate() {
+        if (this.state.update) {
+            this.service.sendDataGet('/dialogs')
+                .then((dialogs) => dialogs.json())
+                .then((result) => {
+                    this.setState({ dialogs: result });
+                })
+            this.setState({ update: false })
+        }
+    }
+
 
     componentDidMount() {
         this.service.sendDataGet('/dialogs')
@@ -23,6 +40,7 @@ export default class Dialogs extends Component {
             .then((result) => {
                 this.setState({ dialogs: result });
             })
+
 
         // let result = this.service.getMockedData();
         // this.setState({ dialogs: result });
@@ -67,17 +85,17 @@ export default class Dialogs extends Component {
 
                     <SwiperSlide>
                         {this.addContact()}
-                        <RenderDialog dialogs={this.state.dialogs[0]} itemsFound={this.state.itemsFound} groupId={0} />
+                        <RenderDialog dialogs={this.state.dialogs[0]} itemsFound={this.state.itemsFound} groupId={0} onUpdate={this.onUpdate} />
                     </SwiperSlide>
 
                     <SwiperSlide>
                         {this.addContact()}
-                        <RenderDialog dialogs={this.state.dialogs[1]} itemsFound={this.state.itemsFound} groupId={1} />
+                        <RenderDialog dialogs={this.state.dialogs[1]} itemsFound={this.state.itemsFound} groupId={1} onUpdate={this.onUpdate} />
                     </SwiperSlide>
 
                     <SwiperSlide>
                         {this.addContact()}
-                        <RenderDialog dialogs={this.state.dialogs[2]} itemsFound={this.state.itemsFound} groupId={2} />
+                        <RenderDialog dialogs={this.state.dialogs[2]} itemsFound={this.state.itemsFound} groupId={2} onUpdate={this.onUpdate} />
                     </SwiperSlide>
                 </div>
             </Swiper>
@@ -85,7 +103,7 @@ export default class Dialogs extends Component {
     }
 }
 
-const RenderDialog = ({ dialogs, itemsFound = null, groupId = null }) => {
+const RenderDialog = ({ dialogs, itemsFound = null, groupId = null, onUpdate }) => {
 
     let toSearchIn = null;
 
@@ -96,7 +114,7 @@ const RenderDialog = ({ dialogs, itemsFound = null, groupId = null }) => {
             <div>
                 {
                     toSearchIn.map((dialog) => {
-                        return <DialogItem key={dialog.id_pair} dialog={dialog} groupId={groupId} />
+                        return <DialogItem key={dialog.id_pair} dialog={dialog} groupId={groupId} onUpdate={onUpdate} />
                     })
                 }
             </div>
