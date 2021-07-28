@@ -64,7 +64,7 @@ class DialogItem extends Component {
         }
     };
     onHistoryPush() {
-        const { dialog: { name, img, id, id_pair }, groupId, onUpdate } = this.props
+        const { dialog: { name, img, id, id_pair }, groupId } = this.props
         this.props.history.push({
             pathname: `/chatapp/${id_pair}`,
             state: {
@@ -73,7 +73,6 @@ class DialogItem extends Component {
                 img: img,
                 groupId: groupId,
                 id_pair: id_pair,
-                onUpdate: onUpdate
             }
         }
         );
@@ -86,7 +85,7 @@ class DialogItem extends Component {
 
     };
     render() {
-        const { dialog: { name, lastMessage, img, id_pair, timing, id }, groupId } = this.props
+        const { dialog: { name, lastMessage, img, id_pair, timing, id }, groupId, onUpdate } = this.props
         let time = timing
         time = timing.toString().split(' ')[1].split(':')[0] + ':' + timing.toString().split(' ')[1].split(':')[1]
 
@@ -99,7 +98,7 @@ class DialogItem extends Component {
                     <p className="dialog-message">{lastMessage}</p>
                 </div>
                 <div className="dialog-timing">{time}</div>
-                <ChatMenu groupId={groupId} display={this.state.display} id_pair={id_pair} id={id} margin={"55px"} onUpdate={this.props.onUpdate} />
+                <ChatMenu groupId={groupId} display={this.state.display} id_pair={id_pair} id={id} margin={"55px"} onUpdate={onUpdate} />
             </div>
 
 

@@ -16,7 +16,7 @@ const ChatApp = (props) => {
     const location = useLocation();
 
     if (location.state) {
-        var { groupId, name, img, id_pair, id, onUpdate } = location.state
+        var { groupId, name, img, id_pair, id } = location.state
     }
     // else {
     //     groupId = 0;
@@ -165,8 +165,7 @@ const ChatApp = (props) => {
             <MsgHeader
                 groupId={data[currentConv].groupId}
                 name={data[currentConv].name}
-                img={data[currentConv].img}
-                onUpdate={onUpdate} />
+                img={data[currentConv].img} />
             <div className="chat-container">
                 <ChatWindow
                     messages={data[currentConv]}
