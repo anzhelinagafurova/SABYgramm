@@ -19,17 +19,17 @@ export default class Dialogs extends Component {
 
     componentDidMount() {
         this.service.sendDataGet('/dialogs')
-        .then((dialogs) => dialogs.json())
-        .then((result) => {
-            this.setState({dialogs:result});
-        }) 
+            .then((dialogs) => dialogs.json())
+            .then((result) => {
+                this.setState({ dialogs: result });
+            })
 
         // let result = this.service.getMockedData();
         // this.setState({ dialogs: result });
 
     }
 
-    
+
     slideSettings = () => {
         var mySwiper = document.querySelector('.swiper-container').swiper
         mySwiper.slideTo(0);
