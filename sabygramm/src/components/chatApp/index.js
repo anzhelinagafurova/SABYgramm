@@ -16,15 +16,8 @@ const ChatApp = (props) => {
     const location = useLocation();
 
     if (location.state) {
-        var { groupId, name, img, id_pair, id } = location.state
+        var { groupId, name, img, id_pair, id, } = location.state
     }
-    // else {
-    //     groupId = 0;
-    //     name = 'Vasya';
-    //     img = 'https://i1.sndcdn.com/artworks-000094489636-qzznk3-t500x500.jpg';
-    //     id_pair = 100;
-    // }
-
 
 
     /**
@@ -40,9 +33,7 @@ const ChatApp = (props) => {
     const [editIndex, setEditIndex] = useState(null);
 
     const msgInput = useRef();
-    //const service = new SabygramService();
-    //const dialogs = service.getDialogData(0);
-    //индекс группы
+
 
     /**
      * The data object holds all friends and their related messages
@@ -72,13 +63,15 @@ const ChatApp = (props) => {
             time: time,
             direction: direction,
         });
-        // console.log(selectedConv.messages)
+
         const updatedData = { ...data };
         updatedData[currentConv] = selectedConv;
         setData(updatedData);
-        // setSavedMsg("");
+
     };
-    var socket = new WebSocket("ws://" + window.location.host + `/ws/room/${id_pair}/`)
+
+    const socketFound = props.sockets.find((socket) => socket.id === id_pair);
+    const socket = socketFound.socket;
 
     useEffect(() => {
         service.sendDataPost({ id_pair, status: 2, my_id: props.myId }, `/dialogs`)
@@ -96,15 +89,11 @@ const ChatApp = (props) => {
                 })
             })
 
-
-        // const socketFound = this.state.sockets.find((socket) => socket.socketId === id_pair);
-        // const socket = socketFound.socket;
-
         socket.onopen = () => {
-            console.log("Соединение установлено. " + id_pair);
+            console.log("Соединение установлено. ChatApp " + id_pair);
         };
         socket.onmessage = (event) => {
-            console.log("Данные получены: " + event.data);
+            console.log("Данные получены ChatApp: " + event.data);
             const data = JSON.parse(event.data);
 
             if (data.user_id.toString() !== props.myId.toString()) {
@@ -114,7 +103,14 @@ const ChatApp = (props) => {
     }, [id_pair]);
 
     const sendSocketMessage = (message) => {
-        socket.send(JSON.stringify({ 'message': message, 'user2_id': id, 'id_pair': id_pair }))
+        if (!socket.readyState) {
+            setTimeout(function () {
+                socket.send(JSON.stringify({ 'message': message, 'user2_id': id, 'id_pair': id_pair }))
+            }, 200);
+        }
+        else {
+            socket.send(JSON.stringify({ 'message': message, 'user2_id': id, 'id_pair': id_pair }))
+        }
     };
     /**
      * The following function saves any unsent message to that current conversation
@@ -187,9 +183,10 @@ const ChatApp = (props) => {
     );
 };
 const mapStateToProps = (state) => {
+
     return {
         myId: state.myId,
-        // sockets: state.sockets
+        sockets: state.sockets
     }
 }
 export default connect(mapStateToProps)(ChatApp);
