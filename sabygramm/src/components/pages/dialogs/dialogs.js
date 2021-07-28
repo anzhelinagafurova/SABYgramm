@@ -24,7 +24,7 @@ export default class Dialogs extends Component {
 
     componentDidUpdate() {
         if (this.state.update) {
-            this.service.sendDataGet('/dialogs')
+            this.service.sendDataGet({status: 80}, '/dialogs')
                 .then((dialogs) => dialogs.json())
                 .then((result) => {
                     this.setState({ dialogs: result });
