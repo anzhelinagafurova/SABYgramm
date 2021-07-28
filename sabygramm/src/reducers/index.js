@@ -5,7 +5,8 @@ const initialState = {
     myProfilePhoto: null,
     myPassword: null,
     myPhone: null,
-    sockets: []
+    sockets: [],
+    shouldUpdate: false
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -58,7 +59,13 @@ const reducer = (state = initialState, action) => {
         case "CLEAR_STATE": {
             return initialState;
         }
-        
+        case "SHOULD_UPDATE": {
+            return {
+                ...state,
+                shouldUpdate: action.payload
+            }
+        }
+
         default:
             return state;
     }

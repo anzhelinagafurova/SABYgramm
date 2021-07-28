@@ -30,17 +30,21 @@ const ChatWindow = (props) => {
             <ul className="message-list" ref={messageList}>
                 {currentMessages.length !== 0
                     ? currentMessages.map((message, index) => (
-                        <li key={index}>
-                            <Message
-                                message={message}
-                                enterEditMode={props.enterEditMode}
-                                index={index}
-                                editMode={props.editMode}
-                                editIndex={props.editIndex}
-                            />
-                        </li>
+                        <div className='margin'>
+                            <li key={index}>
+                                <Message
+                                    message={message}
+                                    enterEditMode={props.enterEditMode}
+                                    index={index}
+                                    editMode={props.editMode}
+                                    editIndex={props.editIndex}
+                                />
+                            </li>
+                        </div>
                     ))
                     : null}
+
+
             </ul>
 
             {currentMessages.length === 0 ? (
