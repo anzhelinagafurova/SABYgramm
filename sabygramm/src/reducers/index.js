@@ -5,8 +5,10 @@ const initialState = {
     myProfilePhoto: null,
     myPassword: null,
     myPhone: null,
-    sockets: [],
-    shouldUpdate: false
+    sockets: [{
+        id: 100,
+        socket: new WebSocket('ws://' + window.location.host + '/ws/room/100/')
+    }],
 }
 const reducer = (state = initialState, action) => {
     switch (action.type) {

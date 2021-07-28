@@ -16,7 +16,13 @@ const ChatApp = (props) => {
     const location = useLocation();
 
     if (location.state) {
-        var { groupId, name, img, id_pair, id, } = location.state
+        var { groupId, name, img, id_pair, id } = location.state
+    }
+    else {
+        groupId = 0;
+        name = 'Vasya';
+        img = 'https://i1.sndcdn.com/artworks-000094489636-qzznk3-t500x500.jpg';
+        id_pair = 100;
     }
 
 
