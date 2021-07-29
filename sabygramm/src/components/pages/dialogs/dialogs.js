@@ -6,36 +6,35 @@ import Header from '../../header';
 import './dialogs.scss';
 import AddContact from '../../addContact/addContact';
 import SettingPage from '../settingPage';
+import { connect } from "react-redux";
 
 
-export default class Dialogs extends Component {
+
+class Dialogs extends Component {
     service = new SabygramService();
 
     state = {
         slideGroup: 0,
         itemsFound: null,
         dialogs: [],
-        update: false
     }
 
-    onUpdate = () => {
-        this.setState({ update: true })
-    }
 
     componentDidUpdate() {
-        if (this.state.update) {
+        if (this.props.shouldUpdate) {
             this.updateDialogs();
-            this.setState({ update: false })
+            this.props.shouldUpdate(false);
         }
     }
 
 
     componentDidMount() {
         this.updateDialogs();
+        this.props.shouldUpdate(false);
     }
 
     updateDialogs() {
-        this.service.sendDataPost({status: 80}, '/dialogs')
+        this.service.sendDataPost({ status: 80 }, '/dialogs')
             .then((dialogs) => dialogs.json())
             .then((result) => {
                 this.setState({ dialogs: result });
@@ -77,7 +76,7 @@ export default class Dialogs extends Component {
         }
     }
 
-    renderDialog = (dialogs, itemsFound = null, groupId = null, onUpdate) => {
+    renderDialog = (dialogs, itemsFound = null, groupId = null) => {
 
         let toSearchIn = null;
 
@@ -88,7 +87,7 @@ export default class Dialogs extends Component {
                 <div>
                     {
                         toSearchIn.map((dialog) => {
-                            return <DialogItem key={dialog.id_pair} dialog={dialog} groupId={groupId} onUpdate={onUpdate} />
+                            return <DialogItem key={dialog.id_pair} dialog={dialog} groupId={groupId} />
                         })
                     }
                 </div>
@@ -107,21 +106,33 @@ export default class Dialogs extends Component {
 
                     <SwiperSlide>
                         {this.addContact()}
-                        {this.renderDialog(this.state.dialogs[0], this.state.itemsFound, 0, this.onUpdate)}
+                        {this.renderDialog(this.state.dialogs[0], this.state.itemsFound, 0,)}
                     </SwiperSlide>
 
                     <SwiperSlide>
                         {this.addContact()}
-                        {this.renderDialog(this.state.dialogs[1], this.state.itemsFound, 1, this.onUpdate)}
+                        {this.renderDialog(this.state.dialogs[1], this.state.itemsFound, 1,)}
                     </SwiperSlide>
 
                     <SwiperSlide>
                         {this.addContact()}
-                        {this.renderDialog(this.state.dialogs[2], this.state.itemsFound, 2, this.onUpdate)}
+                        {this.renderDialog(this.state.dialogs[2], this.state.itemsFound, 2,)}
                     </SwiperSlide>
                 </div>
             </Swiper>
         )
     }
 }
+
+const mapStateToProps = ({ shouldUpdate }) => {
+    return {
+        shouldUpdate
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        shouldUpdate: (shouldUpdate) => dispatch({ type: "HOULD_UPDATE", payload: shouldUpdate })
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 

@@ -12,7 +12,7 @@ import SabygramService from "../../services/SabygramService";
  */
 const service = new SabygramService();
 const ChatApp = (props) => {
-    
+
     const location = useLocation();
 
     if (location.state) {
@@ -47,7 +47,9 @@ const ChatApp = (props) => {
     const [data, setData] = useState({
         0: {
             name: name, messages: [],
-            saved: "", editMode: false, groupId: groupId, img: img
+            saved: "", editMode: false, groupId: groupId, img: img,
+            id_pair: id_pair,
+            id: id
         }
     });
     //поменять индексы и должно работать, но не могу с сервиса забрать в пропс сразу
@@ -167,7 +169,9 @@ const ChatApp = (props) => {
             <MsgHeader
                 groupId={data[currentConv].groupId}
                 name={data[currentConv].name}
-                img={data[currentConv].img} />
+                img={data[currentConv].img}
+                id_pair={data[currentConv].id_pair}
+                id={data[currentConv].id} />
             <div className="chat-container">
                 <ChatWindow
                     messages={data[currentConv]}
@@ -188,7 +192,7 @@ const ChatApp = (props) => {
         </>
     );
 };
-const mapStateToProps = ({myId, sockets}) => {
+const mapStateToProps = ({ myId, sockets }) => {
     return {
         myId,
         sockets
@@ -196,7 +200,7 @@ const mapStateToProps = ({myId, sockets}) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        readNotification: (index) => dispatch({type: "READ_NOTIFICATION", payload: index})
+        readNotification: (index) => dispatch({ type: "READ_NOTIFICATION", payload: index })
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChatApp);

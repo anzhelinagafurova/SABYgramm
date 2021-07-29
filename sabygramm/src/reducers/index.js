@@ -5,6 +5,7 @@ const initialState = {
     myProfilePhoto: null,
     myPassword: null,
     myPhone: null,
+    shouldUpdate: false,
     sockets: [{
         id: 10000,
         socket: new WebSocket('ws://' + window.location.host + '/ws/room/100/')
@@ -20,8 +21,7 @@ const reducer = (state = initialState, action) => {
             let newNotification;
             let newNotifications;
             const index = state.notifications.findIndex((element) => element.id === action.payload);
-            if(index === -1)
-            {
+            if (index === -1) {
                 newCounter = 1;
                 newNotification = {
                     id: action.payload,
@@ -47,10 +47,10 @@ const reducer = (state = initialState, action) => {
             }
             return {
                 ...state,
-                notifications: newNotifications 
+                notifications: newNotifications
             }
         }
-        case "READ_NOTIFICATION":{
+        case "READ_NOTIFICATION": {
             const index = state.notifications.findIndex((element) => element.id === action.payload);
             const newNotification = {
                 id: action.payload,
@@ -61,9 +61,9 @@ const reducer = (state = initialState, action) => {
                 newNotification,
                 ...state.notifications.slice(index + 1)
             ]
-            return{
+            return {
                 ...state,
-                notifications: newNotifications 
+                notifications: newNotifications
             }
         }
         case "ADD_SOCKET": {

@@ -23,29 +23,29 @@ class DialogItem extends Component {
         })
         const foundSocket = this.props.sockets.find((socket) => socket.id === this.props.dialog.id_pair);
 
-        if(!foundSocket){
+        if (!foundSocket) {
             const socket = new WebSocket("ws://" + window.location.host + `/ws/room/${this.props.dialog.id_pair}/`)
-        socket.onopen = () => {
-            console.log("Соединение установлено. " + this.props.dialog.id_pair);
-        };
-        socket.onclose = () => {
-            console.log("Соединение закрыто. " + this.props.dialog.id_pair);
-        };
-        socket.onmessage = (event) => {
-            console.log("Данные получены: " + event.data + " " + this.props.dialog.id_pair);
-            const data = JSON.parse(event.data);
+            socket.onopen = () => {
+                console.log("Соединение установлено. " + this.props.dialog.id_pair);
+            };
+            socket.onclose = () => {
+                console.log("Соединение закрыто. " + this.props.dialog.id_pair);
+            };
+            socket.onmessage = (event) => {
+                console.log("Данные получены: " + event.data + " " + this.props.dialog.id_pair);
+                const data = JSON.parse(event.data);
 
-            if (data.user_id.toString() !== this.props.myId.toString()) {
-                this.setState({
-                    // messagesUnread: this.state.messagesUnread + 1,
-                    lastMessage: data.message
-                })
+                if (data.user_id.toString() !== this.props.myId.toString()) {
+                    this.setState({
+                        // messagesUnread: this.state.messagesUnread + 1,
+                        lastMessage: data.message
+                    })
 
-                this.props.addNotification(this.props.dialog.id_pair)
+                    this.props.addNotification(this.props.dialog.id_pair)
+                }
             }
-        }
             this.props.addSocket({ id: this.props.dialog.id_pair, socket })
-        }   
+        }
     }
 
     constructor(props) {
@@ -95,7 +95,7 @@ class DialogItem extends Component {
         const note = this.props.notifications.find((notification) => notification.id === this.props.dialog.id_pair);
         console.log(note)
         let counter = 0;
-        if(note !== undefined){
+        if (note !== undefined) {
             // this.setState({
             //     messagesUnread: note.counter
             // })
@@ -103,7 +103,7 @@ class DialogItem extends Component {
         }
 
 
-        const { dialog: { name, lastMessage, img, id_pair, timing, id }, groupId, onUpdate } = this.props
+        const { dialog: { name, lastMessage, img, id_pair, timing, id }, groupId } = this.props
         let time = timing
         time = timing.toString().split(' ')[1].split(':')[0] + ':' + timing.toString().split(' ')[1].split(':')[1]
         let clazz = "";
@@ -136,7 +136,7 @@ class DialogItem extends Component {
                     }
 
                 </div>
-                <ChatMenu groupId={groupId} display={this.state.display} id_pair={id_pair} id={id} margin={"55px"} onUpdate={onUpdate} />
+                <ChatMenu groupId={groupId} display={this.state.display} id_pair={id_pair} id={id} margin={"55px"} />
             </div>
         )
     }
@@ -145,7 +145,7 @@ class DialogItem extends Component {
 const mapStateToProps = ({ myId, notifications, sockets }) => {
     return {
         myId,
-        notifications, 
+        notifications,
         sockets
     }
 }

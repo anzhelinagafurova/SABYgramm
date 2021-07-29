@@ -1,22 +1,23 @@
 import React from 'react';
 import './chatMenu.scss';
+import { connect } from "react-redux";
 import SabygramService from '../../services/SabygramService';
 import { useHistory } from 'react-router-dom';
 
 
-const ChatMenu = ({ display, groupId, id, margin, id_pair, onUpdate }) => {
+const ChatMenu = ({ display, groupId, id, margin, id_pair, shouldUpdate }) => {
 
   const service = new SabygramService();
   const history = useHistory();
   const handleClick = () => {
     history.push(`/dialogs`);
-    onUpdate();
+    shouldUpdate(true);
   }
   const onHandleClicked = (id, group_number) => {
     service.handleDialogs({
       status: 0,
       user_id: id,
-      id_pair,
+      id_pair: id_pair,
       group_number: group_number
     }, '/dialogs')
     handleClick()
@@ -65,7 +66,14 @@ const ChatMenu = ({ display, groupId, id, margin, id_pair, onUpdate }) => {
   )
 }
 
-
-
-
-export default ChatMenu;
+const mapStateToProps = ({ shouldUpdate }) => {
+  return {
+    shouldUpdate
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    shouldUpdate: (shouldUpdate) => dispatch({ type: "HOULD_UPDATE", payload: shouldUpdate })
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ChatMenu);
