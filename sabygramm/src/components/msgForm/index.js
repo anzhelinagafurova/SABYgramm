@@ -95,12 +95,16 @@ const MsgForm = (props) => {
         const newText = textArray.join("");
         props.setSavedMsg(newText);
 
+        console.log(newText)
+        input.value += newText;
+
         input.focus();
         input.selectionStart = input.selectionEnd = cursorPosition + 1;
     };
 
     return (
         <form
+        name="messageForm"
             className={
                 props.editMode ? "message-form editing-input" : "message-form"
             }
@@ -126,7 +130,7 @@ const MsgForm = (props) => {
                 autoComplete="off"
                 // onChange={handleChange}
                 //value={props.savedMsg || ""}
-                // onKeyDown={handleKeyPress}
+                //onKeyDown={handleKeyPress}
             />
             <button type="submit" className="send-message">
                 <span className="sr-only">send</span>
