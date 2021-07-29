@@ -6,13 +6,11 @@ import Dialogs from '../pages/dialogs/dialogs';
 import ChatApp from '../chatApp/index'
 import Contacts from '../pages/contacts/contacts';
 import Cinema from '../pages/cinema/cinema';
-import TestWebSocket from '../test/test';
 
 
 const App = () => {
     return (
         <Switch>
-
             <Route exact path="/" component={Auth} />
             <Route path="/edit" component={Edit} />
             <Route path="/dialogs" component={Dialogs} />

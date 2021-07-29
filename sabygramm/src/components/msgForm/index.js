@@ -86,6 +86,7 @@ const MsgForm = (props) => {
      * emoji
      */
     const onEmojiClick = (event, emojiObject) => {
+        console.log(event + " " + emojiObject)
         setDisplayEmojis(false);
         const cursorPosition = input.selectionStart;
         const selectionLength = input.selectionEnd - input.selectionStart;

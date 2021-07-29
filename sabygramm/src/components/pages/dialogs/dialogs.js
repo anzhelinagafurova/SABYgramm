@@ -40,6 +40,13 @@ class Dialogs extends Component {
                 this.setState({ dialogs: result });
             })
 
+        this.service.sendDataPost({ status: 70 }, '/dialogs')
+        .then((dialogs) => dialogs.json())
+        .then((result) => {
+            this.props.setProfilePhoto(result.image_link)
+            this.props.setUserName(result.name)
+            this.props.setWelcomeMessage(result.welcome_msg)
+        })
 
         // let result = this.service.getMockedData();
         // this.setState({ dialogs: result });
@@ -131,6 +138,9 @@ const mapStateToProps = ({ update }) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setProfilePhoto: (photo) => dispatch({ type: "SET_MY_PROFILE_PHOTO", payload: photo }),
+        setUserName: (name) => dispatch({ type: "SET_MY_USER_NAME", payload: name }),
+        setWelcomeMessage: (message) => dispatch({ type: "SET_MY_WELCOME_MESSAGE", payload: message }),
         shouldUpdate: (update) => dispatch({ type: "SHOULD_UPDATE", payload: update })
     }
 }

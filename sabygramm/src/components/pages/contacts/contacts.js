@@ -5,23 +5,36 @@ import SettingPage from '../settingPage';
 import SabygramService from '../../../services/SabygramService';
 import AddContact from '../../addContact/addContact';
 import './contacts.scss';
+import { connect } from "react-redux";
 
-export default class Contacts extends Component{
+class Contacts extends Component{
     service = new SabygramService();
-
-    componentDidMount() {  
-        this.service.sendDataPost({status: 80}, '/dialogs')
-        .then((dialogs) => dialogs.json())
-        .then((result) => {
-            this.setState({dialogs:result});
-        }) 
-    }
 
     state = {
         slideGroup: "all",
         itemsFound: null,
         dialogs: []
     }
+
+    componentDidMount = () => {  
+        //const {setProfilePhoto, setUserName, setWelcomeMessage} = this.props;
+
+        this.service.sendDataPost({status: 80}, '/dialogs')
+        .then((dialogs) => dialogs.json())
+        .then((result) => {
+            this.setState({dialogs:result});
+        }) 
+
+        this.service.sendDataPost({ status: 70 }, '/dialogs')
+        .then((dialogs) => dialogs.json())
+        .then((result) => {
+            this.props.setPhoto(result.image_link)
+            this.props.setName(result.name)
+            this.props.setMessage(result.welcome_msg)
+        })
+    }
+
+    
 
     slideChanged = (e) => {
         if (e && e.activeIndex === 1) {
@@ -82,3 +95,11 @@ const RenderContact = ({dialogs, itemsFound = null }) => {
     )
     else return <div></div>
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setPhoto: (photo) => dispatch({ type: "SET_MY_PROFILE_PHOTO", payload: photo }),
+        setName: (name) => dispatch({ type: "SET_MY_USER_NAME", payload: name }),
+        setMessage: (message) => dispatch({ type: "SET_MY_WELCOME_MESSAGE", payload: message }),
+    }
+}
+export default connect(null, mapDispatchToProps)(Contacts)

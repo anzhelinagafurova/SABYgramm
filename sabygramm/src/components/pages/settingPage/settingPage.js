@@ -111,7 +111,7 @@ const mapStateToProps = ({ myUserName, myWelcomeMessage, myProfilePhoto }) => {
     }
 }
 
-const mapDispatchProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         setProfilePhoto: (photo) => dispatch({ type: "SET_MY_PROFILE_PHOTO", payload: photo }),
         setUserName: (name) => dispatch({ type: "SET_MY_USER_NAME", payload: name }),
@@ -119,4 +119,4 @@ const mapDispatchProps = (dispatch) => {
         clearState: () => dispatch({ type: "CLEAR_STATE" })
     }
 }
-export default connect(mapStateToProps, mapDispatchProps)(SettingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SettingPage);
