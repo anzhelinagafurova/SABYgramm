@@ -18,10 +18,10 @@ class Dialogs extends Component {
         itemsFound: null,
         dialogs: [],
     }
-
-
     componentDidUpdate() {
-        if (this.props.shouldUpdate) {
+        const { update } = this.props
+        console.log(update)
+        if (update) {
             this.updateDialogs();
             this.props.shouldUpdate(false);
         }
@@ -124,14 +124,14 @@ class Dialogs extends Component {
     }
 }
 
-const mapStateToProps = ({ shouldUpdate }) => {
+const mapStateToProps = ({ update }) => {
     return {
-        shouldUpdate
+        update
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        shouldUpdate: (shouldUpdate) => dispatch({ type: "HOULD_UPDATE", payload: shouldUpdate })
+        shouldUpdate: (update) => dispatch({ type: "SHOULD_UPDATE", payload: update })
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);

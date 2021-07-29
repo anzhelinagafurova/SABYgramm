@@ -10,8 +10,11 @@ const ChatMenu = ({ display, groupId, id, margin, id_pair, shouldUpdate }) => {
   const service = new SabygramService();
   const history = useHistory();
   const handleClick = () => {
+
     history.push(`/dialogs`);
+
     shouldUpdate(true);
+
   }
   const onHandleClicked = (id, group_number) => {
     service.handleDialogs({
@@ -66,14 +69,14 @@ const ChatMenu = ({ display, groupId, id, margin, id_pair, shouldUpdate }) => {
   )
 }
 
-const mapStateToProps = ({ shouldUpdate }) => {
+const mapStateToProps = ({ update }) => {
   return {
-    shouldUpdate
+    update
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    shouldUpdate: (shouldUpdate) => dispatch({ type: "HOULD_UPDATE", payload: shouldUpdate })
+    shouldUpdate: (update) => dispatch({ type: "SHOULD_UPDATE", payload: update })
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChatMenu);
