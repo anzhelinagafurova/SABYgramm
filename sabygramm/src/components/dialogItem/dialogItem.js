@@ -35,13 +35,15 @@ class DialogItem extends Component {
                 console.log("Данные получены: " + event.data + " " + this.props.dialog.id_pair);
                 const data = JSON.parse(event.data);
 
+               
+                
                 if (data.user_id.toString() !== this.props.myId.toString()) {
                     this.setState({
                         // messagesUnread: this.state.messagesUnread + 1,
                         lastMessage: data.message
                     })
 
-                    this.props.addNotification(this.props.dialog.id_pair)
+                    // this.props.addNotification(this.props.dialog.id_pair)
                 }
             }
             this.props.addSocket({ id: this.props.dialog.id_pair, socket })

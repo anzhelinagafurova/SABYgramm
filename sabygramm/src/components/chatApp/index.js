@@ -104,8 +104,14 @@ const ChatApp = (props) => {
             console.log("Данные получены ChatApp: " + event.data);
             const data = JSON.parse(event.data);
 
+            
+
+            console.log("chatapp my id: " +  props.myId.toString())
+            console.log("chatapp receiver id: " + data.user_id.toString())
+
             if (data.user_id.toString() !== props.myId.toString()) {
                 addNewMessage(data.message, "incoming")
+                props.addNotification(id_pair)
             }
         };
     }, [id_pair]);
@@ -200,7 +206,8 @@ const mapStateToProps = ({ myId, sockets }) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        readNotification: (index) => dispatch({ type: "READ_NOTIFICATION", payload: index })
+        readNotification: (index) => dispatch({ type: "READ_NOTIFICATION", payload: index }),
+        addNotification: (notification) => dispatch({ type: "ADD_NOTIFICATION", payload: notification })
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChatApp);
