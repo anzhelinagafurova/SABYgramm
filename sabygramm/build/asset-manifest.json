@@ -1,39 +1,20 @@
 {
   "files": {
-<<<<<<< Updated upstream
     "main.css": "/static/css/main.cf5459dd.chunk.css",
-    "main.js": "/static/js/main.a722d8d1.chunk.js",
-    "main.js.map": "/static/js/main.a722d8d1.chunk.js.map",
+    "main.js": "/static/js/main.64cb585c.chunk.js",
+    "main.js.map": "/static/js/main.64cb585c.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.f43f3096.js",
     "runtime-main.js.map": "/static/js/runtime-main.f43f3096.js.map",
-    "static/js/2.623cfdcb.chunk.js": "/static/js/2.623cfdcb.chunk.js",
-    "static/js/2.623cfdcb.chunk.js.map": "/static/js/2.623cfdcb.chunk.js.map",
+    "static/js/2.ebcaa92b.chunk.js": "/static/js/2.ebcaa92b.chunk.js",
+    "static/js/2.ebcaa92b.chunk.js.map": "/static/js/2.ebcaa92b.chunk.js.map",
     "index.html": "/index.html",
     "static/css/main.cf5459dd.chunk.css.map": "/static/css/main.cf5459dd.chunk.css.map",
-    "static/js/2.623cfdcb.chunk.js.LICENSE.txt": "/static/js/2.623cfdcb.chunk.js.LICENSE.txt"
+    "static/js/2.ebcaa92b.chunk.js.LICENSE.txt": "/static/js/2.ebcaa92b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f43f3096.js",
-    "static/js/2.623cfdcb.chunk.js",
+    "static/js/2.ebcaa92b.chunk.js",
     "static/css/main.cf5459dd.chunk.css",
-    "static/js/main.a722d8d1.chunk.js"
-=======
-    "main.css": "/static/css/main.1ffb1580.chunk.css",
-    "main.js": "/static/js/main.28b4c78c.chunk.js",
-    "main.js.map": "/static/js/main.28b4c78c.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.f43f3096.js",
-    "runtime-main.js.map": "/static/js/runtime-main.f43f3096.js.map",
-    "static/js/2.a06250ac.chunk.js": "/static/js/2.a06250ac.chunk.js",
-    "static/js/2.a06250ac.chunk.js.map": "/static/js/2.a06250ac.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.1ffb1580.chunk.css.map": "/static/css/main.1ffb1580.chunk.css.map",
-    "static/js/2.a06250ac.chunk.js.LICENSE.txt": "/static/js/2.a06250ac.chunk.js.LICENSE.txt"
-  },
-  "entrypoints": [
-    "static/js/runtime-main.f43f3096.js",
-    "static/js/2.a06250ac.chunk.js",
-    "static/css/main.1ffb1580.chunk.css",
-    "static/js/main.28b4c78c.chunk.js"
->>>>>>> Stashed changes
+    "static/js/main.64cb585c.chunk.js"
   ]
 }
