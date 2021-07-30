@@ -24,7 +24,7 @@ class DialogItem extends Component {
         const foundSocket = this.props.sockets.find((socket) => socket.id === this.props.dialog.id_pair);
 
         if (!foundSocket) {
-            const socket = new WebSocket("ws://" + window.location.host + `/ws/room/${this.props.dialog.id_pair}/`)
+            const socket = new WebSocket("wss://" + window.location.host + `/ws/room/${this.props.dialog.id_pair}/`)
             socket.onopen = () => {
                 console.log("Соединение установлено. " + this.props.dialog.id_pair);
             };
@@ -43,6 +43,7 @@ class DialogItem extends Component {
                         lastMessage: data.message
                     })
 
+                    this.props.addNotification(this.props.dialog.id_pair)
                     // this.props.addNotification(this.props.dialog.id_pair)
                 }
             }

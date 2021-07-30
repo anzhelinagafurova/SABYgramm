@@ -7,6 +7,7 @@ import ChatApp from '../chatApp/index'
 import Contacts from '../pages/contacts/contacts';
 import Cinema from '../pages/cinema/cinema';
 
+import Test from './test';
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
             <Route path="/dialogs" component={Dialogs} />
             <Route path="/contacts" component={Contacts} />
             <Route path="/cinema" component={Cinema} />
+            <Route path="/test" component={Test} />
             <Route path="/chatapp/:id"
                 render={({ match }) => {
                     const { id, groupId } = match.params;

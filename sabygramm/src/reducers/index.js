@@ -8,7 +8,7 @@ const initialState = {
     update: false,
     sockets: [{
         id: 10000,
-        socket: new WebSocket('ws://' + window.location.host + '/ws/room/100/')
+        socket: new WebSocket('wss://' + window.location.host + '/ws/room/100/')
     }],
     notifications: [],
 }
