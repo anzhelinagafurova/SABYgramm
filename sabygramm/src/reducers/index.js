@@ -20,12 +20,13 @@ const reducer = (state = initialState, action) => {
             let newCounter;
             let newNotification;
             let newNotifications;
-            const index = state.notifications.findIndex((element) => element.id === action.payload);
+            const index = state.notifications.findIndex((element) => element.id === action.payload.notification);
             if (index === -1) {
                 newCounter = 1;
                 newNotification = {
-                    id: action.payload,
-                    counter: newCounter
+                    id: action.payload.notification,
+                    counter: newCounter,
+                    message: action.payload.message
                 }
                 newNotifications = [
                     ...state.notifications,
@@ -33,11 +34,12 @@ const reducer = (state = initialState, action) => {
                 ]
             }
             else {
-                const foundCounter = state.notifications.find((element) => element.id === action.payload);
+                const foundCounter = state.notifications.find((element) => element.id === action.payload.notification);
                 newCounter = foundCounter.counter + 1;
                 newNotification = {
-                    id: action.payload,
-                    counter: newCounter
+                    id: action.payload.notification,
+                    counter: newCounter,
+                    message: action.payload.message
                 }
                 newNotifications = [
                     ...state.notifications.slice(0, index),
@@ -54,7 +56,8 @@ const reducer = (state = initialState, action) => {
             const index = state.notifications.findIndex((element) => element.id === action.payload);
             const newNotification = {
                 id: action.payload,
-                counter: 0
+                counter: 0,
+                message: null
             }
             const newNotifications = [
                 ...state.notifications.slice(0, index),

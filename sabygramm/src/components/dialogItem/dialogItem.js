@@ -43,7 +43,7 @@ class DialogItem extends Component {
                         lastMessage: data.message
                     })
 
-                    this.props.addNotification(this.props.dialog.id_pair)
+                    this.props.addNotification(this.props.dialog.id_pair, data.message)
                     // this.props.addNotification(this.props.dialog.id_pair)
                 }
             }
@@ -98,11 +98,10 @@ class DialogItem extends Component {
         const note = this.props.notifications.find((notification) => notification.id === this.props.dialog.id_pair);
         console.log(note)
         let counter = 0;
+        let message = null;
         if (note !== undefined) {
-            // this.setState({
-            //     messagesUnread: note.counter
-            // })
-            counter = note.counter
+            counter = note.counter;
+            message = note.message
         }
 
 
@@ -130,7 +129,7 @@ class DialogItem extends Component {
                 <img src={img ? img : 'https://media.istockphoto.com/photos/smiling-man-portrait-made-of-vegetables-and-fruits-picture-id466161171'} alt="dialogPicture" className="dialog-img" />
                 <div className="dialog-contain" >
                     <p className="dialog-name">{name}</p>
-                    <p className="dialog-message">{this.state.lastMessage || lastMessage}</p>
+                    <p className="dialog-message">{message || this.state.lastMessage || lastMessage}</p>
                 </div>
                 <div className="dialog-timeNot">
                     <p className="dialog-timing">{time}</p>
@@ -155,7 +154,7 @@ const mapStateToProps = ({ myId, notifications, sockets }) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addSocket: (socketInfo) => dispatch({ type: "ADD_SOCKET", payload: socketInfo }),
-        addNotification: (notification) => dispatch({ type: "ADD_NOTIFICATION", payload: notification })
+        addNotification: (notification, message) => dispatch({ type: "ADD_NOTIFICATION", payload: {notification, message }})
     }
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DialogItem));

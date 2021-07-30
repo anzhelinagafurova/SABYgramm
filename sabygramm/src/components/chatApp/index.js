@@ -111,8 +111,9 @@ const ChatApp = (props) => {
 
             if (data.user_id.toString() !== props.myId.toString()) {
                 addNewMessage(data.message, "incoming")
-                props.addNotification(id_pair)
+                
             }
+            props.addNotification(id_pair, data.message)
         };
     }, [id_pair]);
 
@@ -207,7 +208,7 @@ const mapStateToProps = ({ myId, sockets }) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         readNotification: (index) => dispatch({ type: "READ_NOTIFICATION", payload: index }),
-        addNotification: (notification) => dispatch({ type: "ADD_NOTIFICATION", payload: notification })
+        addNotification: (notification, message) => dispatch({ type: "ADD_NOTIFICATION", payload: {notification, message }})
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChatApp);

@@ -43,6 +43,7 @@ class Dialogs extends Component {
         this.service.sendDataPost({ status: 70 }, '/dialogs')
         .then((dialogs) => dialogs.json())
         .then((result) => {
+            this.props.setId(result.id)
             this.props.setProfilePhoto(result.image_link)
             this.props.setUserName(result.name)
             this.props.setWelcomeMessage(result.welcome_msg)
@@ -138,6 +139,7 @@ const mapStateToProps = ({ update }) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        setId: (id) => dispatch({ type: "SET_MY_ID", payload: id }),
         setProfilePhoto: (photo) => dispatch({ type: "SET_MY_PROFILE_PHOTO", payload: photo }),
         setUserName: (name) => dispatch({ type: "SET_MY_USER_NAME", payload: name }),
         setWelcomeMessage: (message) => dispatch({ type: "SET_MY_WELCOME_MESSAGE", payload: message }),
